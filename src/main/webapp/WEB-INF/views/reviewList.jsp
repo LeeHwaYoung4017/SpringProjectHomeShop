@@ -128,10 +128,12 @@ function resize(img){
     img.height = resizeHeight;
  }
  
-
- function changeStar(num) {
-	alert(num);
-}
+window.onload = function(){
+	
+	 function changeStar(num) {
+		alert("작동???");
+	}
+};
  
 
  
@@ -204,15 +206,9 @@ function resize(img){
                   </td>
                </tr>
                <tr>
-               	<p onload="changeStar('${vo.star}')">
-                  <td id="star">
-                 	<span class="starR on">★</span>
-			        <span class="starR">☆</span>
-			        <span class="starR">☆</span>
-			        <span class="starR">☆</span>
-			        <span class="starR">☆</span>
+                  <td id="star"onload="changeStar(${vo.star})">
+                 	
                   </td>
-                 </p> 
                </tr>
                <tr>
                   <td>
