@@ -15,7 +15,7 @@
    <select id="selectList1" parameterType="java.util.HashMap" resultType="reviewVo">
   <![CDATA[
 	select * from (
-		select rownum rnum, AA.* from (	
+		select rownum rnum, AA.* from (
 			select * from SPRING_review order by idx desc
 		)AA where rownum <= #{endNo}
 	) where rnum >= #{startNo}
