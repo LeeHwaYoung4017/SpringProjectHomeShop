@@ -24,6 +24,7 @@ public class JW_HomeController {
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
 		System.out.println("문제야??-화영");
+		System.out.println(" 웁노");
 		System.out.println("dkdk");
 		System.out.println("removeItem");
 		int idx = Integer.parseInt(request.getParameter("idx"))-1;
