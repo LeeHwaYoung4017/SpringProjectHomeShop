@@ -23,6 +23,7 @@ public class JW_HomeController {
     
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
+		System.out.println("문제야??-화영");
 		System.out.println("removeItem");
 		int idx = Integer.parseInt(request.getParameter("idx"))-1;
 		ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
