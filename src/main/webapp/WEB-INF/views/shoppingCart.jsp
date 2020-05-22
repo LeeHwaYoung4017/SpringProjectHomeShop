@@ -147,7 +147,7 @@ function resize(img){
     }
  }
     
-   
+ 
 </script>
 <style type="text/css">
 .button {
@@ -232,6 +232,7 @@ function resize(img){
                                        
                                        <td align="center"><c:set var="price" value="${(vo.price*vo.ea)}"/><p class="my_font">${price}</p>
                                        <c:set var="total" value="${total+price}"/></td>
+                                       <td align="center"><input type="button" value="삭제" onclick="location.href='removeItem?idx=${i}'"></td>
                                     </tr>
                               </c:forEach>
                                     <tr>
