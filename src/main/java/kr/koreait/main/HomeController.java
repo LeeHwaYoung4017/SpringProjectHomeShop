@@ -65,23 +65,6 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate);
-		ArrayList<CartVO> cartList = new ArrayList<CartVO>();
-		session.setAttribute("cartList", cartList);
-		
-		logger.info("다예쁜 쇼핑몰!!!!!!!!!!!!!!");
-		return "mainHome";
-	}
-	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 login 실행");
@@ -117,88 +100,6 @@ public class HomeController {
 	public String popUp(HttpServletRequest request, Model model) {
 		return "popUp";
 	}
-	
-	@RequestMapping("/mainHome")
-	public String mainHome(HttpServletRequest request, Model model) {
-		return "mainHome";
-	}
-	
-	@RequestMapping("/topList")
-	public String topList(HttpServletRequest request, Model model) {
-		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-		
-		int pageSize = 12;
-		int currentPage = 1;
-		try {
-		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		} catch(NumberFormatException e) { }
-		int totalCount = mapper.topCount();
-		logger.info("topCount is = " + totalCount);
-		
-		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
-		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
-		
-		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-		hmap.put("startNo", goodsList.getStartNo());
-		hmap.put("endNo", goodsList.getEndNo());
-		goodsList.setGoodList(mapper.topList(hmap));
-		
-		model.addAttribute("goodsList", goodsList);
-		return "topList";
-	}
-	
-	@RequestMapping("/bottomList")
-	public String bottomList(HttpServletRequest request, Model model) {
-		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-		
-		int pageSize = 12;
-		int currentPage = 1;
-		try {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		} catch(NumberFormatException e) { }
-		int totalCount = mapper.bottomCount();
-		logger.info("bottomCount is = " + totalCount);
-		
-		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
-		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
-		
-		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-		hmap.put("startNo", goodsList.getStartNo());
-		hmap.put("endNo", goodsList.getEndNo());
-		goodsList.setGoodList(mapper.bottomList(hmap));
-		model.addAttribute("goodsList", goodsList);
-		return "bottomList";
-	}
-	
-	@RequestMapping("/accList")
-	public String accList(HttpServletRequest request, Model model) {
-		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-		
-		int pageSize = 12;
-		int currentPage = 1;
-		try {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		} catch(NumberFormatException e) { }
-		int totalCount = mapper.accCount();
-		logger.info("accCount is = " + totalCount);
-//		System.out.println(totalCount);
-		
-		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
-		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
-		
-		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-		hmap.put("startNo", goodsList.getStartNo());
-		hmap.put("endNo", goodsList.getEndNo());
-		goodsList.setGoodList(mapper.accList(hmap));
-		
-		model.addAttribute("goodsList", goodsList);
-		return "accList";
-	}
-	
-	
 	
 //	다예부분!!
 	
@@ -422,8 +323,8 @@ public class HomeController {
 		cartVO.setEa(Integer.parseInt(request.getParameter("ea")));
 		cartVO.setIdx(Integer.parseInt(request.getParameter("idx")));
 		cartVO.setSize(request.getParameter("size"));
+		System.out.println(cartVO);
 		orderList.add(cartVO);
-		System.out.println(orderList);
 	}
 	
 	@RequestMapping(value = "/orderBuy")
@@ -529,7 +430,6 @@ public class HomeController {
 			photoNum++;
 		}
 		goodsVO.setPhoto(photoNum);
-		
 	}
 	
 	@RequestMapping(value="/contentView_goods")
@@ -620,130 +520,6 @@ public class HomeController {
 		   return "mainHome";
 	   }
 	   
-   //화영 업로드!
-  @RequestMapping(value = "/uploadForm2", method = RequestMethod.GET)
-  public void uploadForm2GET(Locale locale, Model model) {
-     logger.info("uploadForm2 GET");
-  }
-  @RequestMapping(value = "/uploadForm2", method = RequestMethod.POST)
-  public String uploadForm2POST(MultipartFile file, Model model, QAVO vo) throws Exception {
-     MybatisDAO mapper = sqlSession2.getMapper(MybatisDAO.class);
-     int QAIdx = mapper.selectQAIdx();
-     vo.setGoodsidx(QAIdx);
-     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-     String date = sdf.format(new Date());
-     
-     String savedFileName = " ";
-     
-     // 사진없이 글만 적을 경우.
-     if(file.getOriginalFilename().equals("")) {
-        savedFileName = " ";
-     } else {
-        savedFileName = FileUtills.uploadFile(file,uploadPath2, QAIdx, date);
-     }
-     
-     vo.setAttached(savedFileName);
-     mapper.QAinsert(vo);
-     model.addAttribute("savedFileName", savedFileName);
-     return "redirect: QAlist";
-//	         return "redirect: QAinsert";
-      }
-	      
-      @RequestMapping("/QAlist")
-      public String QAlist(HttpServletRequest request, Model model) {
-         MybatisDAO mapper = sqlSession2.getMapper(MybatisDAO.class);
-         
-         int pageSize = 10;
-         int currentPage = 1;
-         try {
-         currentPage = Integer.parseInt(request.getParameter("currentPage"));
-         } catch(NumberFormatException e) { }
-         int totalCount = mapper.selectQACount();
-         
-         AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-         QAList qalist = ctx.getBean("qaList", QAList.class);
-         qalist.initQAList(pageSize, totalCount, currentPage);
-         
-         HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-         hmap.put("startNo", qalist.getStartNo());
-         hmap.put("endNo", qalist.getEndNo());
-         qalist.setQaList(mapper.selectQAList(hmap));
-         logger.info("hmap is : " + hmap);
-         logger.info("qalist is : " + qalist);
-         
-         model.addAttribute("qaList", qalist);
-         return "QAlist";
-      }   
-      
-      @RequestMapping("/QAinsert")
-      public String QAinsert(HttpServletRequest request, Model model) {
-         
-         return "QAinsert";
-      }
-      
-      @RequestMapping("/QAView")
-      public String QAView(HttpServletRequest request, Model model) {
-		System.out.println("QAView 실행");
-		MybatisDAO mapper = sqlSession2.getMapper(MybatisDAO.class);
-		int idx = Integer.parseInt(request.getParameter("idx"));
-		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-		QAVO qaVO = ctx.getBean("qaVO", QAVO.class);
-		qaVO = mapper.QAselectByIdx(idx);
-		model.addAttribute("vo", qaVO);
-		model.addAttribute("currentPage", Integer.parseInt(request.getParameter("currentPage")));
-		
-		return "QAView";
-      }
-      
-      @RequestMapping("/QAdelete")
-      public String QAdelete(HttpServletRequest request, Model model) {
-  		System.out.println("QAdelete 실행");
-  		MybatisDAO mapper = sqlSession2.getMapper(MybatisDAO.class);
-  		int idx = Integer.parseInt(request.getParameter("idx"));
-  		mapper.QAdelete(idx);
-  		
-  		model.addAttribute("currentPage", Integer.parseInt(request.getParameter("currentPage")));
-  		return "redirect:QAlist";
-  	}
-      
-    @RequestMapping("/QAupdate")
-  	public String QAupdate(HttpServletRequest request, Model model, QAVO qaVO) {
-  		System.out.println("QAupdate 실행");
-  		return "QAupdate";
-  	}
-    
-    @RequestMapping("/QAupdateOK")
-    public String QAupdateOK(HttpServletRequest request, Model model, QAVO qaVO) {
-    	System.out.println("QAupdateOK 실행");
-    	MybatisDAO mapper = sqlSession2.getMapper(MybatisDAO.class);
-    	mapper.QAupdate(qaVO);
-    	
-    	model.addAttribute("currentPage", Integer.parseInt(request.getParameter("currentPage")));
-    	return "redirect:QAlist";
-    }
-    
-      @RequestMapping("/newList")
-      public String newList(HttpServletRequest request, Model model) {
-    	MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-    	int newListSize = 24;
-  		int pageSize = 12;
-  		int currentPage = 1;
-  		try {
-  		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-  		} catch(NumberFormatException e) { }
-  		int totalCount = mapper.newCount(newListSize);
-  		logger.info("AllCount is = " + totalCount);
-  		
-  		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-  		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
-  		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
-  		
-  		goodsList.setGoodList(mapper.newList(newListSize));
-  		
-  		model.addAttribute("goodsList", goodsList);    	  
-    	  
-    	return "newList";
-      }      
       
       @RequestMapping("/reSize")
       public void reSize(HttpServletRequest request, Model model, HttpServletResponse response) {
@@ -779,75 +555,56 @@ public class HomeController {
     	  vo.setId_number(request.getParameter("id_number"));
     	  vo.setCategory(request.getParameter("category"));
     	  vo.setItem_name(request.getParameter("item_name"));
+    	  System.out.println(vo);
 		  ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList"); 
 		  cartList.add(vo);
 		  session.setAttribute("cartList", cartList);
       }
-
-      @RequestMapping("/smallNoticeList")
-      public String smallNoticeList(HttpServletRequest request, Model model) {
-         System.out.println("smallNoticeList() 실행");
-         MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-         
-         int pageSize = 10;
-         int currentPage = 1;
-         try {
-         currentPage = Integer.parseInt(request.getParameter("currentPage"));
-         } catch(NumberFormatException e) { }
-         int totalCount = mapper.selectCount();
-         AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-         NoticeList noticelist = ctx.getBean("noticeList", NoticeList.class);
-         noticelist.initNoticeList(pageSize, totalCount, currentPage);
-         
-         HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-         hmap.put("startNo", noticelist.getStartNo());
-         hmap.put("endNo", noticelist.getEndNo());
-         noticelist.setNoticeList(mapper.selectList(hmap));
-         
-         model.addAttribute("noticeList", noticelist);
-         return "smallNoticeList";
-
-      }
       
-      @RequestMapping("/reviewList")
-  	public String list1(HttpServletRequest request, Model model) {
-  		System.out.println("list() 실행");
-//  		db에서 전체 review리스트 가져오기.		
-  		MybatisDAO mapper = sqlSession3.getMapper(MybatisDAO.class);
-  		
-  		int pageSize = 10;
-  		int currentPage = 1;
-  		try {
-  		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-  		} catch(NumberFormatException e) { }
-  		int totalCount = mapper.selectCount();
-//  		System.out.println(totalCount);
-  		
-  		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-  		ReviewList reviewList = ctx.getBean("reviewList", ReviewList.class);
-  		reviewList.initReviewList(pageSize, totalCount, currentPage);
-  		
-  		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-  		hmap.put("startNo", reviewList.getStartNo());
-  		hmap.put("endNo", reviewList.getEndNo());
-  		reviewList.setReviewList(mapper.selectList1(hmap));
-  		
-  		model.addAttribute("reviewList", reviewList);
-  		
-//  		상품별로 리스트 가져오기.
-  		MybatisDAO mapper1 = sqlSession1.getMapper(MybatisDAO.class);
-  		ReviewVO vo = reviewList.getReviewList().get(1);
-  		System.out.println(vo);
-  		int idx = vo.getGoodsidx();
-  		
-  		System.out.println("idx: " + idx);
-  		GoodsVO goodsVO = mapper1.selectGoods(idx);
-  		model.addAttribute("goodsVO", goodsVO);
-  		
-  		
-  		return "reviewList";
+//    리뷰게시판!!!   
+//    브라우저에 출력할 1페이지 분량의 글 얻어오기     
+     @RequestMapping("/reviewList")
+    public String list1(HttpServletRequest request, Model model) {
+       System.out.println("list() 실행");
+//       db에서 전체 review리스트 가져오기.      
+       MybatisDAO mapper = sqlSession3.getMapper(MybatisDAO.class);
+       
+       int pageSize = 10;
+       int currentPage = 1;
+       try {
+       currentPage = Integer.parseInt(request.getParameter("currentPage"));
+       } catch(NumberFormatException e) { }
+       int totalCount = mapper.selectCount();
+//       System.out.println(totalCount);
+       
+       AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+       ReviewList reviewList = ctx.getBean("reviewList", ReviewList.class);
+       reviewList.initReviewList(pageSize, totalCount, currentPage);
+       
+       
+       HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+       hmap.put("startNo", reviewList.getStartNo());
+       hmap.put("endNo", reviewList.getEndNo());
+       reviewList.setReviewList(mapper.selectList1(hmap));
+       
+       model.addAttribute("reviewList", reviewList);
+       
+//       상품별로 리스트 가져오기.
+       MybatisDAO mapper1 = sqlSession1.getMapper(MybatisDAO.class);
+       ArrayList<GoodsVO> goodslist = new ArrayList<GoodsVO>(); 
+       for (int i = 0; i < 10; i++) {
+          ReviewVO vo = reviewList.getReviewList().get(i);
+          System.out.println(vo);
+          int idx = vo.getGoodsidx();
+          GoodsVO goodsVO = mapper1.selectGoods(idx);
+          goodslist.add(goodsVO);
+          System.out.println(goodslist);
+       }
+       model.addAttribute("goodslist", goodslist);
+       
+       return "reviewList";
 
-  	}
+    }
       
       String savedFileName= "";
 //    리뷰 작성하기

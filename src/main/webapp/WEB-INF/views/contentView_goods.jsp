@@ -184,7 +184,7 @@ function resize(img){
  
 
 window.onload = function(){
-
+/* 서브 이미지  */
  var img = document.getElementById("imggo");
     var imgname = "${vo.id_Number}";
     var nn = "${vo.photo}";
@@ -195,57 +195,52 @@ window.onload = function(){
           + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)'/>";
        img.appendChild(sp);      
     }
-    
-    
-    
-       $('select[name=sizeSelection]').change(function() {
-          
-          var tr = document.createElement("tr")
-          var table1 = document.getElementById("table1");
-          table1.appendChild(tr);
-          /* 상품명설정 */
-          var name1 = '${vo.name}'
-           var ho = document.createElement("td")
-           var color;
-           var size_t = $(this).val();
-           if($(this).value != "1"){
-                  color = document.querySelector("#cili").value.toUpperCase()
-                  var list = "-" + color +"/" + $(this).val()/* ex)-white/S */
-                      ho.innerHTML = name1 +"<br/> "+ list;
-                      /* $("#num1").attr("readonly", true); */
-                   } 
-           
-            tr.appendChild(ho); 
-            /* 수량설정 */
-            var ho1 = document.createElement("td")
-            
-           ho1.innerHTML = "<input type='button'  name='cal' value='-' onclick='minus(this)'>"
-             + "<input type='text' value= '1' name='ea' style='width : 20px'>" 
-             + "<input type='button' value='+' onclick='plus(this)'>"
-             + "<input type='hidden' value='"+color+"' name='color'>"
-             + "<input type='hidden' value='"+size_t+"' name='size_t'>";
-            tr.appendChild(ho1);
-           
-              
-            
-          /* 가격설정 */
-           var ho2 = document.createElement("td")
-          var price = ${vo.price}
-           ho2.setAttribute("class", "setPrice");
-           ho2.innerHTML = price + "won"
-            tr.appendChild(ho2);
-           
-           var dd = document.getElementById("calc").innerHTML;
-           dd *= 1;
-           var ss = dd + price;
-           var dd1 = document.getElementById("calc")
-           dd1.innerHTML = ss;
-           
-           $("#sum").attr("hidden", false);
-           
-          
-       });
 }
+
+function itemList(selectVal){
+   var tr = document.createElement("tr")
+    var table1 = document.getElementById("table1");
+    table1.appendChild(tr);
+    /* 상품명설정 */
+    var name1 = '${vo.name}'
+     var ho = document.createElement("td");
+     var color;
+     var size_t = selectVal;
+
+     if(selectVal != "1"){
+            color = document.querySelector("#cili").value.toUpperCase()
+            var list = "-" + color +"/" + size_t/* ex)-white/S */
+                ho.innerHTML = name1 +"<br/> "+ list;
+                /* $("#num1").attr("readonly", true); */
+      } 
+     
+      tr.appendChild(ho); 
+      /* 수량설정 */
+      var ho1 = document.createElement("td")
+      
+     ho1.innerHTML = "<input type='button'  name='cal' value='-' onclick='minus(this)'>"
+       + "<input type='text' value= '1' name='ea' style='width : 20px'>" 
+       + "<input type='button' value='+' onclick='plus(this)'>"
+       + "<input type='hidden' value='"+color+"' name='color'>"
+       + "<input type='hidden' value='"+size_t+"' name='size_t'>";
+      tr.appendChild(ho1);
+      
+    /* 가격설정 */
+     var ho2 = document.createElement("td")
+    var price = ${vo.price}
+     ho2.setAttribute("class", "setPrice");
+     ho2.innerHTML = price + "won"
+      tr.appendChild(ho2);
+     
+     var dd = document.getElementById("calc").innerHTML;
+     dd *= 1;
+     var ss = dd + price;
+     var dd1 = document.getElementById("calc")
+     dd1.innerHTML = ss;
+     
+     $("#sum").attr("hidden", false);   
+}
+
 function minus(obj){
  
  var dd = document.getElementById("calc").innerHTML;
@@ -279,8 +274,6 @@ function minus(obj){
     td.innerHTML = newPri + "won"
     
     //total price
-    
-     
      var ss = dd - 10000;
      dd1.innerHTML = ss;
   
@@ -314,165 +307,158 @@ function plus(obj){
 //바로구매 버튼
 var orderRequest = new XMLHttpRequest();
 function buyNow(){
-	var table = document.getElementsByTagName("tr");
-	for(var i=0; i<table.length; i++){
-		var color = document.getElementsByName("color")[i].value;
-		var size = document.getElementsByName("size_t")[i].value;
-		var ea = document.getElementsByName("ea")[i].value;
-		var idx = document.getElementById("hidIdx").value;
-		var price = document.getElementById("price").value;
-		var category = document.getElementById("category").value;
-		var id_number = document.getElementById("id_number").value;
-		var item_name = document.getElementById("item_name").value;
-		
-		
-		var url="./order?color=" + encodeURIComponent(color)
-		+"&size=" + encodeURIComponent(size) 
-		+"&ea=" + encodeURIComponent(ea)
-		+"&idx=" + encodeURIComponent(idx)
-		+"&price=" + encodeURIComponent(price)
-		+"&category="+ encodeURIComponent(category)
-		+"&id_number="+ encodeURIComponent(id_number)
-		+"&item_name="+ encodeURIComponent(item_name);
-		orderRequest.open("POST",url ,true);
-		orderRequest.send(null);
-	}
-	
-	orderRequest.onreadystatechange = buyresponse;
-	}
+   var table = document.getElementsByTagName("tr");
+   for(var i=0; i<table.length; i++){
+      var color = document.getElementsByName("color")[i].value;
+      var size = document.getElementsByName("size_t")[i].value;
+      var ea = document.getElementsByName("ea")[i].value;
+      var idx = document.getElementById("hidIdx").value;
+      var price = document.getElementById("price").value;
+      var category = document.getElementById("category").value;
+      var id_number = document.getElementById("id_number").value;
+      var item_name = document.getElementById("item_name").value;
+      
+      var url="./order?color=" + encodeURIComponent(color)
+      +"&size=" + encodeURIComponent(size) 
+      +"&ea=" + encodeURIComponent(ea)
+      +"&idx=" + encodeURIComponent(idx)
+      +"&price=" + encodeURIComponent(price)
+      +"&category="+ encodeURIComponent(category)
+      +"&id_number="+ encodeURIComponent(id_number)
+      +"&item_name="+ encodeURIComponent(item_name);
+      orderRequest.open("POST",url ,true);
+      orderRequest.send(null);
+   }
+   orderRequest.onreadystatechange = buyresponse;
+   }
 
 function buyresponse(){
-	if(orderRequest.readyState == 4 && orderRequest.status == 200) {
-		
-		location.href="orderBuy";
-	}
+   if(orderRequest.readyState == 4 && orderRequest.status == 200) {
+      location.href="orderBuy";
+   }
 }
 
 var searchRequest = new XMLHttpRequest();
 function reSize(){
-	var url="./reSize?color=" + encodeURIComponent(document.getElementById("cili").value) + "&idx=" + encodeURIComponent(document.getElementById("hidIdx").value);
-	searchRequest.open("POST",url ,true);
-//	onreadystatechange : ajax 요청이 완료되면 실행할 콜백 함수를 지정한다.		
-	searchRequest.onreadystatechange = reSizeProcess;
-//	send() : 요청한다.
-	searchRequest.send(null);
+   var url="./reSize?color=" + encodeURIComponent(document.getElementById("cili").value) + "&idx=" + encodeURIComponent(document.getElementById("hidIdx").value);
+   searchRequest.open("POST",url ,true);
+   searchRequest.onreadystatechange = reSizeProcess;
+   searchRequest.send(null);
 }
 
 function reSizeProcess(){
-	if(searchRequest.readyState == 4 && searchRequest.status == 200) {
-		$("#hero").empty();
-		var object = eval("(" + searchRequest.responseText + ")");
-		var result = object.result;
-		var ho = document.createElement("div");
-		var hero = document.getElementById("hero");
-		
-		var str =  "<select name='sizeSelection' id='sizeSelection'>" + 
-        			"<option value ='1'>--[필수] 사이즈 선택--</option>";
-        			
-		for (var i = 0; i < result.length; i++) {
-	      var str = str + "<option value='" + result[i][0].value + "'>" +result[i][0].value;
-	      ho.innerHTML = str;
-		}
-		str= str + "</select>";
-		hero.appendChild(ho);
-	}
+   if(searchRequest.readyState == 4 && searchRequest.status == 200) {
+      $("#hero").empty();
+      var object = eval("(" + searchRequest.responseText + ")");
+      var result = object.result;
+      var ho = document.createElement("div");
+      var hero = document.getElementById("hero");
+      
+      var str =  "SIZE <select name='sizeSelection' id='sizeSelection' onchange='itemList(this.value)'>" + 
+                 "<option value ='1'>--[필수] 사이즈 선택--</option>";
+                 
+      for (var i = 0; i < result.length; i++) {
+         var str = str + "<option value='" + result[i][0].value + "'>" +result[i][0].value + "</option>";
+         ho.innerHTML = str;
+      }
+      str= str + "</select>";
+      hero.appendChild(ho);
+   }
 }
 
 var insertRequest = new XMLHttpRequest();
 function addToCart(){
-	var table = document.getElementsByTagName("tr");
-	for(var i=0; i<table.length; i++){
-		var color = document.getElementsByName("color")[i].value;
-		var size = document.getElementsByName("size_t")[i].value;
-		var ea = document.getElementsByName("ea")[i].value;
-		var idx = document.getElementById("hidIdx").value;
-		var price = document.getElementById("price").value;
-		var category = document.getElementById("category").value;
-		var id_number = document.getElementById("id_number").value;
-		var item_name = document.getElementById("item_name").value;
-		
-		var url="./addToCart?color=" + encodeURIComponent(color)
-			    			+"&size=" + encodeURIComponent(size) 
-			    			+"&ea=" + encodeURIComponent(ea)
-			    			+"&idx=" + encodeURIComponent(idx)
-			    			+"&price=" + encodeURIComponent(price)
-			    			+"&category="+ encodeURIComponent(category)
-			    			+"&id_number="+ encodeURIComponent(id_number)
-							+"&item_name="+ encodeURIComponent(item_name);
-		insertRequest.open("POST",url ,true);
-		insertRequest.send(null);
-	}
-	insertRequest.onreadystatechange = addCartSession;
+   var table = document.getElementsByTagName("tr");
+   for(var i=0; i<table.length; i++){
+      var color = document.getElementsByName("color")[i].value;
+      var size = document.getElementsByName("size_t")[i].value;
+      var ea = document.getElementsByName("ea")[i].value;
+      var idx = document.getElementById("hidIdx").value;
+      var price = document.getElementById("price").value;
+      var category = document.getElementById("category").value;
+      var id_number = document.getElementById("id_number").value;
+      var item_name = document.getElementById("item_name").value;
+      
+      var url="./addToCart?color=" + encodeURIComponent(color)
+                      +"&size=" + encodeURIComponent(size) 
+                      +"&ea=" + encodeURIComponent(ea)
+                      +"&idx=" + encodeURIComponent(idx)
+                      +"&price=" + encodeURIComponent(price)
+                      +"&category="+ encodeURIComponent(category)
+                      +"&id_number="+ encodeURIComponent(id_number)
+                     +"&item_name="+ encodeURIComponent(item_name);
+      insertRequest.open("POST",url ,true);
+      insertRequest.send(null);
+   }
+   insertRequest.onreadystatechange = addCartSession;
 } 
 
 function addCartSession(){
-	if(insertRequest.readyState == 4 && insertRequest.status == 200) {
-		var result = confirm("장바구니로 이동하시겠습니까?");
-		if(result){
-			location.href="shoppingCart";
-		}else{
-			return false;
-		}
-	}
+   if(insertRequest.readyState == 4 && insertRequest.status == 200) {
+      var result = confirm("장바구니로 이동하시겠습니까?");
+      if(result){
+         location.href="shoppingCart";
+      }else{
+         return false;
+      }
+   }
 }
 
 //아작스가 필요없어...ㅜㅜㅜㅜ
 var reviewInsertRequest = new XMLHttpRequest();
 function insertReview(frm){
-	frm.submit();
-	var star = document.getElementsByClassName("starR on");
-	alert(star.length)
+   frm.submit();
+   var star = document.getElementsByClassName("starR on");
+   alert(star.length)
 
-	var url = "./insertReview?idx=" + encodeURIComponent(document.getElementById("hidIdx").value)
-							+ "&content=" + encodeURIComponent(document.getElementById("review_message").value)
-							+ "&name=" + encodeURIComponent('${name}')
-							+ "&star=" + encodeURIComponent(star.length);//여기에 div의 값을 가져오게함.
-							
-	reviewInsertRequest.open("POST", url, true);
-	reviewInsertRequest.onreadystatechange = insertProcess;
-	reviewInsertRequest.send(null);
-	
+   var url = "./insertReview?idx=" + encodeURIComponent(document.getElementById("hidIdx").value)
+                     + "&content=" + encodeURIComponent(document.getElementById("review_message").value)
+                     + "&name=" + encodeURIComponent('${name}')
+                     + "&star=" + encodeURIComponent(star.length);//여기에 div의 값을 가져오게함.
+   reviewInsertRequest.open("POST", url, true);
+   reviewInsertRequest.onreadystatechange = insertProcess;
+   reviewInsertRequest.send(null);
+   
 }
 
 function insertProcess(){
-	if(reviewInsertRequest.readyState == 4 && reviewInsertRequest.status == 200) {
-				
-		var result = reviewInsertRequest.responseText;
-		if(result != 1) {
-			alert("저장실패!!!");
-		} else {
-//			정상적으로 데이터가 테이블에 저장되면 다음 데이터 입력을 위해서 입력 상자에 입력한 내용을 지워준다.
-			var content = document.getElementById("review_message");
-			var attached = document.getElementById("reviewFile");
-			content.value = "";
-			attached.value = "";
-	
-//			입력된 데이터가 화면에 표시되야 하므로 데이터를 얻어오는 함수를 실행한다.
-			//searchFunction();
-		}
-	}
+   if(reviewInsertRequest.readyState == 4 && reviewInsertRequest.status == 200) {
+            
+      var result = reviewInsertRequest.responseText;
+      if(result != 1) {
+         alert("저장실패!!!");
+      } else {
+//         정상적으로 데이터가 테이블에 저장되면 다음 데이터 입력을 위해서 입력 상자에 입력한 내용을 지워준다.
+         var content = document.getElementById("review_message");
+         var attached = document.getElementById("reviewFile");
+         content.value = "";
+         attached.value = "";
+   
+//         입력된 데이터가 화면에 표시되야 하므로 데이터를 얻어오는 함수를 실행한다.
+         //searchFunction();
+      }
+   }
 }
 
 /* 별점 */
 $(function(){
 $('.filebox span').click(function(){
-	  $(this).parent().children('span').removeClass('on');
-	  $(this).addClass('on').prevAll('span').addClass('on');
-	  return false;
-	});
+     $(this).parent().children('span').removeClass('on');
+     $(this).addClass('on').prevAll('span').addClass('on');
+     return false;
+   });
 
 
-	
-/* 후기작성 비회원경우 로그인창으로 */	
+   
+/* 후기작성 비회원경우 로그인창으로 */   
 $('#review_message').click(function(){
-	if('${name}' == ''){
-		var result = confirm("로그인후 작성하실수 있습니다. 로그인창으로 이동하시겠습니까?");
-    	if(result){
-		    location.href = "login";
-		 }
-	}
-});	
-	
+   if('${name}' == ''){
+      var result = confirm("로그인후 작성하실수 있습니다. 로그인창으로 이동하시겠습니까?");
+       if(result){
+          location.href = "login";
+       }
+   }
+});   
 });
 
 
@@ -503,15 +489,11 @@ $('#review_message').click(function(){
             <!--    <input type="button" va> -->
                     
                 
-                    <select id="cili" >
+               <select id="cili" onchange="reSize()">
                     <option value ="1">--[필수] 색깔 선택--</option>
                     <c:forEach var="item" items="${stc}" >
                        <c:if test="${item.color ne color}"> 
                         <option var= "${item.color}">${item.color}</option>
-                    <%--    <label class="box-radio-input" id="color">
-                       <input type="radio"  name="radio" value="${item.color}" />
-                       ${item.color}</label>
-                        --%>
                         </c:if>
                        <c:set var="color" value="${item.color}"/> 
                     </c:forEach>
@@ -519,21 +501,13 @@ $('#review_message').click(function(){
                     
                  </div>
                  
-                 
-                <div> SIZE
-               <select name="sizeSelection" id="sizeSelection">
-                    <option value ="1">--[필수] 사이즈 선택--</option>
-                       <c:forEach var="item" items="${stc}" >
-                       <c:if test="${item.color eq color}">
-                       <option var= "${item.size1}" id="size" value="${item.size1}" >${item.size1}</option>
-                       </c:if>
-                       <c:set var="size" value="${item.size1}"/> 
-                    </c:forEach>
-                </select>
+                
+               <div id="hero">SIZE
                </div>
                
                <div>
-                  <table id=table1>
+                  <table id="table1">
+                  
                   </table>
                </div>
                   
@@ -543,16 +517,16 @@ $('#review_message').click(function(){
             </div>   
             
             <div class="btn-goods">
-           	 <input type="button" value="BUY NOW" onclick="buyNow()"/><!-- 비회원은 로그인창으로 회원은 결제창으로. -->
+               <input type="button" value="BUY NOW" onclick="buyNow()"/><!-- 비회원은 로그인창으로 회원은 결제창으로. -->
             </div>
             <div>
          
             <input type="button" value="ADD TO CART" onclick="addToCart()"/><!-- 장바구니 -->
             <input type="button" value="WISHLIST" onclick="wishlist(this.form)"/><!-- 마이리스트?? -->
             </div>
-            
       </div>
       
+      <!-- 서브 이미지 -->
       <div id="imggo"></div>
       
       
@@ -561,35 +535,34 @@ $('#review_message').click(function(){
      <form id="uploadphoto" action="uploadReview?idx=${vo.idx}" method="post" enctype="multipart/form-data" >
 
      <div class ="reviewBox">
-	<div class="review_textfieldBox">
-	     
+   <div class="review_textfieldBox">
+        
      <textarea class="review_textfield" placeholder="리뷰를 남겨주세요." maxlength="2000" cols="5000" 
      name="review[message]" id="review_message"></textarea>
      </div>
      
      <div class=addfile>
-     	<div class=filebox>
-     		<label for="reviewFile"><img src='${pageContext.request.contextPath}/resources/images/camera.png' style='width: 30px;'> +사진추가</label>
-     		<input type="file" name="file" id="reviewFile"/>
+        <div class=filebox>
+           <label for="reviewFile"><img src='${pageContext.request.contextPath}/resources/images/camera.png' style='width: 30px;'> +사진추가</label>
+           <input type="file" name="file" id="reviewFile"/>
      
-		  <span class="starR on">별1</span>
-		  <span class="starR">별2</span>
-		  <span class="starR">별3</span>
-		  <span class="starR">별4</span>
-		  <span class="starR">별5</span>
-		 
-	
-			<input class="saveReview" style="float: right;"type="button" value="리뷰 등록하기"  onclick="insertReview(this.form)"/>
+        <span class="starR on">별1</span>
+        <span class="starR">별2</span>
+        <span class="starR">별3</span>
+        <span class="starR">별4</span>
+        <span class="starR">별5</span>
+       
+   
+         <input class="saveReview" style="float: right;"type="button" value="리뷰 등록하기"  onclick="insertReview(this.form)"/>
      </div>
      </div>
      
      
 </div>
 </form>
-		<!-- 리뷰 글 나오는 부분!! -->
-		<div id="reviewList">
-		<table>
-		 <c:set var="list" value="${reviewList.reviewList}"/>
+      <!-- 리뷰 글 나오는 부분!! -->
+      <div id="reviewList">
+       <c:set var="list" value="${reviewList.reviewList}"/>
                
                <!-- 테이블에 글이 없으면 없다고 출력한다. -->
                <c:if test="${list.size() == 0}">
@@ -608,7 +581,6 @@ $('#review_message').click(function(){
                <tr>
                   <td align="center">${vo.idx}</td>
                   <td>
-                     
                      <!-- 오늘 입력된 글은 new를 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <img src="${pageContext.request.contextPath }/resources/images/new.png"/>
@@ -620,8 +592,6 @@ $('#review_message').click(function(){
                      <a href="contentView_goods?idx=${vo.goodsidx}&currentPage=${reviewList.currentPage}">
                         ${content}
                      </a>
-                     
-                     
                   </td>
                   <td align="center">
                      ${vo.name}
@@ -672,19 +642,9 @@ $('#review_message').click(function(){
                            onclick="location.href='?currentPage=${reviewList.totalPage}'" title="마지막 페이지로 이동합니다."/>
                   </c:if>            
                   </td>
-                 
                </tr>
-            
-            </table>
-		
-		</div>
+      </div>
 
-</div>
-</div>
-
-</body>
-</html>
-</div>
 </div>
 </div>
 
