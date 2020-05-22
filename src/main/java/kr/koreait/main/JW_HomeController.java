@@ -53,6 +53,7 @@ public class JW_HomeController {
 		cartList.remove(idx);
 		session.setAttribute("cartList", cartList);
 		System.out.println(session.getAttribute("cartList"));
+		System.out.println("adsadas");
 		return "redirect:shoppingCart";
 	}
 	
