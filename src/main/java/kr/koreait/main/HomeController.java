@@ -78,7 +78,7 @@ public class HomeController {
 		ArrayList<CartVO> cartList = new ArrayList<CartVO>();
 		session.setAttribute("cartList", cartList);
 		
-		logger.info("다예쁜 쇼핑몰");
+		logger.info("다예쁜 쇼핑몰!!!!!!!!!!!!!!");
 		return "mainHome";
 	}
 	
