@@ -57,6 +57,18 @@ table.type09 td {
   font-size: 12px;
   cursor: pointer;
 }
+
+/* 별점 */
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}
  
 </style>
 
@@ -115,6 +127,14 @@ function resize(img){
     img.width = resizeWidth;
     img.height = resizeHeight;
  }
+ 
+
+ function changeStar(num) {
+	alert(num);
+}
+ 
+
+ 
 </script>
 
 </head>
@@ -146,7 +166,7 @@ function resize(img){
                <tbody class="tbody">
                <!-- request 영역의 noticeList 객체에서 1페이지 분량의 글이 저장된 ArrayList(noticeList)의 내용만 얻어내서 별도의 변수에 저장한다. -->
                <c:set var="list" value="${reviewList.reviewList}"/>
-               <%-- <c:set var="goodslist" value="${goodslist.goodlist}"/> --%>
+               <c:set var="goodslist" value="${goodslist}"/>
                
                
                <!-- 테이블에 글이 없으면 없다고 출력한다. -->
@@ -162,13 +182,39 @@ function resize(img){
                <!-- 컴퓨터 시스템의 현재 날짜와 시간을 기억하는 Date 클래스 객체를 만든다. -->	
                <jsp:useBean id="date" class="java.util.Date"/>
                
+               <c:set var="i" value="0"/>
                <c:forEach var="vo" items="${list}">
                <tr>
-                  <td align="center">
-               <%-- ${goods[1].name} --%>
-                 <%-- <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goods.category}/${goods.id_Number}" onload='resize(this)'>  --%>
-                <%-- <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_bottom/3.jpg" onload='resize(this)'>  --%>
+                  <td align="center" rowspan="3">
+               <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>  
                   </td>
+               <c:set var="i" value="${i+1}"/>
+                    <td> ${goodslist[i].name}</td> 
+                    <td align="center" rowspan="3">
+                     ${vo.name}
+                  </td>
+                  <td align="center" rowspan="3">
+                     <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
+                     <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
+                        <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
+                     </c:if>
+                     <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date}">
+                        <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)"/>
+                     </c:if>
+                  </td>
+               </tr>
+               <tr>
+               	<p onload="changeStar('${vo.star}')">
+                  <td id="star">
+                 	<span class="starR on">★</span>
+			        <span class="starR">☆</span>
+			        <span class="starR">☆</span>
+			        <span class="starR">☆</span>
+			        <span class="starR">☆</span>
+                  </td>
+                 </p> 
+               </tr>
+               <tr>
                   <td>
                      
                      <!-- 오늘 입력된 글은 new를 표시한다. -->
@@ -185,19 +231,7 @@ function resize(img){
                      
                      
                   </td>
-                  <td align="center">
-                     ${vo.name}
-                  </td>
-                  <td align="center">
-                     <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
-                     <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
-                        <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
-                     </c:if>
-                     <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date}">
-                        <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)"/>
-                     </c:if>
-                  </td>
-               </tr>
+                  </tr>
                </c:forEach>
                </c:if>
                </tbody>
