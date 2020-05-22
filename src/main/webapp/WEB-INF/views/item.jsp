@@ -252,7 +252,7 @@ z-index:200;
 					<c:if test="${name != null}">
 						<li><a href="logout" style="color:black"><h6>Logout</h6></a></li>
 					</c:if>
-					<li><a href="order"  style="color:black; letter-spacing: 3px"><h6>Order</h6></a></li>
+					<li><a href="orderBuy"  style="color:black; letter-spacing: 3px"><h6>Order</h6></a></li>
 					<li><a href="shoppingCart"  style="color:black; letter-spacing: 3px"><h6>Cart</h6></a></li>
 					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
 					

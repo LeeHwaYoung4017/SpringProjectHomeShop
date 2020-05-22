@@ -206,11 +206,10 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form
 	<div id="container">	
 		<div class="-hexagon -mos" scroll="" data-scroll="up"></div>
 		<div wid="true" class="-footer-contents ">
-			<span><a href="list">회사소개</a></span>&nbsp;&nbsp;
+			<span><a href="companyAboutUs">회사소개</a></span>&nbsp;&nbsp;
 			<span><a href="list">공지사항</a></span>&nbsp;&nbsp;
-			<span><a href="list">입점/제휴/대량구매</a></span>&nbsp;&nbsp;
-			<span><a href="list">개인정보처리방침</a></span>&nbsp;&nbsp;
-			<span><a href="list">이용약관</a></span>
+			<span><a href="companyPrivacyPolicyUs">개인정보처리방침</a></span>&nbsp;&nbsp;
+			<span><a href="companyTermsUs">이용약관</a></span>
 				<ul wid="true" class="-clear">
 					<button class="-footer-scrolltop" data-scroll="up" tooltip="위로" toolpos="bctc" tooltheme="dark" data-hasqtip="23">
 						<i class="fa fa-angle-up"></i>
@@ -221,7 +220,11 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form
 							<hr/>
 							<h6>대표전화 </h6><h5>010-4432-4017</h5>
 							<hr>
+							
+						</div>
+						<div class="-split">
 							<h2 style="font-size: 15px; font-family: font-family: 'Noto Sans JP', sans-serif;">계좌안내</h2>
+							<hr/>
 							<div>
 								<p style="font-size: 13px; font-family: font-family: 'Noto Sans JP', sans-serif;">
 									국민은행<br /> 676901-01-186383
@@ -254,14 +257,6 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form
 							</span>
 						</div>
 						<div class="-split">
-							<h2 class="-font-ns">공지/게시판</h2>
-							<hr/>
-							<!-- 공지사항 프레임 -->
-							<iframe src="smallNoticeList" name="board_vertical_slider"
-								width="100%" height="170px" border="0" frameborder="0"
-								allowtransparency="true"></iframe>
-						</div>
-						<div class="-split">
 							<h2>배송 / 반품지원센터</h2>
 							<hr/>
 							<div>
@@ -278,7 +273,7 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form
 								<hr class="-nude">
 								<p></p>
 								<ol style="display: inline-block;" class="xans-record-">
-									<a href="" class="-btn -black -xs"><i style="font-size: 13px; font-family: font-family: 'Noto Sans JP', sans-serif;">&nbsp; CJ택배</i><em class="displaynone"></em></a>
+									<a href="https://www.cjlogistics.com/ko/tool/parcel/tracking" class="-btn -black -xs"><i style="font-size: 13px; font-family: font-family: 'Noto Sans JP', sans-serif;">&nbsp; CJ택배</i><em class="displaynone"></em></a>
 								</ol>
 							</div>
 						</div> 
@@ -299,6 +294,7 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form
 									<a href="mailto:ghkdud7913@gmail.com">ghkdud7913@gmail.com</a></span><br>
 								<span>주소 : 서울특별시 강남구 테헤란로 146</span><br>
 								<span>제휴/제안 : <a href="mailto:ghkdud7913@gmail.com">ghkdud7913@gmail.com</a></span>
+								<br/><br/><br/>
 							</p>
 						</div>
 					</li>

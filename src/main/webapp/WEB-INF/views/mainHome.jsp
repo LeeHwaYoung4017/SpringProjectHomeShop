@@ -185,8 +185,13 @@ a{text-decoration: none}
 }
 .slide-wrap{
 	margin-bottom: 300px;
-} 
-
+}
+/* 
+img{
+	width: 200px;
+	height: 370px;
+}
+ */
 </style>
 
 </head>
