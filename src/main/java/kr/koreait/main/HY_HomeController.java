@@ -78,14 +78,12 @@ public class HY_HomeController {
 		ArrayList<CartVO> cartList = new ArrayList<CartVO>();
 		session.setAttribute("cartList", cartList);
 		
-		logger.info("다예몰 쇼핑몰");
-		logger.info("sada sdasdsadasdsafsfsaasdsaas쇼핑몰");
+		logger.info("화영몰 쇼핑몰");
 		return "mainHome";
 	}
 	
 	@RequestMapping("/mainHome")
 	public String mainHome(HttpServletRequest request, Model model) {
-		System.out.println("mainHome");
 		return "mainHome";
 	}
 	
