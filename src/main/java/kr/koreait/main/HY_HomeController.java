@@ -78,7 +78,7 @@ public class HY_HomeController {
 		ArrayList<CartVO> cartList = new ArrayList<CartVO>();
 		session.setAttribute("cartList", cartList);
 		
-		logger.info("화영몰 쇼핑몰");
+		logger.info("진원몰 쇼핑몰");
 		return "mainHome";
 	}
 	
