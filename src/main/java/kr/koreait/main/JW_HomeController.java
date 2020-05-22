@@ -3,12 +3,10 @@ package kr.koreait.main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,18 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-
 import kr.koreait.mybatis.MybatisDAO;
-import kr.koreait.utill.FileUtills;
 import kr.koreait.vo.CartVO;
-import kr.koreait.vo.GoodsVO;
 import kr.koreait.vo.LoginVO;
 import kr.koreait.vo.Resize;
 import kr.koreait.vo.StatusCount;
 import kr.koreait.vo.StatusVO;
-import kr.koreait.vo.StokeVO;
 
 @Controller
 public class JW_HomeController {
@@ -52,10 +44,10 @@ public class JW_HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UB_HomeController.class);
 	
+//	장바구니에서 상품 삭제 시 인덱스번호 받아서 삭제하고 돌아가는 메소드
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
-		System.out.println("문제야??-화영");
-		System.out.println("removeItem");
+		System.out.println("진원 컨트롤러의 removeItem() 실행");
 		int idx = Integer.parseInt(request.getParameter("idx"))-1;
 		ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
 		cartList.remove(idx);
@@ -64,19 +56,21 @@ public class JW_HomeController {
 		return "redirect:shoppingCart";
 	}
 	
+//	로그인 페이지로 이동
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 login 실행");
 		return "login";
 	}
 	
-//	회원가입 창으로 
+//	회원가입 창으로 이동
 	@RequestMapping("/join")
 	public String join(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 join 실행");
 		return "join";
 	}
 	
+
 	@RequestMapping("/idCheck")
 	public String idCheck(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 idCheck 실행");
@@ -98,8 +92,6 @@ public class JW_HomeController {
 	public String popUp(HttpServletRequest request, Model model) {
 		return "popUp";
 	}
-	
-
 	
 //	회원가입 주소 검색창
 	@RequestMapping(value="/jusoPopup")
