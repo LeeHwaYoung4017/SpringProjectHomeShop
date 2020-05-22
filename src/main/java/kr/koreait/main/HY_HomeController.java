@@ -79,6 +79,7 @@ public class HY_HomeController {
 		session.setAttribute("cartList", cartList);
 		
 		logger.info("화영 몰타임 쇼핑몰");
+		logger.info("다예 쇼핑몰");
 		return "mainHome";
 	}
 	
