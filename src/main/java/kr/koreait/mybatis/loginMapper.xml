@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.koreait.mybatis.MybatisDAO">
+	
+	<!-- 회원가입 -->
+	<insert id="insertMemeber" parameterType="kr.koreait.vo.LoginVO">
+		insert into SPRING_MEMBER (idx, name, id, pw, email, phone, addr, birth, gender)
+		values (SPRING_MEMBER_idx_seq.nextval, #{name}, #{id}, #{pw}, #{email}, #{phone}, #{addr}, #{birth}, #{gender})
+	</insert>
+	
+	<!-- 회원가입 id 중복확인 체크 -->
+	<select id="checkID" parameterType="String" resultType="String">
+		select id from SPRING_MEMBER where id=#{id}
+	</select>
+	
+	<select id="selectLogin" parameterType="java.util.HashMap" resultType="kr.koreait.vo.LoginVO">
+		select * from SPRING_MEMBER where id=#{id} and pw=#{password}
+	</select>
+	
+	<select id="selectById" resultType="kr.koreait.vo.LoginVO" parameterType="String">
+		select * from SPRING_MEMBER where id = #{id}
+	</select>
+	
+	<select id="selectLoginCount" resultType="int">
+		select count(*) from SPRING_MEMBER
+	</select>
+	
+	<select id="selectLoginList" parameterType="java.util.HashMap" resultType="kr.koreait.vo.LoginVO">
+		<![CDATA[
+		select * from (
+			select rownum rnum, TT.* from (
+				select * from SPRING_MEMBER order by idx desc
+			) TT where rownum <= #{endNo}
+		) where rnum >= #{startNo}
+		]]>
+	</select>
+	
+	<select id="memberIdList" resultType="String">
+		select id from SPRING_MEMBER where idx = #{i}
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

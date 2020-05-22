@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.koreait.mybatis.MybatisDAO">
+	
+	<!-- 테이블에 저장된 전체 글의 개수얻어오기. -->
+	<select id="selectCount" resultType="int">
+		select count(*) from SPRING_NOTICE
+	</select>
+	
+	<!-- 한페이지 분량의 글 얻어오기 -->
+	<select id="selectList" parameterType="java.util.HashMap" resultType="vo">
+	<![CDATA[
+	select * from (
+		select rownum rnum, AA.* from (	
+			select * from SPRING_NOTICE order by idx desc
+		)AA where rownum <= #{endNo}
+	) where rnum >= #{startNo}
+	]]>	
+	</select>
+	
+	<!-- 공지글 한건을 저장  -->
+   <insert id="insert" parameterType="vo">
+      insert into SPRING_NOTICE (IDX, TITLE, content, attached)
+      values (spring_notice_idx_seq.nextval, #{title}, #{content}, #{attached})
+   </insert>
+	
+	<!-- 글 한 건을 얻어온다. -->
+	<select id="selectByIdx" parameterType="int" resultType="vo">
+		select * from SPRING_NOTICE where idx = #{idx}
+	</select>
+	
+	<!-- 글 1건 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from SPRING_NOTICE where idx = #{idx}
+	</delete>
+	
+	<!-- 수정 -->
+	<update id="update" parameterType="vo">
+		update SPRING_NOTICE set title = #{title}, content = #{content} where idx = #{idx}
+	</update>
+	
+	<!-- 상품 등록(악세사리) -->
+	<insert id="insertGoods_acc" parameterType="kr.koreait.vo.GoodsVO">
+		insert into SPRING_ACC (IDX, name,goodsDir ,price,category,id_number,photo, item_comment, goodsColor)
+		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor})
+	</insert>
+	
+	<!-- 상품 등록(상의) -->
+	<insert id="insertGoods_top" parameterType="kr.koreait.vo.GoodsVO">
+		insert into SPRING_TOP (IDX, name,goodsDir ,price,category,id_number,photo, item_comment, goodsColor)
+		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor})
+	</insert>
+	
+	<!-- 상품 등록(하의) -->
+	<insert id="insertGoods_bottom" parameterType="kr.koreait.vo.GoodsVO">
+		insert into SPRING_BOTTOM (IDX, name, goodsDir ,price,category,id_number,photo, item_comment, goodsColor)
+		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor})
+	</insert>
+	
+	<!-- 상품 이름idx을 얻어온다. -->
+	<select id="selectGoodsIdx" resultType="int">
+	select last_number from USER_SEQUENCES where SEQUENCE_NAME = 'SPRING_ACC_IDX_SEQ'
+	</select>
+	
+	<insert id="insertStoke" parameterType="kr.koreait.vo.StokeVO">
+		insert into SPRING_STOKE(idx, color, ea, size1) values(#{idx}, #{color}, #{ea}, #{size1})
+	</insert>
+	
+	<select id="topCount" resultType="int">
+		select count(*) from SPRING_TOP
+	</select>
+	
+	<select id="topList"  parameterType="java.util.HashMap" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (
+				select rownum rnum, AA.* from (	
+					select * from SPRING_TOP order by idx desc
+				)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+		]]>	
+	</select>
+	
+	<select id="bottomCount" resultType="int">
+		select count(*) from SPRING_BOTTOM
+	</select>
+	
+	<select id="bottomList"  parameterType="java.util.HashMap" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (
+				select rownum rnum, AA.* from (	
+					select * from SPRING_BOTTOM order by idx desc
+				)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+		]]>	
+	</select>
+	
+	<select id="accCount" resultType="int">
+		select count(*) from SPRING_ACC
+	</select>
+	
+	<select id="accList"  parameterType="java.util.HashMap" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (
+				select rownum rnum, AA.* from (	
+					select * from SPRING_ACC order by idx desc
+				)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+		]]>	
+	</select>
+	
+	<select id="selectGoods" parameterType="int" resultType="kr.koreait.vo.GoodsVO">
+		select * from SPRING_BOTTOM where idx=#{idx} union select * from SPRING_top where idx=#{idx} union select * from SPRING_acc where idx=#{idx}		
+	</select>
+	
+	<select id="selectNoticeIdx" resultType="int">
+	  select last_number from USER_SEQUENCES where SEQUENCE_NAME = 'SPRING_NOTICE_IDX_SEQ'
+   </select>
+   
+   <select id="selectStatus" parameterType="String" resultType="kr.koreait.vo.StatusVO">
+   		select * from SPRING_STATUS where user_id = #{id}
+   </select>
+   
+  <select id="selectColor" resultType="kr.koreait.vo.StokeVO">
+         select * from spring_stoke where idx = #{idx}
+   </select>
+    <select id="reSize" parameterType="kr.koreait.vo.Resize" resultType="String">
+   		select size1 from spring_stoke where idx = #{idx} and color=#{color}
+   </select>
+   
+   <select id="newCount" parameterType="int" resultType="int">
+   <![CDATA[
+	   select count(*) from(
+	      select * from spring_top
+	      union
+	      select * from spring_bottom
+	      union
+	      select * from spring_acc
+	   ) where rownum <= #{newListSize}
+	]]>		   
+	</select>
+   
+   <select id="newList"  parameterType="int" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (	
+				select * from SPRING_TOP
+				union
+				select * from SPRING_BOTTOM
+				union
+				select * from SPRING_ACC
+			) where rownum <= #{newListSize} 
+		]]>	
+	</select>
+</mapper>

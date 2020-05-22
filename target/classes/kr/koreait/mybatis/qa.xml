@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.koreait.mybatis.MybatisDAO">
+	<!-- 테이블에 저장된 전체 글의 개수얻어오기O -->
+   <select id="selectQACount" resultType="int">
+      select count(*) from SPRING_QA
+   </select>
+   
+   <insert id="QAinsert" parameterType="kr.koreait.vo.QAVO">
+      insert into SPRING_QA (IDX, TITLE, content, attached, name)
+      values (spring_QA_idx_seq.nextval, #{title}, #{content}, #{attached}, #{name})
+   </insert>
+   
+   <!-- 한페이지 분량의 글 얻어오기O -->
+   <select id="selectQAList" parameterType="java.util.HashMap" resultType="kr.koreait.vo.QAVO">
+   <![CDATA[
+   select * from (
+      select rownum rnum, AA.* from (   
+         select * from SPRING_QA order by idx desc
+      )AA where rownum <= #{endNo}
+   ) where rnum >= #{startNo}
+   ]]>   
+   </select>
+   
+   <!-- 글 한 건을 얻어온다. -->
+   <select id="QAselectByIdx" parameterType="int" resultType="kr.koreait.vo.QAVO">
+      select * from SPRING_QA where idx = #{idx}
+   </select>
+   
+   <!-- 글 1건 삭제 -->
+   <delete id="QAdelete" parameterType="int">
+      delete from SPRING_QA where idx = #{idx}
+   </delete>
+   
+   <!-- 수정 -->
+   <update id="QAupdate" parameterType="kr.koreait.vo.QAVO">
+      update SPRING_QA set title = #{title}, content = #{content} where idx = #{idx}
+   </update>
+   
+   <!-- 상품 이름idx을 얻어온다. -->
+   <select id="selectQAIdx" resultType="int">
+   select count(*) from SPRING_QA
+   </select>
+   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
