@@ -130,11 +130,7 @@ function resize(img){
  
 
  function changeStar(num) {
-<<<<<<< HEAD
-   alert(num);
-=======
 	alert(num);
->>>>>>> refs/remotes/origin/master
 }
  
 
@@ -183,7 +179,7 @@ function resize(img){
                <!-- 테이블에 글이 있으면 화면에 출력할 글의 개수 만큼 반복하며 글을 출력한다. -->
                <c:if test="${list.size() != 0}">
                
-               <!-- 컴퓨터 시스템의 현재 날짜와 시간을 기억하는 Date 클래스 객체를 만든다. -->   
+               <!-- 컴퓨터 시스템의 현재 날짜와 시간을 기억하는 Date 클래스 객체를 만든다. -->	
                <jsp:useBean id="date" class="java.util.Date"/>
                
                <c:set var="i" value="0"/>
@@ -208,15 +204,6 @@ function resize(img){
                   </td>
                </tr>
                <tr>
-<<<<<<< HEAD
-                  <p onload="changeStar('${vo.star}')">
-                  <td id="star">
-                    <span class="starR on">★</span>
-                 <span class="starR">☆</span>
-                 <span class="starR">☆</span>
-                 <span class="starR">☆</span>
-                 <span class="starR">☆</span>
-=======
                	<p onload="changeStar('${vo.star}')">
                   <td id="star">
                  	<span class="starR on">★</span>
@@ -224,7 +211,6 @@ function resize(img){
 			        <span class="starR">☆</span>
 			        <span class="starR">☆</span>
 			        <span class="starR">☆</span>
->>>>>>> refs/remotes/origin/master
                   </td>
                  </p> 
                </tr>
