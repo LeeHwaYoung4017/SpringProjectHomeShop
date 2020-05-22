@@ -130,7 +130,11 @@ function resize(img){
  
 
  function changeStar(num) {
+<<<<<<< HEAD
    alert(num);
+=======
+	alert(num);
+>>>>>>> refs/remotes/origin/master
 }
  
 
@@ -204,6 +208,7 @@ function resize(img){
                   </td>
                </tr>
                <tr>
+<<<<<<< HEAD
                   <p onload="changeStar('${vo.star}')">
                   <td id="star">
                     <span class="starR on">★</span>
@@ -211,6 +216,15 @@ function resize(img){
                  <span class="starR">☆</span>
                  <span class="starR">☆</span>
                  <span class="starR">☆</span>
+=======
+               	<p onload="changeStar('${vo.star}')">
+                  <td id="star">
+                 	<span class="starR on">★</span>
+			        <span class="starR">☆</span>
+			        <span class="starR">☆</span>
+			        <span class="starR">☆</span>
+			        <span class="starR">☆</span>
+>>>>>>> refs/remotes/origin/master
                   </td>
                  </p> 
                </tr>
