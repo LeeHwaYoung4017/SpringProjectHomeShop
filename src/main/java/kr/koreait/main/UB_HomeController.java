@@ -76,7 +76,7 @@ public class UB_HomeController {
 	
 	ArrayList<CartVO> orderList = new ArrayList<CartVO>();
 	ArrayList<StatusVO> statusList = new ArrayList<StatusVO>();
-	StatusVO statusVO= new StatusVO();
+	
 	// 주문 페이지
 	/**
 	 * 
@@ -86,35 +86,33 @@ public class UB_HomeController {
 	 * 
 	 */
 	@RequestMapping(value="/order")
-	public void order(HttpServletRequest request, Model model){
-		
-		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-		System.out.println("order페이지 입장");
-		CartVO cartVO = new CartVO();
-		cartVO.setItem_name(request.getParameter("item_name"));
-		cartVO.setId_number(request.getParameter("id_number"));
-		cartVO.setPrice(Integer.parseInt(request.getParameter("price")));
-		cartVO.setCategory(request.getParameter("category"));
-		cartVO.setColor(request.getParameter("color"));
-		cartVO.setEa(Integer.parseInt(request.getParameter("ea")));
-		cartVO.setIdx(Integer.parseInt(request.getParameter("idx")));
-		cartVO.setSize(request.getParameter("size"));									
-		System.out.println(cartVO);
-		orderList.add(cartVO);
-		
-		/*
-		 * statusVO.setCategory(request.getParameter("category"));
-		 * statusVO.setColor(request.getParameter("color"));
-		 * statusVO.setItem_name(request.getParameter("item_name"));
-		 * statusVO.setId_number(request.getParameter("id_number"));
-		 * statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
-		 * statusVO.setEa(Integer.parseInt(request.getParameter("ea")));
-		 * statusVO.setItem_size(request.getParameter("size"));
-		 * statusList.add(statusVO); System.out.println(statusVO);
-		 * System.out.println(statusList);
-		 */
-		
-	}
+	   public void order(HttpServletRequest request, Model model){
+	      
+	      MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+	      System.out.println("order페이지 입장");
+	      CartVO cartVO = new CartVO();
+	      cartVO.setItem_name(request.getParameter("item_name"));
+	      cartVO.setId_number(request.getParameter("id_number"));
+	      cartVO.setPrice(Integer.parseInt(request.getParameter("price")));
+	      cartVO.setCategory(request.getParameter("category"));
+	      cartVO.setColor(request.getParameter("color"));
+	      cartVO.setEa(Integer.parseInt(request.getParameter("ea")));
+	      cartVO.setIdx(Integer.parseInt(request.getParameter("idx")));
+	      cartVO.setSize(request.getParameter("size"));                           
+	      System.out.println(cartVO);
+	      orderList.add(cartVO);
+	       
+	       StatusVO statusVO =new StatusVO(); 
+	       statusVO.setCategory(request.getParameter("category"));
+	       statusVO.setColor(request.getParameter("color"));
+	       statusVO.setItem_name(request.getParameter("item_name"));
+	       statusVO.setId_number(request.getParameter("id_number"));
+	       statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
+	       statusVO.setEa(Integer.parseInt(request.getParameter("ea")));
+	       statusVO.setItem_size(request.getParameter("size"));
+	       statusList.add(statusVO); 
+	       System.out.println(statusList);
+	   }
 	
 	/**
 	 * 
@@ -160,17 +158,24 @@ public class UB_HomeController {
 	 */
 	@RequestMapping(value = "/orderOK")
 	public String orderOK(HttpServletRequest request, Model model) {
+		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		System.out.println("orderOK 들어옴");
 		/* statusVO.setStatus(1); */
 		 
 		System.out.println(request.getParameter("totalEa"));
 		System.out.println(request.getParameter("totalPrice"));
 		LoginVO loginVO= (LoginVO) session.getAttribute("vo");
-	      for(CartVO vo : orderList) {
-	         StatusVO svo = new StatusVO();
-	         svo.setCategory(vo.getCategory());
-	         svo.setAddr(loginVO.getaddr());
+	      for(StatusVO vo : statusList) {
+	    	  
+			  vo.setAddr(loginVO.getaddr());
+			  vo.setUser_id(loginVO.getId());
+			 
+			  mapper.insertStatus(vo);  
 	      }
+	      
+	      
+	      System.out.println(statusList);
+	      
 		/*
 		 * String email= request.getParameter("email"); String pay=
 		 * request.getParameter("pay"); System.out.println(email);
