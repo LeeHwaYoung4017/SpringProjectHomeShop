@@ -24,10 +24,14 @@ import kr.koreait.vo.Resize;
 import kr.koreait.vo.StatusCount;
 import kr.koreait.vo.StatusVO;
 
-
+/**
+ * @author LeeJinWon
+ */
 @Controller
 public class JW_HomeController {
-	
+	/**
+	 * @param mapper(Autowired)
+	 */
 	@Autowired
 	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
 	
@@ -50,75 +54,66 @@ public class JW_HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UB_HomeController.class);
 	
-//	장바구니에서 상품 삭제 시 인덱스번호 받아서 삭제하고 돌아가는 메소드	
+	
+	/**
+	 * 장바구니에서 상품 삭제 시 인덱스번호 받아서 삭제하고 돌아가는 메소드	<br>
+	 * @param request .getParameter("idx")삭제할 리스트의 index번호 <br>
+	 * @return 장바구니 호출 메소드(shoppingCart) 이동 <br>
+	 */	
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
-		System.out.println("문제야??-화영");
-		System.out.println("dkdk");
-		System.out.println("removeItem");
 		System.out.println("진원 컨트롤러의 removeItem() 실행");
 		int idx = Integer.parseInt(request.getParameter("idx"))-1;
 		ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
 		cartList.remove(idx);
 		session.setAttribute("cartList", cartList);
-		System.out.println(session.getAttribute("cartList"));
-		System.out.println("adsadas");
 		return "redirect:shoppingCart";
 	}
 	
-//	로그인 페이지로 이동
+	
+	/**
+	 * @return 로그인 페이지 이동
+	 */
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 login 실행");
 		return "login";
 	}
 	
-//	회원가입 창으로 이동
+
+	/**
+	 * @return 회원가입 페이지 이동
+	 */
 	@RequestMapping("/join")
 	public String join(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 join 실행");
 		return "join";
 	}
-	
-//	이거 내꺼야?..	
-	@RequestMapping("/idCheck")
-	public String idCheck(HttpServletRequest request, Model model) {
-		System.out.println("컨트롤러의 idCheck 실행");
-		ArrayList<String> memberId = new ArrayList<String>();
-		MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
-		int totalLoginCount = mapper.selectLoginCount();
-		logger.info("selectLoginCount 실행");
-		for(int i=1;i<=totalLoginCount;i++) {
-			memberId.add(mapper.memberIdList(i));
-			logger.info("selectIdList 실행");
-			logger.info(i+ "번째 IdList를 Get!");
-		}
-		System.out.println(memberId);
-		model.addAttribute("idList", memberId);
-		return "idCheck";
-	}
 
-//	팝업?	
+	/**
+	 * 솔직히 말하자면 누가 만든지 모르겠습니다. 
+	 */
 	@RequestMapping("/popUp")
 	public String popUp(HttpServletRequest request, Model model) {
 		return "popUp";
 	}
 	
-//	회원가입 주소 검색창
+	
+	/**
+	 * @return API를 이용한 주소 검색 페이지를 요청 
+	 */
 	@RequestMapping(value="/jusoPopup")
-	public String jusoPopup(HttpServletRequest request, Model model){
+	public String jusoPopup(HttpServletRequest request){
 		return "jusoPopup";
 	}
 	
-//	회원가입 아이디 검사창
-	@RequestMapping(value="/dd")
-	public String chk() {
-		return "idCheck";
-	}
-	
-//	아이디 검사창에서 중복확인 (쿼리문 조건에 맞는 값이 없을 때(null) 해당 아이디 사용 가능)
+	/**
+	 * 아이디 검사창에서 중복확인 (쿼리문 조건에 맞는 값이 없을 때(null) 해당 아이디 사용 가능)
+	 * @param request 뷰 페이지에서 사용자의 중복확인을 위한 id가 담겨 해당 아이디를 중복 검사한다. 
+	 * @param response 검사에 대한 결과를 response객체에 담아 해당 javascript 함수로 넘겨준다.
+	 */
 	@RequestMapping(value="/checkID")
-	public void check(HttpServletRequest request, Model model , HttpServletResponse response) {
+	public void check(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("컨트롤러 ID중복확인 실행(check)");
 		String id = request.getParameter("id");
 		MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
@@ -141,9 +136,13 @@ public class JW_HomeController {
 		}
 	}
 	
-//	회원가입 
+	/**
+	 * @param request 입력받은 연,월,일을 하나의 변수로 만들어 loginVO에 set한다.
+	 * @param loginVO 회원가입 창에서 사용자에게 입력받은 데이터를 담는다. 해당 VO는 DAO로 넘겨 데이터베이스로 INSERT
+	 * @return 회원가입이 완료되면 로그인 페이지를 요청한다.
+	 */
 	@RequestMapping("/joinOK")
-	public String joinOK(HttpServletRequest request, Model model, LoginVO loginVO) {
+	public String joinOK(HttpServletRequest request, LoginVO loginVO) {
 		System.out.println("컨트롤러의 joinOK 실행");
 		MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
 		String birth = request.getParameter("year") +"-"+ request.getParameter("month") +"-"+ request.getParameter("day");
@@ -152,10 +151,18 @@ public class JW_HomeController {
 		return "login";
 	}
 	
-//	로그인
+	/**
+	 * 로그인 처리 후 결과가 성공적이면 전역변수 LoginVO vo에 해당 정보가 담긴다.
+	 */
 	LoginVO vo;
+	
+	/**
+	 * 넘겨받은 id와 pw를 데이터베이스로 넘겨 검사한 후 결과를 response로 넘기는 메소드
+	 * @param request 입력받은 id와 password가 넘어온다.
+	 * @param response 로그인 검사 결과를 담아 넘겨준다.
+	 */
 	@RequestMapping(value="/loginOK")
-	public void loginOK(HttpServletRequest request, Model model, HttpServletResponse response){
+	public void loginOK(HttpServletRequest request, HttpServletResponse response){
 		System.out.println("로그인 확인(loginOK)");
 		MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
 		HashMap<String, String> hmap = new HashMap<String, String>();
@@ -183,6 +190,10 @@ public class JW_HomeController {
 		}
 	}
 	
+	/**
+	 * 로그인이 성공적으로 이루어지면 해당 메소드에서 전역변수로 선언된 vo를 세션에 담아준다.
+	 * @return 로그인 성공 시 메인을 호출한다.
+	 */
 	@RequestMapping(value="/x685x23")
 	public String x685x23(HttpServletRequest request, Model model, HttpServletResponse response){
 		if(vo!=null) {
@@ -194,7 +205,10 @@ public class JW_HomeController {
 	}
 	
 	
-//	마이페이지
+	/**
+	 * 세션에서 사용자의 id를 가져와 해당 id의 구매 정보를 읽어온 후 분류하여 뷰 페이지로 뿌려주는 메소드 
+	 * @return request에 상품의 list와 상품 상태를 저장하는 countVO를 담아 마이페이지로 리턴한다. 
+	 */
 	@RequestMapping(value="/myPage")
 	public String myPage(HttpServletRequest request, Model model){
 		System.out.println("마이페이지(myPage)");
@@ -229,81 +243,98 @@ public class JW_HomeController {
 		return "myPage";
 	}
 	
+	/**
+	 * @return 로그인이 되어있을 시 장바구니로, 비로그인 상태면 로그인 페이지를 요청한다.
+	 */
 	@RequestMapping("/shoppingCart")
 	   public String shoppingCart(HttpServletRequest request, Model model) {
-		   System.out.println("장바구니로 갑시다잉");
+		   System.out.println("장바구니로 갑시다");
 		   if(session.getAttribute("name")==null) {
 			   return "login";
 		   }
 		   return "shoppingCart";
 	   }
 	   
+		/**
+		 * 세션의 로그인 정보를 날려주는 로그아웃 메소드 
+		 * @return 로그아웃 후 메인으로 리턴한다.
+		 */
 	   @RequestMapping("/logout")
 	   public String logout(HttpServletRequest request, Model model) {
 		   session.invalidate();
 		   return "mainHome";
 	   }
 	   
-   @RequestMapping("/reSize")
-   public void reSize(HttpServletRequest request, Model model, HttpServletResponse response) {
-	    System.out.println("reSize함수 실행");
-	    String color = request.getParameter("color");
-	    MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-	    int idx = Integer.parseInt(request.getParameter("idx"));
-	    Resize re = new Resize(color, idx);
-	    ArrayList<String> size_List = mapper.reSize(re);
-	    
-	    StringBuffer result = new StringBuffer();
-		result.append("{\"result\":[");
-		for (int i = 0; i < size_List.size(); i++) {
-			result.append("[{\"value\":\"" + size_List.get(i)+ "\"}],");
-		}
-		result.append("]}");
-		try {
-			response.getWriter().write(result.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-   }
+	   /**
+	    * 상품의 컬러 선택 시 stokeVO의 컬러가 가지고있는 사이즈 재고 표시 
+	    * @param request 상품의 idx와 color를 넘겨받아 해당 컬러의 size를 response에 담아 넘겨준다.
+	    */
+	   @RequestMapping("/reSize")
+	   public void reSize(HttpServletRequest request, Model model, HttpServletResponse response) {
+		    System.out.println("reSize함수 실행");
+		    String color = request.getParameter("color");
+		    MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+		    int idx = Integer.parseInt(request.getParameter("idx"));
+		    Resize re = new Resize(color, idx);
+		    ArrayList<String> size_List = mapper.reSize(re);
+		    
+		    StringBuffer result = new StringBuffer();
+			result.append("{\"result\":[");
+			for (int i = 0; i < size_List.size(); i++) {
+				result.append("[{\"value\":\"" + size_List.get(i)+ "\"}],");
+			}
+			result.append("]}");
+			try {
+				response.getWriter().write(result.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	   }
    
-   @RequestMapping("/addToCart")
-   public void addToCart(HttpServletRequest request, Model model, HttpServletResponse response) {
- 	  System.out.println("addToCart");
- 	  CartVO vo = new CartVO();
- 	  vo.setIdx(Integer.parseInt(request.getParameter("idx")));
- 	  vo.setColor(request.getParameter("color"));
- 	  vo.setEa(Integer.parseInt(request.getParameter("ea")));
- 	  vo.setSize(request.getParameter("size"));
- 	  vo.setPrice(Integer.parseInt(request.getParameter("price")));
- 	  vo.setId_number(request.getParameter("id_number"));
- 	  vo.setCategory(request.getParameter("category"));
- 	  vo.setItem_name(request.getParameter("item_name"));
- 	  System.out.println(vo);
-	  ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList"); 
-	  cartList.add(vo);
-	  session.setAttribute("cartList", cartList);
-   }
+	   /**
+	    * 상품의 정보를 입력받은 갯수만큼 vo객체를 만들어 세션의 cartList에 담는 메소드
+	    */
+	   @RequestMapping("/addToCart")
+	   public void addToCart(HttpServletRequest request, Model model, HttpServletResponse response) {
+	 	  System.out.println("addToCart");
+	 	  CartVO vo = new CartVO();
+	 	  vo.setIdx(Integer.parseInt(request.getParameter("idx")));
+	 	  vo.setColor(request.getParameter("color"));
+	 	  vo.setEa(Integer.parseInt(request.getParameter("ea")));
+	 	  vo.setSize(request.getParameter("size"));
+	 	  vo.setPrice(Integer.parseInt(request.getParameter("price")));
+	 	  vo.setId_number(request.getParameter("id_number"));
+	 	  vo.setCategory(request.getParameter("category"));
+	 	  vo.setItem_name(request.getParameter("item_name"));
+	 	  System.out.println(vo);
+		  ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList"); 
+		  cartList.add(vo);
+		  session.setAttribute("cartList", cartList);
+	   }
    
-   @RequestMapping("/bestList")
-   public String bestList(HttpServletRequest request, Model model,HttpServletResponse response) {
-	 System.out.println("진원 컨트롤러 - bestList");  
-	 MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
- 	    int newListSize = 24;
-		int pageSize = 12;
-		int currentPage = 1;
-		try {
-		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		} catch(NumberFormatException e) { }
-		int totalCount = mapper.newCount(newListSize);
-		logger.info("AllCount is = " + totalCount);
-		
-		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
-		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
-		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
-		goodsList.setGoodList(mapper.bestList(newListSize));
-		model.addAttribute("goodsList", goodsList);    	  
- 	  
- 	return "bestList";
-   }
+	   /**
+	    * 주문량이 10이 넘는 상품을 model에 담아 넘기는 메소드 
+	    * @return 베스트 상품을 모아놓은 bestList 페이지를 요청한다.
+	    */
+	   @RequestMapping("/bestList")
+	   public String bestList(HttpServletRequest request, Model model,HttpServletResponse response) {
+		    System.out.println("진원 컨트롤러 - bestList");  
+		    MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+	 	    int bestListSize = 12;
+			int pageSize = 12;
+			int currentPage = 1;
+			try {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			} catch(NumberFormatException e) { }
+			int totalCount = mapper.bestCount(bestListSize);
+			logger.info("AllCount is = " + totalCount);
+			
+			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+			GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+			goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+			goodsList.setGoodList(mapper.bestList(bestListSize));
+			model.addAttribute("goodsList", goodsList);    	  
+	 	return "bestList";
+	   }
    
 }

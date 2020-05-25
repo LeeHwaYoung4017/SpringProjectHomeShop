@@ -71,6 +71,7 @@ public class UB_HomeController {
 	StatusVO statusVO= new StatusVO();
 	@RequestMapping(value="/order")
 	public void order(HttpServletRequest request, Model model){
+		
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		System.out.println("order페이지 입장");
 		CartVO cartVO = new CartVO();
@@ -149,12 +150,7 @@ public class UB_HomeController {
 		}
 		goodsVO.setPhoto(photoNum);
 	}
-	
-	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
-	public void uploadFormGET(Model model, HttpServletRequest request) throws Exception {
-		logger.info("uploadFormGET");
-	}
-	
+		
 //	업로드
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
 	public void uploadFormGET(Locale locale, Model model) {

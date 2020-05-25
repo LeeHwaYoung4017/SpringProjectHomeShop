@@ -124,6 +124,7 @@
   <select id="selectColor" resultType="kr.koreait.vo.StokeVO">
          select * from spring_stoke where idx = #{idx}
    </select>
+   
     <select id="reSize" parameterType="kr.koreait.vo.Resize" resultType="String">
    		select size1 from spring_stoke where idx = #{idx} and color=#{color}
    </select>
@@ -131,11 +132,11 @@
    <select id="newCount" parameterType="int" resultType="int">
    <![CDATA[
 	   select count(*) from(
-	      select * from spring_top
-	      union
-	      select * from spring_bottom
-	      union
-	      select * from spring_acc
+	      select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+				union
+		  select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+				union
+		  select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
 	   ) where rownum <= #{newListSize}
 	]]>		   
 	</select>
@@ -149,6 +150,30 @@
 				union
 				select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
 			) where rownum <= #{newListSize} 
+		]]>	
+	</select>
+		  
+	<select id="bestCount" parameterType="int" resultType="int">
+	   <![CDATA[
+		   select count(*) from(
+		     select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+				union
+			 select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+				union
+			 select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+		   ) where rownum <= #{bestListSize}
+		]]>		   
+	</select>	
+	
+	   <select id="bestList"  parameterType="int" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (	
+				select * from spring_top where volume >=10;
+				union
+				select * from spring_bottom where volume >=10;
+				union
+				select * from spring_acc where volume >=10;
+			) where rownum <= #{bestListSize} 
 		]]>	
 	</select>
 </mapper>
