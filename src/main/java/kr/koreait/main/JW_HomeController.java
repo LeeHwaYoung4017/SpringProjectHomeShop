@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.annotation.Resource;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,15 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import kr.koreait.mybatis.MybatisDAO;
+
 import kr.koreait.vo.CartVO;
 import kr.koreait.vo.LoginVO;
 import kr.koreait.vo.Resize;
 import kr.koreait.vo.StatusCount;
 import kr.koreait.vo.StatusVO;
 
+
 @Controller
 public class JW_HomeController {
-	
 	@Autowired
 	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
 	@Autowired
@@ -45,6 +47,7 @@ public class JW_HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(UB_HomeController.class);
 	
 //	장바구니에서 상품 삭제 시 인덱스번호 받아서 삭제하고 돌아가는 메소드
+    
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
 		System.out.println("진원 컨트롤러의 removeItem() 실행");
@@ -273,4 +276,5 @@ public class JW_HomeController {
 	  cartList.add(vo);
 	  session.setAttribute("cartList", cartList);
    }
+
 }

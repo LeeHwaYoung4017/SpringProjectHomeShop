@@ -52,14 +52,14 @@
 	
 	<!-- 파일 업로드 폴더 경로 -->
 	<beans:bean class="java.lang.String" id="uploadPath_TOP">
-		<beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\goodsupload\goodsupload_top"/>
+		<beans:constructor-arg value="C:\spring\workspace\homeProject\src\main\webapp\resources\goodsupload\goodsupload_top"/>
 	</beans:bean>
 	<beans:bean class="java.lang.String" id="uploadPath_BOTTOM">
-		<beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\goodsupload\goodsupload_bottom"/>
+		<beans:constructor-arg value="C:\spring\workspace\homeProject\src\main\webapp\resources\goodsupload\goodsupload_bottom"/>
 	</beans:bean>
 	
 	<beans:bean class="java.lang.String" id="uploadPath_ACC">
-		<beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\goodsupload\goodsupload_acc"/>
+		<beans:constructor-arg value="C:\spring\workspace\homeProject\src\main\webapp\resources\goodsupload\goodsupload_acc"/>
 	</beans:bean>
 	<!-- 파일 업로드 허용가능한 최대크기 -->
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
@@ -67,7 +67,7 @@
 	</beans:bean>
 	<!-- 공지 이미지 경로 -->
 	<beans:bean class="java.lang.String" id="uploadPath1">
-		<beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\noticeimage"/>
+		<beans:constructor-arg value="C:\spring\workspace\homeProject\src\main\webapp\resources\noticeimage"/>
 	</beans:bean>
 	
 	<!-- QA -->
@@ -82,7 +82,7 @@
    </beans:bean>
    <!-- QA -->
    <beans:bean class="java.lang.String" id="uploadPath2">
-      <beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\QAimage"/>
+      <beans:constructor-arg value="C:\spring\workspace\homeProject\src\main\webapp\resources\QAimage"/>
    </beans:bean>
    <!-- review -->
      <beans:bean id="sqlSessionFactory3" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -96,7 +96,7 @@
    </beans:bean>
    <!-- review -->
    <beans:bean class="java.lang.String" id="uploadPath3">
-      <beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\reviewimage"/>
+      <beans:constructor-arg value="C:\spring\workspace\homeProject\src\main\webapp\resources\reviewimage"/>
    </beans:bean>
    
    
