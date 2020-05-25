@@ -11,11 +11,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import kr.koreait.mybatis.MybatisDAO;
 import kr.koreait.vo.CartVO;
+import kr.koreait.vo.GoodsList;
 import kr.koreait.vo.LoginVO;
 import kr.koreait.vo.Resize;
 import kr.koreait.vo.StatusCount;
@@ -279,9 +282,25 @@ public class JW_HomeController {
    }
    
    @RequestMapping("/bestList")
-   public String bestList(HttpServletRequest request, HttpServletResponse response) {
+   public String bestList(HttpServletRequest request, Model model,HttpServletResponse response) {
 	 System.out.println("진원 컨트롤러 - bestList");  
- 	 return "bestList";
+	 MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+ 	    int newListSize = 24;
+		int pageSize = 12;
+		int currentPage = 1;
+		try {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		} catch(NumberFormatException e) { }
+		int totalCount = mapper.newCount(newListSize);
+		logger.info("AllCount is = " + totalCount);
+		
+		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+		goodsList.setGoodList(mapper.bestList(newListSize));
+		model.addAttribute("goodsList", goodsList);    	  
+ 	  
+ 	return "bestList";
    }
    
 }

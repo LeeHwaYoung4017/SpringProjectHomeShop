@@ -93,5 +93,7 @@ public interface MybatisDAO {
 		void update(ReviewVO reviewVO);
 		int insertReview(ReviewVO vo);
 		int selectReviewIdx();
+		
+	ArrayList<GoodsVO> bestList(int newListSize);
 	
 }
