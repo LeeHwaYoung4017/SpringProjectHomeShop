@@ -34,6 +34,14 @@ import kr.koreait.vo.ReviewList;
 import kr.koreait.vo.ReviewVO;
 import kr.koreait.vo.StokeVO;
 
+/**
+ * 
+ * @author DAYE KIM
+ * @version 1.0
+ *
+ */
+
+
 @Controller
 public class DK_HomeController {
 	@Autowired
@@ -59,6 +67,11 @@ public class DK_HomeController {
 //	다예부분!!
 	
 //	브라우저에 출력할 1페이지 분량의 글 얻어오기
+	/**
+	 * 게시판에 1페이지 분량의 글 얻어오기
+	 * 
+	 * @return 한페이지 분량의 공지 글 
+	 */
 	@RequestMapping("/list")
 	public String list(HttpServletRequest request, Model model) {
 		System.out.println("list() 실행");
@@ -87,12 +100,23 @@ public class DK_HomeController {
 
 	}
 	
+	/**
+	 * 글 쓰기버튼을 누를시 
+	 * 
+	 * @return 글쓰기 창 띄움
+	 */
 	@RequestMapping("/insert")
 	public String insert(HttpServletRequest request, Model model){
 		System.out.println("insert 실행");
 		return "insert";
 	}
 	
+	/**
+	 * 글 저장
+	 *
+	 * @param noticeVO 
+	 * @return SQL문을 이용해 글을 저장하고 LIST로 돌아감.
+	 */
 	@RequestMapping("/insertOK")
 	public String insertOK(HttpServletRequest request, Model model, NoticeVO noticeVO) {
 		System.out.println("insertOK 실행");
@@ -102,6 +126,11 @@ public class DK_HomeController {
 		return "redirect:list";
 	}
 	
+	/**
+	 * 글 내용 보기
+	 * 
+	 * @return 글번호(IDX)에 해당하는 글을 얻어와 화면에 뿌려준다.
+	 */
 	@RequestMapping("/contentView")
 	public String contentView(HttpServletRequest request, Model model) {
 		System.out.println("contentView 실행");
@@ -116,6 +145,11 @@ public class DK_HomeController {
 		return "contentView";
 	}
 	
+	/**
+	 * 글 삭제
+	 * @return 선택된 글을 IDX번호를 가져와 SQL문을 이용해 DB에서 삭제 후 게시판으로 넘어감.
+	 * 
+	 */
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		System.out.println("delete 실행");
@@ -127,6 +161,12 @@ public class DK_HomeController {
 		return "redirect:list";
 	}
 	
+	/**
+	 * 글 수정
+	 * @param noticeVO 
+	 * 
+	 * @return 수정하기 버튼을 누르면 수정할수 있는 창이 뜨고 SQL문을 이용해 UPDATE 하고 게시판으로 돌아간다.
+	 */
 	@RequestMapping("/update")
 	public String update(HttpServletRequest request, Model model, NoticeVO noticeVO) {
 		System.out.println("update 실행");
@@ -138,6 +178,11 @@ public class DK_HomeController {
 		
 	}
 	
+	/**
+	 * 제품 상세보기
+	 * @return IDX를 이용해 상품내역 얻어오기 그리고 REVIEW 부분을 위해 리뷰내역도 얻어오기
+	 * 
+	 */
 	@RequestMapping(value="/contentView_goods")
 	   public String contentView_goods(HttpServletRequest request, Model model){
 	      System.out.println("아이템 자세히 보기");
@@ -171,12 +216,18 @@ public class DK_HomeController {
 	      
 	      return "contentView_goods";
 	   }
+
 	
-	 //다예 업로드!
 	   @RequestMapping(value = "/uploadForm1", method = RequestMethod.GET)
 	   public void uploadForm1GET(Locale locale, Model model) {
 	      logger.info("uploadForm1 GET");
 	   }
+	   /**
+	    * 공지글, 리뷰 이미지 파일 업로드
+	    * @param file 이미지 파일
+	    * @return IDX와 날짜를 사용해 이름을 지정한후 지정된 폴더에 사진 저장후 게시판으로 돌아감.
+	    * @throws Exception
+	    */
 	   @RequestMapping(value = "/uploadForm1", method = RequestMethod.POST)
 	   public String uploadForm1POST(MultipartFile file, Model model, NoticeVO vo) throws Exception {
 	      MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
@@ -197,6 +248,10 @@ public class DK_HomeController {
 	      return "redirect: list";
 	   }
 	   
+	   /**
+	    * 내역보던중 수정하고 싶을때 수정하기 버튼 클릭시 작동
+	    * @return 필요한 내용을 가지고 UPDATE 창으로넘어감.
+	    */
 	   @RequestMapping("/view2")
 	   public String view2(HttpServletRequest request, Model model) {
 	      System.out.println("contentView2 실행");
@@ -211,6 +266,12 @@ public class DK_HomeController {
 	      return "update";
 	   }
 	   
+	   /**
+	    * 리뷰게시판
+	    * 
+	   
+	    * @return 브라우저에 출력할 1페이지 분량의 글을 얻어온다.
+	    */
 //	    리뷰게시판!!!   
 //	    브라우저에 출력할 1페이지 분량의 글 얻어오기     
 	     @RequestMapping("/reviewList")
@@ -258,6 +319,12 @@ public class DK_HomeController {
 	      
 	      String savedFileName= "";
 //	    리뷰 작성하기
+	      /**
+	       * 리뷰 업로드
+	       * @param file 이미지
+	       * @return 이미지를 DB에 저장.
+	       * @throws Exception
+	       */
 	     @RequestMapping("/uploadReview")
 		public String uploadReview(MultipartFile file, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	   	  System.out.println("파일 업로드 부터 했음 좋겠다~~");
@@ -279,6 +346,10 @@ public class DK_HomeController {
 		      return "redirect: contentView_goods";
 		   }
 	     
+	     /**
+	      * AJAX를 사용해 리뷰 글 작성
+	      * @throws IOException
+	      */
 	     @RequestMapping("/insertReview")
 	     public void insertReview(HttpServletRequest request, Model model, HttpServletResponse response, ReviewVO vo) throws IOException {
 	   	  System.out.println("insertReview() 메소드");

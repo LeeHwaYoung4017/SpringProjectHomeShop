@@ -42,6 +42,11 @@ import kr.koreait.vo.StatusCount;
 import kr.koreait.vo.StatusVO;
 import kr.koreait.vo.StokeVO;
 
+/**
+ * 
+ * @author Administrator
+ *@version 1.0
+ */
 @Controller
 public class HY_HomeController {
 	
@@ -49,6 +54,7 @@ public class HY_HomeController {
 	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
 	@Autowired
 	HttpSession session;
+	
 	
 	@Resource(name= "uploadPath1")
 	private String uploadPath1;
@@ -65,6 +71,12 @@ public class HY_HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HY_HomeController.class);
 	
+	/**
+	 * 
+	 * @param locale
+	 * @param model
+	 * @return 메인 페이지를 띄운다.
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -87,6 +99,12 @@ public class HY_HomeController {
 		return "mainHome";
 	}
 	
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * @return 상품 상의 목록을 보여준다.
+	 */
 	@RequestMapping("/topList")
 	public String topList(HttpServletRequest request, Model model) {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
@@ -111,6 +129,12 @@ public class HY_HomeController {
 		return "topList";
 	}
 	
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * @return 상품 하의 목록을 보여준다
+	 */
 	@RequestMapping("/bottomList")
 	public String bottomList(HttpServletRequest request, Model model) {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
@@ -135,6 +159,12 @@ public class HY_HomeController {
 		return "bottomList";
 	}
 	
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * @return 상품 악세사리 목록을 보여준다.
+	 */
 	@RequestMapping("/accList")
 	public String accList(HttpServletRequest request, Model model) {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
@@ -162,10 +192,19 @@ public class HY_HomeController {
 	}
 	   
    //화영 업로드!
+	
   @RequestMapping(value = "/uploadForm2", method = RequestMethod.GET)
   public void uploadForm2GET(Locale locale, Model model) {
      logger.info("uploadForm2 GET");
   }
+  /**
+   * 
+   * @param file
+   * @param model
+   * @param vo
+   * @return 게시판 사진 업로드
+   * @throws Exception
+   */
   @RequestMapping(value = "/uploadForm2", method = RequestMethod.POST)
   public String uploadForm2POST(MultipartFile file, Model model, QAVO vo) throws Exception {
      MybatisDAO mapper = sqlSession2.getMapper(MybatisDAO.class);
@@ -190,6 +229,12 @@ public class HY_HomeController {
 //	         return "redirect: QAinsert";
       }
 	      
+  /**
+   * 
+   * @param request
+   * @param model
+   * @return 질문 게시판 글을 보여준다.
+   */
       @RequestMapping("/QAlist")
       public String QAlist(HttpServletRequest request, Model model) {
          MybatisDAO mapper = sqlSession2.getMapper(MybatisDAO.class);
@@ -216,12 +261,24 @@ public class HY_HomeController {
          return "QAlist";
       }   
       
+      /**
+       * 
+       * @param request
+       * @param model
+       * @return 질문글을 등록한다.
+       */
       @RequestMapping("/QAinsert")
       public String QAinsert(HttpServletRequest request, Model model) {
          
          return "QAinsert";
       }
       
+      /**
+       * 
+       * @param request
+       * @param model
+       * @return 질문글을 보여준다
+       */
       @RequestMapping("/QAView")
       public String QAView(HttpServletRequest request, Model model) {
 		System.out.println("QAView 실행");
@@ -236,6 +293,12 @@ public class HY_HomeController {
 		return "QAView";
       }
       
+      /**
+       * 
+       * @param request
+       * @param model
+       * @return 질문글을 삭제한다.
+       */
       @RequestMapping("/QAdelete")
       public String QAdelete(HttpServletRequest request, Model model) {
   		System.out.println("QAdelete 실행");
@@ -247,6 +310,13 @@ public class HY_HomeController {
   		return "redirect:QAlist";
   	}
       
+      /**
+       * 
+       * @param request
+       * @param model
+       * @param qaVO
+       * @return 질문글을 수정한다.
+       */
     @RequestMapping("/QAupdate")
   	public String QAupdate(HttpServletRequest request, Model model, QAVO qaVO) {
   		System.out.println("QAupdate 실행");
@@ -285,7 +355,13 @@ public class HY_HomeController {
     	  
     	return "newList";
       }     
-
+      
+      /**
+       * 
+       * @param request
+       * @param model
+       * @return 메인홈에서 조그만 창 게시판을 보여준다.
+       */
       @RequestMapping("/smallNoticeList")
       public String smallNoticeList(HttpServletRequest request, Model model) {
          System.out.println("smallNoticeList() 실행");

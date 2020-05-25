@@ -10,7 +10,7 @@
    
 <style type="text/css">
    a { color: black; text-decoration: none; }
-   .tbody tr:hover { color: white; font-weight: bold; background: purple; }
+   #line tr:hover { color: white; font-weight: bold; background: purple; }
 
 /* 내가 손댄 부분 */
 table.type09 {
@@ -128,10 +128,14 @@ function resize(img){
     img.height = resizeHeight;
  }
  
-
- function changeStar(num) {
-	alert(num);
+window.onload = function(){
+	
+var star = "${vo.star}";
+for (var i = 0; i < star; i++) {
+	
 }
+	
+};
  
 
  
@@ -184,7 +188,7 @@ function resize(img){
                
                <c:set var="i" value="0"/>
                <c:forEach var="vo" items="${list}">
-               <tr>
+               <tr class="line"><!-- 사진 -->
                   <td align="center" rowspan="3">
                <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>  
                   </td>
@@ -203,18 +207,12 @@ function resize(img){
                      </c:if>
                   </td>
                </tr>
-               <tr>
-               	<p onload="changeStar('${vo.star}')">
-                  <td id="star">
-                 	<span class="starR on">★</span>
-			        <span class="starR">☆</span>
-			        <span class="starR">☆</span>
-			        <span class="starR">☆</span>
-			        <span class="starR">☆</span>
+               <tr class="line"> <!--별점  -->
+                  <td id="star" onload="changeStar(${vo.star})">
+                 	
                   </td>
-                 </p> 
                </tr>
-               <tr>
+               <tr class="line">
                   <td>
                      
                      <!-- 오늘 입력된 글은 new를 표시한다. -->
