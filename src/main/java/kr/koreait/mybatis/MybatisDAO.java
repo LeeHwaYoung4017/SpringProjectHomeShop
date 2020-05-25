@@ -65,6 +65,7 @@ public interface MybatisDAO {
 //	stoke 입력	
 	void insertStoke(StokeVO stoke);
 	
+//  구매한 상품 등록
 	void insertStatus(StatusVO status);
 	
 	int selectNoticeIdx();

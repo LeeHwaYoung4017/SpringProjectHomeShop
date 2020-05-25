@@ -43,12 +43,11 @@
          ho.innerHTML=
             "<td>입금자명 : <input type='text' value='${name}' name='payName' id='payName'/>"
             +"<br/>입금은행 : <select name='bank' id='bank'>"
-            +"<option>::선택해 주세요::</option>"
             +"<option value='nhBank'>농협은행 : 000-0000-0000-00 심운보</option>"
             +"<option value='wooriBank'>우리은행 : 000-0000-0000-00 심운보</option>"
             +"</select></td>";
                         
-         document.getElementById("sb").innerHTML="무통장 결제";
+		 document.getElementById("sb").innerHTML="무통장 결제";
             
          var here = document.getElementById("here");
            here.appendChild(ho);
@@ -74,9 +73,16 @@
 		   alert("이메일을 입력하세요.");
 		   return false; 
 	   }
+      var div =$("input[name='pay']:checked").val();
+      if (div=="cardPay") {
+    	  alert("카드 결제 서비스는 준비중입니다.")
+      }else if (div=="phonePay") {
+    	  alert("핸드폰 결제 서비스는 준비중입니다.")
+      }else if (div=="directPay") {
+    	  document.getElementById("orderForm").submit();
+      }
     
-    
-      document.getElementById("orderForm").submit();
+      
    }
    function resize(img){
 
@@ -185,6 +191,8 @@ strong {
 							<td width="100">배송비</td>
 							<td width="150">TOTAL</td>
 						</tr>
+						<c:set var="totalEa" value="0"/>
+						<c:set var="totalPrice" value="0"/>
 						<c:forEach var="vo" items="${orderList}">
 								<tr align="left">
 									<td><img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/${vo.id_number}">
@@ -193,13 +201,20 @@ strong {
 									<td>${vo.ea}</td>
 									<td>2500</td>
 									<td><c:set var="total" value="${(vo.price)*(vo.ea)+2500}"/>${total}</td>
+									<c:set var="totalPrice" value="${totalPrice+total}" />
+									<c:set var="totalEa" value="${totalEa+vo.ea}" />
 								</tr>
 					   </c:forEach>
+					    <input type="hidden" value="${totalEa}" name="totalEa"/>
+           				<input type="hidden" value="${totalPrice}" name="totalPrice"/>
+                  		<c:out value="${totalEa}"/>
+                  		<c:out value="${totalPrice}"/>
 	                  </table>
-                  
+	                 <%--  <input type="hidden" value="${totalPrice}" name="totalPrice"/> --%>
+	                
                   
                      <table width="700" cellpadding="0" cellspacing="8">
-                        <caption>배송정보 </caption>
+                        <caption>배송정보</caption>
                            <tr>                                   
                               <td align="center">받으시는 분 :</td>
                               <td><input type="text" value="${name}" name="name" id="name"/></td>
@@ -251,6 +266,7 @@ strong {
                               </tr>
                <!-- 총 결제 금액 가져오기 --><tr><td><span id="sb"></span> 총 결제 금액 : <span class="payPrice"><c:out value="${total}"/></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="button" value="결제하기" id="checkPayBtn" onclick="checkPay()"/></td></tr>
+                                 
                         </table><!-- 결제 수단 끝 -->
                        </form>
                </div>
