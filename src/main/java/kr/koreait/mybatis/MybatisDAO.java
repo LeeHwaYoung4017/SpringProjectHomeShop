@@ -95,6 +95,10 @@ public interface MybatisDAO {
 		int insertReview(ReviewVO vo);
 		int selectReviewIdx();
 		
-	ArrayList<GoodsVO> bestList(int newListSize);
+	int bestCount(int bestListSize);
+	
+	ArrayList<GoodsVO> bestList(int bestListSize);
+	
+	
 	
 }

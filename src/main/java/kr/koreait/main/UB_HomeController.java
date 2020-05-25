@@ -87,6 +87,7 @@ public class UB_HomeController {
 	 */
 	@RequestMapping(value="/order")
 	public void order(HttpServletRequest request, Model model){
+		
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		System.out.println("order페이지 입장");
 		CartVO cartVO = new CartVO();
