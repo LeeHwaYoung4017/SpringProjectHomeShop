@@ -181,6 +181,7 @@ public class DK_HomeController {
 	/**
 	 * 제품 상세보기
 	 * @return IDX를 이용해 상품내역 얻어오기 그리고 REVIEW 부분을 위해 리뷰내역도 얻어오기
+	 * 
 	 */
 	@RequestMapping(value="/contentView_goods")
 	   public String contentView_goods(HttpServletRequest request, Model model){
