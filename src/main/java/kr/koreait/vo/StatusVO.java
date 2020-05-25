@@ -16,9 +16,6 @@ public class StatusVO {
 	private String category;
 	private String item_size;
 	
-	
-	
-	
 	public String getItem_size() {
 		return item_size;
 	}

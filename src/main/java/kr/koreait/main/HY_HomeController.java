@@ -91,12 +91,7 @@ public class HY_HomeController {
 		session.setAttribute("cartList", cartList);
 		
 		logger.info("운보원몰타임 쇼핑몰");
-		return "mainHome";
-	}
-	
-	@RequestMapping("/mainHome")
-	public String mainHome(HttpServletRequest request, Model model) {
-		return "mainHome";
+		return "redirect:mainHome";
 	}
 	
 	/**

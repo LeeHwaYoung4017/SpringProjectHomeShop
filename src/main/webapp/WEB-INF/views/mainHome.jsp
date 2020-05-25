@@ -30,9 +30,113 @@ $(document).ready(function() {
     });
 });
 
-function test(){
-	alert("안녕");
-}
+function resize(img){
+
+    // 원본 이미지 사이즈 저장
+    var width = img.width;
+    var height = img.height;
+
+    var newW = 450;
+    var newH = 450;
+    
+    var ratio = newW/width;
+    var ratio2 = newH/height;
+ 
+
+    // 가로, 세로 최대 사이즈 설정
+    var maxWidth = width * ratio;   
+    var maxHeight = height * ratio; 
+    
+    var maxWidth2 = width * ratio2;   
+    var maxHeight2 = height * ratio2; 
+    
+
+  //가로가 최대사이즈보다 작을경우
+  if(width <= newW){
+    if(height <= newH ){
+       
+       resizeWidth = maxWidth;
+        resizeHeight = maxHeight;
+       
+    } else {
+       resizeWidth = maxWidth2;
+       resizeHeight = maxHeight2;
+    }
+  } else {
+     if(height <= newH ){
+          
+          resizeWidth = maxWidth;
+           resizeHeight = maxHeight;
+          
+       } else {
+          if(maxHeight < newH){
+             resizeWidth = maxWidth;
+           resizeHeight = maxHeight;
+       }else {
+          resizeWidth = maxWidth2;
+          resizeHeight = maxHeight2;
+       }
+       }
+       
+  }
+    // 리사이즈한 크기로 이미지 크기 다시 지정
+    img.width = resizeWidth;
+    img.height = resizeHeight;
+ }
+ 
+function resize2(img){
+
+    // 원본 이미지 사이즈 저장
+    var width = img.width;
+    var height = img.height;
+
+    var newW = 350;
+    var newH = 350;
+    
+    var ratio = newW/width;
+    var ratio2 = newH/height;
+ 
+
+    // 가로, 세로 최대 사이즈 설정
+    var maxWidth = width * ratio;   
+    var maxHeight = height * ratio; 
+    
+    var maxWidth2 = width * ratio2;   
+    var maxHeight2 = height * ratio2; 
+    
+
+  //가로가 최대사이즈보다 작을경우
+  if(width <= newW){
+    if(height <= newH ){
+       
+       resizeWidth = maxWidth;
+        resizeHeight = maxHeight;
+       
+    } else {
+       resizeWidth = maxWidth2;
+       resizeHeight = maxHeight2;
+    }
+  } else {
+     if(height <= newH ){
+          
+          resizeWidth = maxWidth;
+           resizeHeight = maxHeight;
+          
+       } else {
+          if(maxHeight < newH){
+             resizeWidth = maxWidth;
+           resizeHeight = maxHeight;
+       }else {
+          resizeWidth = maxWidth2;
+          resizeHeight = maxHeight2;
+       }
+       }
+       
+  }
+    // 리사이즈한 크기로 이미지 크기 다시 지정
+    img.width = resizeWidth;
+    img.height = resizeHeight;
+ }
 </script>
 
 <style type="text/css">
@@ -152,13 +256,6 @@ ul{
   width: 100%;
   height:250px;
 }
-.item1{background-image:url('${pageContext.request.contextPath }/resources/images/top1.jpg');}
-.item2{background-image:url('${pageContext.request.contextPath }/resources/images/outer_image1.jpg');}
-.item3{background-image:url('${pageContext.request.contextPath }/resources/images/bottom1.jpg');}
-.item4{background-image:url('${pageContext.request.contextPath }/resources/images/shoes1.jpg');}
-.item5{background-image:url('${pageContext.request.contextPath }/resources/images/outer_image2.jpg');}
-.item6{background-image:url('${pageContext.request.contextPath }/resources/images/outer_image3.jpg');}
-
 
 li{list-style: none; font-family: font-family: 'Noto Sans JP', sans-serif; font-size: 30px;}
 a{text-decoration: none}
@@ -186,12 +283,24 @@ a{text-decoration: none}
 .slide-wrap{
 	margin-bottom: 300px;
 }
-/* 
-img{
-	width: 200px;
-	height: 370px;
+.white_icon{
+   border : 1px solid black;
 }
- */
+.black_icon{
+   background-color: black;
+}
+.sky_icon{
+   background-color: aqua;
+}
+.blue_icon{
+   background-color: blue;
+}
+.gray_icon{
+   background-color: gray;
+}
+.red_icon{
+   background-color: red;
+}
 </style>
 
 </head>
@@ -209,24 +318,19 @@ img{
 						<div class="slide-content" align="center">
 							<h2 style="font-family: font-family: 'Noto Sans JP', sans-serif; font-weight: lighter; letter-spacing: 7px; margin: 0px 0 37px; font-size: 17px"; >BEST</h2>
 						    <ul id="slider" class="slider">
-						        <li class="item1">
-						            <h3></h3>
-						        </li>
-						        <li class="item2">
-						            <h3></h3>
-						        </li>
-						        <li class="item3">
-						            <h3></h3>
-						        </li>
-						        <li class="item4">
-						            <h3></h3>
-						        </li>
-						        <li class="item5">
-						            <h3></h3>
-						        </li>
-						        <li class="item6">
-						            <h3></h3>
-						        </li>
+						    	<c:forEach var="vo" items="${bestSlide}">
+									<li class="item1">
+						            	<c:if test="${vo.category.equals('top')}">
+		            						<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_top/${vo.id_Number}">
+						            	</c:if>
+							            <c:if test="${vo.category.equals('bottom')}">
+						            		<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_bottom/${vo.id_Number}">
+						            	</c:if>
+							            <c:if test="${vo.category.equals('acc')}">
+						            		<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_acc/${vo.id_Number}">
+						            	</c:if>
+						        	</li>						    	
+						    	</c:forEach>
 						    </ul>
 						</div>
 					</div>
@@ -235,110 +339,33 @@ img{
 					   <!--   신상품 타이틀  -->
 					   <h2 class="NewTitle" style="font-family: font-family: 'Noto Sans JP', sans-serif;">NEW ARRIVALS</h2>
 					   <ul class="hotItemUL">
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <!--   img태그에 넣고싶은 사진 넣기   -->
-					            <img src="${pageContext.request.contextPath }/resources/images/Hoodie01.jpg" alt="Hoodie01">
-					            <!--   신상옷의 각각의 제목 적는 곳  -->
-					            <span class="itemName">이지 포켓 후드 아노락 (2col)</span>
-					         </a>
-					         <p class="price">
-					            <!--   할인 전 가격  -->
-					            <span style="text-decoration: line-through; margin-right: 10px; ">54,000won</span>
-					            <!--   할인 후 가격  -->
-					            <span>51,300won</span>
-					         </p>
-					         <p class="color">
-					            <!--   옷 색상 아이콘  -->
-					            <span class="c_icon1">검정</span>
-					            <span class="c_icon2">파랑</span>
-					         </p>
-					         <p class="newIcon">NEW</p>
-					      </li>
-					
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/Sweatshirt02.jpg" alt="Sweatshirt02">
-					            <span class="itemName">파라다이스 맨투맨 (3col)</span>
-					         </a>
-					         <p class="price">
-					            <span style="text-decoration: line-through; margin-right: 10px; ">28,000won</span>
-					            <span>25,000won</span>
-					         </p>
-					         <p class="color">
-					            <span class="c_icon1">검정</span>
-					            <span class="c_icon2">파랑</span>
-					            <span class="c_icon5">베이지</span>
-					         </p>
-					         <p class="newIcon">NEW</p>
-					      </li>
-					
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/washingshirt.jpg" alt="washingshirt">
-					            <span class="itemName">헤비 피그먼트 워싱 셔츠(4color)</span>
-					         </a>
-					         <p class="price">
-					            <span style="text-decoration: line-through; margin-right: 10px; ">46,000won</span>
-					            <span>41,600won</span>
-					         </p>
-					         <p class="color">
-					            <span class="c_icon1">블랙</span>
-					            <span class="c_icon5">베이지</span>
-					            <span class="c_icon6">그레이</span>
-					            <span class="c_icon7">회색</span>
-					         </p>
-					         <p class="newIcon">NEW</p>
-					      </li>
-					
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/bag01.jpg" alt="bag01">
-					            <span class="itemName">울 크리에이트 토트 백  (3col)</span>
-					         </a>
-					         <p class="price">
-					            <span style="text-decoration: line-through; margin-right: 10px; ">39,000won</span>
-					            <span>34,500won</span>
-					         </p>
-					         <p class="color">
-					            <span class="c_icon1">블랙</span>
-					            <span class="c_icon5">베이지</span>
-					            <span class="c_icon6">그레이</span>
-					         </p>
-					         <p class="newIcon">NEW</p>
-					         
-					      </li>
-					
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/denim01.jpg" alt="denim01">
-					            <span class="itemName">샌드 캣 워싱 진  (2col)</span>
-					         </a>
-					         <p class="price">
-					            <span style="text-decoration: line-through; margin-right: 10px; ">53,000won</span>
-					            <span>49,600won</span>
-					         </p>
-					         <p class="color">
-					            <span class="c_icon8">검정</span>
-					         </p>
-					         <p class="newIcon">NEW</p>
-					      </li>
-					
-					      <li style="font-size: 17px;">
-					         <a href="#">
-					            <img src="${pageContext.request.contextPath }/resources/images/shoes01.jpg" alt="shoes01">
-					            <span class="itemName">런 스파크 하이탑 (2col)</span>
-					         </a>
-					         <p class="price">
-					            <span style="text-decoration: line-through; margin-right: 10px; ">74,000won</span>
-					            <span>71,300won</span>
-					         </p>
-					         <p class="color">
-					            <span class="c_icon1">검정</span>
-					            <span class="c_icon4">파랑</span>
-					         </p>
-					         <p class="newIcon">NEW</p>
-					      </li>
+					            <c:forEach var="newVO" items="${newMain}">
+					            <li style="font-size: 17px;">
+					            	 <a href="#">
+					            	 	<c:if test="${newVO.category.equals('top')}">
+		            						<img onload="resize2(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_top/${newVO.id_Number}">
+						            	</c:if>
+							            <c:if test="${newVO.category.equals('bottom')}">
+						            		<img onload="resize2(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_bottom/${newVO.id_Number}">
+						            	</c:if>
+							            <c:if test="${newVO.category.equals('acc')}">
+						            		<img onload="resize2(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_acc/${newVO.id_Number}">
+						            	</c:if>
+					            	 </a>
+					            	 <!--   신상옷의 각각의 제목 적는 곳  -->
+					           		 <span class="itemName">${newVO.name}</span>
+					           		 <p class="price">
+						             	<span>${newVO.price} won</span>
+					       			  </p>
+					       			  <p class="color">
+							            <c:set var="colorValue" value="${newVO.goodsColor}"/>
+							         	<c:forEach var="spt" items="${fn:split(colorValue , ',')}">
+							         		<span class="${spt}_icon">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;
+							         	</c:forEach>
+							         </p>
+							          <p class="newIcon">NEW</p>
+							          </li>
+					            </c:forEach>
 					   </ul>
 					</div>					
 				</div>

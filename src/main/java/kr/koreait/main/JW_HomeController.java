@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.koreait.mybatis.MybatisDAO;
 import kr.koreait.vo.CartVO;
 import kr.koreait.vo.GoodsList;
+import kr.koreait.vo.GoodsVO;
 import kr.koreait.vo.LoginVO;
 import kr.koreait.vo.Resize;
 import kr.koreait.vo.StatusCount;
@@ -334,7 +335,22 @@ public class JW_HomeController {
 			goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
 			goodsList.setGoodList(mapper.bestList(bestListSize));
 			model.addAttribute("goodsList", goodsList);    	  
-	 	return "bestList";
+			return "bestList";
 	   }
-   
+	   
+	   /**
+	    * best아이템 top6 , new아이템 6개를 읽어와 뿌려주는 메인 페이지를 호출하는 메소드
+	    */
+	   @RequestMapping("/mainHome")
+		public String mainHome(HttpServletRequest request, Model model) {
+		   System.out.println("main실행");
+		   MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);      
+		   AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+		   GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+		   ArrayList<GoodsVO> bestSlide = mapper.bestSlide();
+		   ArrayList<GoodsVO> newMain = mapper.newMain();
+		   model.addAttribute("newMain", newMain);
+		   model.addAttribute("bestSlide", bestSlide);
+		   return "mainHome";
+		}
 }

@@ -99,6 +99,12 @@ public interface MybatisDAO {
 	
 	ArrayList<GoodsVO> bestList(int bestListSize);
 	
+//	메인에서 슬라이더 시키는 베스트 아이템 긁어오기
+	ArrayList<GoodsVO> bestSlide();
+	
+//	메인 페이지에 띄워주는 new 상품 긁어오기
+	ArrayList<GoodsVO> newMain();
+	
 	
 	
 }
