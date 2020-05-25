@@ -343,6 +343,7 @@ public class JW_HomeController {
 	    */
 	   @RequestMapping("/mainHome")
 		public String mainHome(HttpServletRequest request, Model model) {
+		   System.out.println("리디넌");
 		   System.out.println("main실행");
 		   MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);      
 		   AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
