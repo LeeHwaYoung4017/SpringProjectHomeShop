@@ -17,7 +17,7 @@ function resize(img){
 
     // 원본 이미지 사이즈 저장
     var width = img.width;
-    var height = img.he0ight;
+    var height = img.height;
 
     var newW = 300;
     var newH = 300;
@@ -67,7 +67,6 @@ function resize(img){
     img.height = resizeHeight;
  }
 </script>
-
 <style type="text/css">
 
 /*   신상품 제목부분 */
@@ -108,6 +107,7 @@ function resize(img){
 
 li{list-style: none; font-family: font-family: 'Noto Sans JP', sans-serif; font-size: 30px;}
 a{text-decoration: none}
+
 
 .product_listmain {
     margin: 0px 0 37px;
@@ -159,7 +159,6 @@ a{text-decoration: none}
 	margin-left: 50%;
 	position: fixed; bottom: 0; width: 100%;
 }
-
 .button {
   background-color: black; /* Green */
   border: none;
@@ -183,16 +182,11 @@ a{text-decoration: none}
   background-color: #555555;
   color: white;
 }
-
-.btn1{
-	background-color: #555555;
-	color: white;
-}
 </style>
 
 </head>
 <body>
-<jsp:include page="item.jsp" flush="true"/>
+<jsp:include page="item.jsp"/>
 <!-- 가운대 틀 -->
 <div id="contents">
 	<div class="sub_contents_inner">
@@ -203,18 +197,17 @@ a{text-decoration: none}
 			   <li align="right" style="font-size: small;">
 						${goodsList.totalCount}(${goodsList.currentPage}/${goodsList.totalPage})
 				</li>
+			          
 			   <ul class="hotItemUL">
 			   <c:set var="list" value="${goodsList.goodList}"/>
+			   <jsp:useBean id="date" class="java.util.Date"/>
 			   <c:forEach var="vo" items="${list}">
 			      <li style="font-size: 17px;">
 			         <a href="contentView_goods?idx=${vo.idx}&currentPage=${goodsList.currentPage}">
 			            <!--   img태그에 넣고싶은 사진 넣기   -->
-		            	<img onload="resize(this)" src="${
-		            	pageContext.request.contextPath }/resources/goodsupload/goodsupload_bottom/${vo.id_Number}">
-			            .0<!--   신상옷의 각각의 제목 적는 곳  -->
+		            	<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_bottom/${vo.id_Number}">
 			            <span class="itemName">${vo.name}</span>
 			         </a>
-			         <!-- 상품 색상 -->
 			          <p class="color">
 			         	<c:set var="colorValue" value="${vo.goodsColor}"/>
 			         	<c:forEach var="spt" items="${fn:split(colorValue , ',')}">
@@ -227,7 +220,14 @@ a{text-decoration: none}
 			            <!--   할인 후 가격  -->
 			            <span>${vo.price-2000}￦</span>
 			         </p>
-			         <p class="newIcon">NEW</p>
+			         
+			         	<!-- 7일 이내 상품은 new icon -->
+						<fmt:parseNumber value="${vo.writeDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"/>
+						<fmt:parseNumber value="${date.time / (1000*60*60*24)}" integerOnly="true" var="nowDate"/>
+						
+				      	 <c:if test="${(nowDate-strDate)<=7}">
+	                        <p class="newIcon">NEW</p>
+	                     </c:if>
 			      </li>
 			      </c:forEach>
 			  		 </ul>
@@ -236,7 +236,7 @@ a{text-decoration: none}
 		  </div>
 		 </div> 
 		 
-	<div class="pageBtn">
+		 <div class="pageBtn">
 		   <c:if test="${goodsList.startPage > 1}">
 				<input class="button btn" type="button" value="<<" onclick="location.href='?currentPage=1'" title="첫 페이지"/>
 				<input class="button btn" type="button" value="<" 
@@ -248,7 +248,7 @@ a{text-decoration: none}
 			<c:forEach var="i" begin="${goodsList.startPage}" end="${goodsList.endPage}" step="1">
 			
 				<c:if test="${i == goodsList.currentPage}">
-					<input class="button btn1" type="button" value="${i}" disabled="disabled"/>
+					<input class="button btn" type="button" value="${i}" disabled="disabled"/>
 				</c:if>
 				
 				<c:if test="${i != goodsList.currentPage}">

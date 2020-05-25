@@ -108,13 +108,17 @@ public class UB_HomeController {
 		return "orderOK";
 	}
 	
-	private void setIdPhotoNum(GoodsVO goodsVO, String savedFileName, ArrayList<String> savedFileName_sub,
-			int photoNum) {
+	private void setIdPhotoNum(GoodsVO goodsVO, String savedFileName, ArrayList<String> savedFileName_sub,int photoNum) {
 		goodsVO.setId_Number(savedFileName);
 		for(String str : savedFileName_sub) {
 			photoNum++;
 		}
 		goodsVO.setPhoto(photoNum);
+	}
+	
+	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
+	public void uploadFormGET(Model model, HttpServletRequest request) throws Exception {
+		logger.info("uploadFormGET");
 	}
 	
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.POST)

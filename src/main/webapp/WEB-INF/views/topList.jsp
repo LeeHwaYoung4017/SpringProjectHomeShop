@@ -197,8 +197,10 @@ a{text-decoration: none}
 			   <li align="right" style="font-size: small;">
 						${goodsList.totalCount}(${goodsList.currentPage}/${goodsList.totalPage})
 				</li>
+			          
 			   <ul class="hotItemUL">
 			   <c:set var="list" value="${goodsList.goodList}"/>
+			   <jsp:useBean id="date" class="java.util.Date"/>
 			   <c:forEach var="vo" items="${list}">
 			      <li style="font-size: 17px;">
 			         <a href="contentView_goods?idx=${vo.idx}&currentPage=${goodsList.currentPage}">
@@ -218,9 +220,14 @@ a{text-decoration: none}
 			            <!--   할인 후 가격  -->
 			            <span>${vo.price-2000}￦</span>
 			         </p>
-			          <!-- 컴퓨터 시스템의 현재 날짜와 시간을 기억하는 Date 클래스 객체를 만든다. -->
-              		 <jsp:useBean id="date" class="java.util.Date"/>
-			         <p class="newIcon">NEW</p>
+			         
+			         	<!-- 7일 이내 상품은 new icon -->
+						<fmt:parseNumber value="${vo.writeDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"/>
+						<fmt:parseNumber value="${date.time / (1000*60*60*24)}" integerOnly="true" var="nowDate"/>
+						
+				      	 <c:if test="${(nowDate-strDate)<=7}">
+	                        <p class="newIcon">NEW</p>
+	                     </c:if>
 			      </li>
 			      </c:forEach>
 			  		 </ul>

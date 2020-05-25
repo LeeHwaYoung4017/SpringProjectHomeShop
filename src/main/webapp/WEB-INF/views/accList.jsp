@@ -194,9 +194,10 @@ a{text-decoration: none}
 			<div id="hotItem">
 			   <h2 class="NewTitle" style="font-family: font-family: 'Noto Sans JP', sans-serif;">ACC</h2>
 			   <li align="right" style="font-size: small;">
-						${goodsList.totalCount}(${goodsList.currentPage}/${goodsList.totalPage})
+						${goodsList.totalCount}(${goodsList.currentPage}/${goodsList.totalPage})<br>
 				</li>
 			   <ul class="hotItemUL">
+			   <jsp:useBean id="date" class="java.util.Date"/>
 			   <c:set var="list" value="${goodsList.goodList}"/>
 			   <c:forEach var="vo" items="${list}">
 			      <li style="font-size: 17px;">
@@ -218,7 +219,14 @@ a{text-decoration: none}
 			            <!--   할인 후 가격  -->
 			            <span>${vo.price-2000}￦</span>
 			         </p>
-			         <p class="newIcon">NEW</p>
+			         
+			         <fmt:parseNumber value="${vo.writeDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"/>
+						<fmt:parseNumber value="${date.time / (1000*60*60*24)}" integerOnly="true" var="nowDate"/>
+						
+				      	 <c:if test="${(nowDate-strDate)<=7}">
+	                        <p class="newIcon">NEW</p>
+	                     </c:if>
+                     
 			      </li>
 			      </c:forEach>
 			  		 </ul>

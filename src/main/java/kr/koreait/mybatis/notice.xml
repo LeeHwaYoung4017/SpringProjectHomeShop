@@ -143,11 +143,11 @@
    <select id="newList"  parameterType="int" resultType="kr.koreait.vo.GoodsVO">
 		<![CDATA[
 			select * from (	
-				select * from SPRING_TOP
+				select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
 				union
-				select * from SPRING_BOTTOM
+				select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
 				union
-				select * from SPRING_ACC
+				select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
 			) where rownum <= #{newListSize} 
 		]]>	
 	</select>
