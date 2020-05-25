@@ -188,7 +188,7 @@ strong {
 							<td width="400">상품</td>
 							<td width="100">판매가</td>
 							<td width="50">수량</td>
-							<td width="100">배송비</td>
+							
 							<td width="150">TOTAL</td>
 						</tr>
 						<c:set var="totalEa" value="0"/>
@@ -197,19 +197,21 @@ strong {
 								<tr align="left">
 									<td><img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/${vo.id_number}">
 										${vo.item_name}(${vo.color},${vo.size},${vo.ea})</td>
-									<td>${vo.price}</td>
+									<td>${(vo.price)*(vo.ea)}</td>
 									<td>${vo.ea}</td>
-									<td>2500</td>
+									
 									<td><c:set var="total" value="${(vo.price)*(vo.ea)+2500}"/>${total}</td>
 									<c:set var="totalPrice" value="${totalPrice+total}" />
 									<c:set var="totalEa" value="${totalEa+vo.ea}" />
 								</tr>
 					   </c:forEach>
+					   
 					    <input type="hidden" value="${totalEa}" name="totalEa"/>
            				<input type="hidden" value="${totalPrice}" name="totalPrice"/>
                   		<c:out value="${totalEa}"/>
                   		<c:out value="${totalPrice}"/>
 	                  </table>
+	                  <div style="margin-left: 70%; font-size: 10px;">*배송비 2,500추가된 가격입니다.</div>
 	                 <%--  <input type="hidden" value="${totalPrice}" name="totalPrice"/> --%>
 	                
                   
