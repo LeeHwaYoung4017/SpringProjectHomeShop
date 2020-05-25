@@ -57,7 +57,7 @@
       //alert(check);
    }
    function checkPay() {
-      var name=document.getElementById("name").value;
+      /* var name=document.getElementById("name").value;
       var phone=document.getElementById("phone").value;
       var addr=document.getElementById("addr").value;
       var email=document.getElementById("email").value;
@@ -66,8 +66,9 @@
       alert(phone);
       alert(addr);
       alert(email);
-      alert(payName); 
-      return false;
+      alert(payName); */
+      alert("들어옴");
+      document.getElementById("orderForm").submit
    }
    function resize(img){
 
@@ -165,7 +166,7 @@ strong {
          <div id="contents">
             <div class="sub_contents_inner">
                <div class="contents_inner">
- 				<form action="orderOK" method="post" name="orderForm">
+ 				<form action="orderOK" method="post" name="orderForm" id="orderForm">
                   <h2 class="Title" style="font-family: font-family: 'Noto Sans JP', sans-serif;">ORDER</h2>
 	                  <table width="700" cellpadding="0" cellspacing="8">
 	                  	<caption>주문내역</caption>
@@ -241,7 +242,7 @@ strong {
                                 
                               </tr>
                <!-- 총 결제 금액 가져오기 --><tr><td><span id="sb"></span> 총 결제 금액 : <span class="payPrice"><c:out value="${total}"/></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="submit" value="결제하기" id="checkPayBtn" onclick="checkPay()"/></td></tr>
+                                <input type="button" value="결제하기" id="checkPayBtn" onclick="checkPay()"/></td></tr>
                         </table><!-- 결제 수단 끝 -->
                        </form>
                </div>
