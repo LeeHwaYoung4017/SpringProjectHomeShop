@@ -131,7 +131,9 @@ function resize(img){
 window.onload = function(){
 	
 var star = "${vo.star}";
-alert(star);
+for (var i = 0; i < star; i++) {
+	
+}
 	
 };
  

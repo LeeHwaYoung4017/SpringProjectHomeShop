@@ -42,14 +42,23 @@ import kr.koreait.vo.StatusCount;
 import kr.koreait.vo.StatusVO;
 import kr.koreait.vo.StokeVO;
 
+/**
+ * 
+ * @author  심운보
+ * @version 1.0
+ * 
+ */
 @Controller
 public class UB_HomeController {
-	
+
 	@Autowired
 	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
 	@Autowired
 	HttpSession session;
 	
+	/**
+	 * 파일 업로드 경로
+	 */
 	@Resource(name= "uploadPath1")
 	private String uploadPath1;
 	@Resource(name= "uploadPath2")
@@ -65,10 +74,17 @@ public class UB_HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UB_HomeController.class);
 	
-	// 주문 페이지
 	ArrayList<CartVO> orderList = new ArrayList<CartVO>();
 	ArrayList<StatusVO> statusList = new ArrayList<StatusVO>();
 	StatusVO statusVO= new StatusVO();
+	// 주문 페이지
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * 주문한 상품 리스트 ajax로 가져와 카트와 status에 넣어준다.
+	 * 
+	 */
 	@RequestMapping(value="/order")
 	public void order(HttpServletRequest request, Model model){
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
@@ -81,23 +97,33 @@ public class UB_HomeController {
 		cartVO.setColor(request.getParameter("color"));
 		cartVO.setEa(Integer.parseInt(request.getParameter("ea")));
 		cartVO.setIdx(Integer.parseInt(request.getParameter("idx")));
-		cartVO.setSize(request.getParameter("size"));
+		cartVO.setSize(request.getParameter("size"));									
 		System.out.println(cartVO);
 		orderList.add(cartVO);
 		
-		statusVO.setCategory(request.getParameter("category"));
-		statusVO.setColor(request.getParameter("color"));
-		statusVO.setItem_name(request.getParameter("item_name"));
-		statusVO.setId_number(request.getParameter("id_number"));
-		statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
-		statusVO.setEa(Integer.parseInt(request.getParameter("ea")));
-		statusVO.setItem_size(request.getParameter("size"));
-		statusList.add(statusVO);
-		System.out.println(statusVO);
-		System.out.println(statusList);
+		/*
+		 * statusVO.setCategory(request.getParameter("category"));
+		 * statusVO.setColor(request.getParameter("color"));
+		 * statusVO.setItem_name(request.getParameter("item_name"));
+		 * statusVO.setId_number(request.getParameter("id_number"));
+		 * statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
+		 * statusVO.setEa(Integer.parseInt(request.getParameter("ea")));
+		 * statusVO.setItem_size(request.getParameter("size"));
+		 * statusList.add(statusVO); System.out.println(statusVO);
+		 * System.out.println(statusList);
+		 */
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param request
+	 * @param model
+	 * @return 주문하기를 눌렀을때 아이디체크 후 유저정보를 받아 주문페이지로 이동한다.
+	 *  
+	 * 
+	 */
 	@RequestMapping(value = "/orderBuy")
 	public String orderBuy(HttpServletRequest request, Model model) {
 		System.out.println("orderBuy 들어옴");
@@ -125,6 +151,12 @@ public class UB_HomeController {
 		 */
 		return "order";
 	}
+	/**
+	 * 
+	 * @param request
+	 * @param model
+	 * @return 결제 완료후 결제 상품의 정보를 데이터베이스에 담아줍니다.
+	 */
 	@RequestMapping(value = "/orderOK")
 	public String orderOK(HttpServletRequest request, Model model) {
 		System.out.println("orderOK 들어옴");
@@ -132,7 +164,12 @@ public class UB_HomeController {
 		 
 		System.out.println(request.getParameter("totalEa"));
 		System.out.println(request.getParameter("totalPrice"));
-		
+		LoginVO loginVO= (LoginVO) session.getAttribute("vo");
+	      for(CartVO vo : orderList) {
+	         StatusVO svo = new StatusVO();
+	         svo.setCategory(vo.getCategory());
+	         svo.setAddr(loginVO.getaddr());
+	      }
 		/*
 		 * String email= request.getParameter("email"); String pay=
 		 * request.getParameter("pay"); System.out.println(email);
@@ -142,20 +179,44 @@ public class UB_HomeController {
 		return "orderOK";
 	}
 	
-	private void setIdPhotoNum(GoodsVO goodsVO, String savedFileName, ArrayList<String> savedFileName_sub,int photoNum) {
+	/**
+	 * 
+	 * @param goodsVO
+	 * @param savedFileName 저장한 메인파일 이름
+	 * @param savedFileName_sub  저장한 서브파일 이름
+	 * @param photoNum
+	 * 
+	 * 
+	 * 
+	 */
+	private void setIdPhotoNum(GoodsVO goodsVO, String savedFileName, ArrayList<String> savedFileName_sub,
+			int photoNum) {
 		goodsVO.setId_Number(savedFileName);
 		for(String str : savedFileName_sub) {
 			photoNum++;
 		}
 		goodsVO.setPhoto(photoNum);
 	}
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> branch 'master' of https://github.com/LeeHwaYoung4017/SpringProjectHomeShop.git
 //	업로드
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
 	public void uploadFormGET(Locale locale, Model model) {
 		logger.info("uploadForm GET");
 	}
+	/**
+	 * 
+	 * @param file
+	 * @param model
+	 * @param request
+	 * @param goodsVO
+	 * @param vo
+	 * @throws Exception
+	 * 파일 업로드 
+	 */
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.POST)
 	public void uploadFormPOST(MultipartFile file, Model model, HttpServletRequest request ,GoodsVO goodsVO, StokeVO vo) throws Exception {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
