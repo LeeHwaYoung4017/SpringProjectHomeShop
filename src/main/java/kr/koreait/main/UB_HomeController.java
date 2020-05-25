@@ -44,9 +44,9 @@ import kr.koreait.vo.StokeVO;
 
 /**
  * 
- * @author  심운보
+ * @author 심운보
  * @version 1.0
- * 
+ *
  */
 @Controller
 public class UB_HomeController {
