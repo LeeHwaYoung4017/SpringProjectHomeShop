@@ -168,11 +168,11 @@
 	   <select id="bestList"  parameterType="int" resultType="kr.koreait.vo.GoodsVO">
 		<![CDATA[
 			select * from (	
-				select * from spring_top where volume >=10;
+				select * from spring_top where volume >=10
 				union
-				select * from spring_bottom where volume >=10;
+				select * from spring_bottom where volume >=10
 				union
-				select * from spring_acc where volume >=10;
+				select * from spring_acc where volume >=10
 			) where rownum <= #{bestListSize} 
 		]]>	
 	</select>
