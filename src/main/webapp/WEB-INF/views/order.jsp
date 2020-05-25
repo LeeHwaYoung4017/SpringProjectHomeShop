@@ -57,18 +57,26 @@
       //alert(check);
    }
    function checkPay() {
-      /* var name=document.getElementById("name").value;
+      var name=document.getElementById("name").value;
       var phone=document.getElementById("phone").value;
       var addr=document.getElementById("addr").value;
       var email=document.getElementById("email").value;
-      var payName=document.getElementById("payName").value;
-      alert(name);
-      alert(phone);
-      alert(addr);
-      alert(email);
-      alert(payName); */
-      alert("들어옴");
-      document.getElementById("orderForm").submit
+      if(!name || name.trim().length == 0){
+		   alert("받으시는 분 이름을 입력하세요.");
+		   return false;
+	   }else if(!phone || phone.trim().length == 0){
+		   alert("핸드폰 번호를 입력하세요.");
+		   return false; 
+	   }else if(!addr || addr.trim().length == 0){
+		   alert("주소를 입력하세요.");
+		   return false; 
+	   }else if(!email || email.trim().length == 0){
+		   alert("이메일을 입력하세요.");
+		   return false; 
+	   }
+    
+    
+      document.getElementById("orderForm").submit();
    }
    function resize(img){
 
