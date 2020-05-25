@@ -39,7 +39,7 @@ public class FileUtills {
    public static String uploadFile(MultipartFile file,String uploadPath, GoodsVO goodsVO) throws IOException {
       String media = file.getOriginalFilename();
       System.out.println(goodsVO);
-      String filename = ((goodsVO.getGoodsidx())+1)+media.substring(media.lastIndexOf("."));
+      String filename = ((goodsVO.getGoodsidx()))+media.substring(media.lastIndexOf("."));
       
       File target = new File(uploadPath, filename);
       
@@ -51,7 +51,7 @@ public class FileUtills {
    // 공지 글.
    public static String uploadFile(MultipartFile file,String uploadPath, int goodIdx, String date) throws IOException {
       String media = file.getOriginalFilename();
-      String filename =(goodIdx+1) + "W" + date + media.substring(media.lastIndexOf(".")); 
+      String filename =(goodIdx) + "W" + date + media.substring(media.lastIndexOf(".")); 
       File target = new File(uploadPath, filename);
       FileCopyUtils.copy(file.getBytes(), target);
       
@@ -70,7 +70,7 @@ public class FileUtills {
       for(MultipartFile file : sub_file) {
          String a = file.getOriginalFilename();
          String filename =a.substring(a.lastIndexOf("."));
-         filename = ((goodsVO.getGoodsidx())+1)+"_"+ (i++)+ filename;
+         filename = ((goodsVO.getGoodsidx()))+"_"+ (i++)+ filename;
          media_sub.add(filename);
          File target = new File(uploadPath, filename);
          FileCopyUtils.copy(file.getBytes(), target);

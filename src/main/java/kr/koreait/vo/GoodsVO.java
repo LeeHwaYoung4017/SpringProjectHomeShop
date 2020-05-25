@@ -2,6 +2,7 @@ package kr.koreait.vo;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,8 +19,15 @@ int goodsidx;
 int photo;         // 서브파일 수량
 String goodsColor;   // 상품의 전체 색상
 ArrayList<MultipartFile> sub_file = new ArrayList<MultipartFile>();   //다중 파일용 변수
+Date writeDate;
 
 
+public Date getWriteDate() {
+	return writeDate;
+}
+public void setWriteDate(Date writeDate) {
+	this.writeDate = writeDate;
+}
 public String getGoodsColor() {
    return goodsColor;
 }

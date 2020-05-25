@@ -192,7 +192,7 @@ a{text-decoration: none}
 		<div class="contents_inner">
 			<!-- TOP -->
 			<div id="hotItem">
-			   <h2 class="NewTitle" style="font-family: font-family: 'Noto Sans JP', sans-serif;">NEW</h2>
+			   <h2 class="NewTitle" style="font-family: font-family: 'Noto Sans JP', sans-serif;">BEST</h2>
 			   <li align="right" style="font-size: small;">
 						${goodsList.totalCount}(${goodsList.currentPage}/${goodsList.totalPage})
 				</li>
@@ -212,7 +212,6 @@ a{text-decoration: none}
 		            		<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_acc/${vo.id_Number}">
 		            	</c:if>
 		            	
-			            <!--   신상옷의 각각의 제목 적는 곳  -->
 			            <span class="itemName">${vo.name}</span>
 			         </a>
 			          <p class="color">

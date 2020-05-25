@@ -3,37 +3,34 @@ package kr.koreait.main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-
 import kr.koreait.mybatis.MybatisDAO;
-import kr.koreait.utill.FileUtills;
 import kr.koreait.vo.CartVO;
-import kr.koreait.vo.GoodsVO;
+import kr.koreait.vo.GoodsList;
 import kr.koreait.vo.LoginVO;
 import kr.koreait.vo.Resize;
 import kr.koreait.vo.StatusCount;
 import kr.koreait.vo.StatusVO;
-import kr.koreait.vo.StokeVO;
+
 
 @Controller
 public class JW_HomeController {
 	
 	@Autowired
 	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
+	
 	@Autowired
 	HttpSession session;
 	
@@ -44,6 +41,7 @@ public class JW_HomeController {
 	@Resource(name= "uploadPath3")
 	private String uploadPath3;
 	@Resource(name= "uploadPath_ACC")
+	
 	private String uploadPath_ACC;
 	@Resource(name= "uploadPath_TOP")
 	private String uploadPath_TOP;
@@ -52,31 +50,37 @@ public class JW_HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UB_HomeController.class);
 	
+//	장바구니에서 상품 삭제 시 인덱스번호 받아서 삭제하고 돌아가는 메소드	
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
 		System.out.println("문제야??-화영");
+		System.out.println("dkdk");
 		System.out.println("removeItem");
+		System.out.println("진원 컨트롤러의 removeItem() 실행");
 		int idx = Integer.parseInt(request.getParameter("idx"))-1;
 		ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
 		cartList.remove(idx);
 		session.setAttribute("cartList", cartList);
 		System.out.println(session.getAttribute("cartList"));
+		System.out.println("adsadas");
 		return "redirect:shoppingCart";
 	}
 	
+//	로그인 페이지로 이동
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 login 실행");
 		return "login";
 	}
 	
-//	회원가입 창으로 
+//	회원가입 창으로 이동
 	@RequestMapping("/join")
 	public String join(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 join 실행");
 		return "join";
 	}
 	
+//	이거 내꺼야?..	
 	@RequestMapping("/idCheck")
 	public String idCheck(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 idCheck 실행");
@@ -94,12 +98,11 @@ public class JW_HomeController {
 		return "idCheck";
 	}
 
+//	팝업?	
 	@RequestMapping("/popUp")
 	public String popUp(HttpServletRequest request, Model model) {
 		return "popUp";
 	}
-	
-
 	
 //	회원가입 주소 검색창
 	@RequestMapping(value="/jusoPopup")
@@ -280,4 +283,27 @@ public class JW_HomeController {
 	  cartList.add(vo);
 	  session.setAttribute("cartList", cartList);
    }
+   
+   @RequestMapping("/bestList")
+   public String bestList(HttpServletRequest request, Model model,HttpServletResponse response) {
+	 System.out.println("진원 컨트롤러 - bestList");  
+	 MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+ 	    int newListSize = 24;
+		int pageSize = 12;
+		int currentPage = 1;
+		try {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		} catch(NumberFormatException e) { }
+		int totalCount = mapper.newCount(newListSize);
+		logger.info("AllCount is = " + totalCount);
+		
+		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+		goodsList.setGoodList(mapper.bestList(newListSize));
+		model.addAttribute("goodsList", goodsList);    	  
+ 	  
+ 	return "bestList";
+   }
+   
 }

@@ -173,7 +173,7 @@ z-index:200;
 						<a href="newList" style="color:black; letter-spacing: 3px"><h6>NEW</h6></a>
 					</li>
 					<li>
-						<a href="" style="color:black; letter-spacing: 3px"><h6>BEST</h6></a>
+						<a href="bestList" style="color:black; letter-spacing: 3px"><h6>BEST</h6></a>
 					</li>
 					<li>
 						<a href="topList" style="color:black; letter-spacing: 3px"><h6>TOP</h6></a>

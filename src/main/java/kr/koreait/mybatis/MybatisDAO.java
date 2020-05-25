@@ -65,6 +65,7 @@ public interface MybatisDAO {
 //	stoke 입력	
 	void insertStoke(StokeVO stoke);
 	
+//  구매한 상품 등록
 	void insertStatus(StatusVO status);
 	
 	int selectNoticeIdx();
@@ -93,5 +94,7 @@ public interface MybatisDAO {
 		void update(ReviewVO reviewVO);
 		int insertReview(ReviewVO vo);
 		int selectReviewIdx();
+		
+	ArrayList<GoodsVO> bestList(int newListSize);
 	
 }

@@ -78,8 +78,7 @@ public class HY_HomeController {
 		ArrayList<CartVO> cartList = new ArrayList<CartVO>();
 		session.setAttribute("cartList", cartList);
 		
-		logger.info("화영 몰타임 쇼핑몰");
-		logger.info("다예 쇼핑몰");
+		logger.info("운보원몰타임 쇼핑몰");
 		return "mainHome";
 	}
 	
@@ -108,7 +107,6 @@ public class HY_HomeController {
 		hmap.put("startNo", goodsList.getStartNo());
 		hmap.put("endNo", goodsList.getEndNo());
 		goodsList.setGoodList(mapper.topList(hmap));
-		
 		model.addAttribute("goodsList", goodsList);
 		return "topList";
 	}

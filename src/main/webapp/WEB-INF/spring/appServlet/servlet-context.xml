@@ -96,8 +96,8 @@
    </beans:bean>
    <!-- review -->
    <beans:bean class="java.lang.String" id="uploadPath3">
-      <beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\reviewimage"/>
+      <beans:constructor-arg value="C:\\git\SpringProjectHomeShop\src\main\webapp\resources\reviewimage"/>
    </beans:bean>
-   
+
    
 </beans:beans>
