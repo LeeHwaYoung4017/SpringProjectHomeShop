@@ -67,6 +67,8 @@ public class UB_HomeController {
 	
 	// 주문 페이지
 	ArrayList<CartVO> orderList = new ArrayList<CartVO>();
+	ArrayList<StatusVO> statusList = new ArrayList<StatusVO>();
+	StatusVO statusVO= new StatusVO();
 	@RequestMapping(value="/order")
 	public void order(HttpServletRequest request, Model model){
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
@@ -82,13 +84,29 @@ public class UB_HomeController {
 		cartVO.setSize(request.getParameter("size"));
 		System.out.println(cartVO);
 		orderList.add(cartVO);
+		
+		statusVO.setCategory(request.getParameter("category"));
+		statusVO.setColor(request.getParameter("color"));
+		statusVO.setItem_name(request.getParameter("item_name"));
+		statusVO.setId_number(request.getParameter("id_number"));
+		statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
+		statusVO.setEa(Integer.parseInt(request.getParameter("ea")));
+		statusVO.setItem_size(request.getParameter("size"));
+		statusList.add(statusVO);
+		System.out.println(statusVO);
+		System.out.println(statusList);
+		
 	}
 	
 	@RequestMapping(value = "/orderBuy")
 	public String orderBuy(HttpServletRequest request, Model model) {
+		System.out.println("orderBuy 들어옴");
 		if(session.getAttribute("name")==null) {
+			orderList=new ArrayList<CartVO>();
 			return "login";
 		}
+			
+		
 		   LoginVO loginVO= (LoginVO) session.getAttribute("vo");
 		    String id = loginVO.getId();
 		    String addr = loginVO.getaddr();
@@ -101,10 +119,26 @@ public class UB_HomeController {
 		      model.addAttribute("orderList", orderList);
 		      System.out.println(orderList);
 		      orderList=new ArrayList<CartVO>();
+		     
+		/*
+		 * statusVO.setAddr(addr); statusVO.setUser_id(id);
+		 */
 		return "order";
 	}
 	@RequestMapping(value = "/orderOK")
 	public String orderOK(HttpServletRequest request, Model model) {
+		System.out.println("orderOK 들어옴");
+		/* statusVO.setStatus(1); */
+		 
+		System.out.println(request.getParameter("totalEa"));
+		System.out.println(request.getParameter("totalPrice"));
+		
+		/*
+		 * String email= request.getParameter("email"); String pay=
+		 * request.getParameter("pay"); System.out.println(email);
+		 * System.out.println(pay);
+		 */
+		//굿즈 브이오 볼륨 1증가, 스테이터스 결제대기로 변경, 스테이터스 브이오 채우기 메소드 만들기
 		return "orderOK";
 	}
 	
@@ -121,6 +155,11 @@ public class UB_HomeController {
 		logger.info("uploadFormGET");
 	}
 	
+//	업로드
+	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
+	public void uploadFormGET(Locale locale, Model model) {
+		logger.info("uploadForm GET");
+	}
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.POST)
 	public void uploadFormPOST(MultipartFile file, Model model, HttpServletRequest request ,GoodsVO goodsVO, StokeVO vo) throws Exception {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);

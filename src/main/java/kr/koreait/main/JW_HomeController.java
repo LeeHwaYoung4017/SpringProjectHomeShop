@@ -53,6 +53,9 @@ public class JW_HomeController {
 //	장바구니에서 상품 삭제 시 인덱스번호 받아서 삭제하고 돌아가는 메소드	
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
+		System.out.println("문제야??-화영");
+		System.out.println("dkdk");
+		System.out.println("removeItem");
 		System.out.println("진원 컨트롤러의 removeItem() 실행");
 		int idx = Integer.parseInt(request.getParameter("idx"))-1;
 		ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
