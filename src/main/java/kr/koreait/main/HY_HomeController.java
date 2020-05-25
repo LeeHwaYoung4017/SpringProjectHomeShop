@@ -44,9 +44,8 @@ import kr.koreait.vo.StokeVO;
 
 /**
  * 
- * @author 이화영
+ * @author Administrator
  *@version 1.0
- *
  */
 @Controller
 public class HY_HomeController {
