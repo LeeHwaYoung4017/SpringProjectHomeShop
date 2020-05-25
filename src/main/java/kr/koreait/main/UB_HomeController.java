@@ -197,11 +197,7 @@ public class UB_HomeController {
 		}
 		goodsVO.setPhoto(photoNum);
 	}
-<<<<<<< HEAD
-	
 
-=======
->>>>>>> branch 'master' of https://github.com/LeeHwaYoung4017/SpringProjectHomeShop.git
 //	업로드
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
 	public void uploadFormGET(Locale locale, Model model) {
