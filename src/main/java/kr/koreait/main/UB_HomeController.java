@@ -172,8 +172,7 @@ public class UB_HomeController {
 			 
 			  mapper.insertStatus(vo);  
 	      }
-	      
-	      
+	      model.addAttribute("statusList", statusList);
 	      System.out.println(statusList);
 	      
 		/*
