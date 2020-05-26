@@ -580,46 +580,47 @@ $('#review_message').click(function(){
                <jsp:useBean id="date" class="java.util.Date"/>
                
                <c:forEach var="vo" items="${list}">
-         	<span style="display: inline-block; width: 90%;text-align: left;">
-               <span style="float: left; color: #e27e37; size: 10px; font-size: 20px;">
-                     <c:if test="${vo.star == 1 }">
-                     ★☆☆☆☆
-                     </c:if> 
-                     <c:if test="${vo.star == 2}">
-                     ★★☆☆☆
-                     </c:if> 
-                     <c:if test="${vo.star == 3}">
-                     ★★★☆☆
-                     </c:if> 
-                     <c:if test="${vo.star == 4}">
-                     ★★★★☆
-                     </c:if>
-                      <c:if test="${vo.star == 5}">
-                     ★★★★★
-                     </c:if>
-                     
-                  <!-- 오늘 입력된 글은 new를 표시한다. -->
-                     <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
-                        <img src="${pageContext.request.contextPath }/resources/images/new.png"/>
-                     </c:if>
-            </span>
-                  <span style="float: right;">   
+         	<div style="display: grid;grid-template-columns: 80% 20%; width: 90%;text-align: left; border-bottom: solid 2px #ccc; margin-bottom: 7px;">
+         		<div class="box">
+         			<span style="color: #e27e37; size: 10px; font-size: 20px;">
+	         			<c:if test="${vo.star == 1 }">
+	                     ★☆☆☆☆
+	                     </c:if> 
+	                     <c:if test="${vo.star == 2}">
+	                     ★★☆☆☆
+	                     </c:if> 
+	                     <c:if test="${vo.star == 3}">
+	                     ★★★☆☆
+	                     </c:if> 
+	                     <c:if test="${vo.star == 4}">
+	                     ★★★★☆
+	                     </c:if>
+	                      <c:if test="${vo.star == 5}">
+	                     ★★★★★
+	                     </c:if>
+	                     
+                     	<!-- 오늘 입력된 글은 new를 표시한다. -->
+		                     <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
+		                        <img src="${pageContext.request.contextPath }/resources/images/new.png"/>
+		                     </c:if>
+                 	</span>
+                 	<div>
+                 		 <c:set var="content" value="${fn:replace(fn:trim(vo.content), '<', '&lt;')}"/>
+	                     <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
+	                     <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
+	                        ${content} 
+                 	</div>
+                 	 <div style="margin-bottom: 10px;"> <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
+                         onerror="this.style.display='none'" style="width: 100px;"/>
+                	</div> 
+         		</div>
+         		<div class="box">
+         			<div >   
                   	<u style="color: #a59a9a;"><sub>작성자</sub></u><br/>
                      ${vo.name}
-                  </span>
-              
-                  <br/>
-                  
-                  <span style="float: left;">
-                  
-                     <c:set var="content" value="${fn:replace(fn:trim(vo.content), '<', '&lt;')}"/>
-                     <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
-                     <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
-                        ${content} 
-                  </span>
-                  <br/>
-                 <span style="float: right;"><u style="color: #a59a9a;"><sub>작성일</sub></u>
-                 <br/>
+                  </div>
+              	 <div ><u style="color: #a59a9a;"><sub>작성일</sub></u>
+                	 <br/>
                      <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
@@ -627,15 +628,10 @@ $('#review_message').click(function(){
                      <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date}">
                         <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)"/>
                      </c:if>
-              	 </span> 
-                        
-                        <br/>
-                    <span style="float: left;"> <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
-                         onerror="this.style.display='none'" style="width: 100px;"/>
-                	</span> 
-                   
-                  </span> 
-              	<hr style="background: #ccc; height:2px; border: 0; margin-bottom: 5px;"/>
+              	 	</div> 
+         		</div>
+            </div>
+            
                </c:forEach>
                </c:if>
                <!-- 페이지 이동 버튼 -->

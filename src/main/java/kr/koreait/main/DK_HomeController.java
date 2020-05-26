@@ -208,7 +208,6 @@ public class DK_HomeController {
 			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
 			ReviewList reviewList = ctx.getBean("reviewList", ReviewList.class);
 			reviewList.initReviewList(pageSize, totalCount, currentPage);
-			System.out.println();
 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 			hmap.put("startNo", reviewList.getStartNo());
 			hmap.put("endNo", reviewList.getEndNo());
