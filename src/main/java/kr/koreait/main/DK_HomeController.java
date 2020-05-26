@@ -199,15 +199,16 @@ public class DK_HomeController {
 	      model.addAttribute("idx", svo.get(0).getIdx());
 	      model.addAttribute("stc", svo);
 	      
+//	      리뷰 가져오기
 	      MybatisDAO mapper1 = sqlSession3.getMapper(MybatisDAO.class);
 			int pageSize = 8;
 			
-			int totalCount = mapper1.selectCount();
+			int totalCount = mapper1.selectCount1(idx);//해당아이템의 리뷰개수
 			
 			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
 			ReviewList reviewList = ctx.getBean("reviewList", ReviewList.class);
 			reviewList.initReviewList(pageSize, totalCount, currentPage);
-			
+			System.out.println();
 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 			hmap.put("startNo", reviewList.getStartNo());
 			hmap.put("endNo", reviewList.getEndNo());

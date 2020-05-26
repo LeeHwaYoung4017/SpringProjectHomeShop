@@ -184,6 +184,7 @@ function resize(img){
  
 
 window.onload = function(){
+	alert('${reviewList.startPage}');
 /* 서브 이미지  */
  var img = document.getElementById("imggo");
     var imgname = "${vo.id_Number}";
@@ -640,8 +641,6 @@ $('#review_message').click(function(){
                </c:if>
                <!-- 페이지 이동 버튼 -->
                <br/>
-               <tr>
-                  <td colspan="3">
                   
                   <!-- 처음으로, 10페이지 앞으로 -->
                   <c:if test="${reviewList.startPage > 1}">
@@ -672,9 +671,8 @@ $('#review_message').click(function(){
                      <input class="button btn" type="button" value=">>" 
                            onclick="location.href='?currentPage=${reviewList.totalPage}'" title="마지막 페이지로 이동합니다."/>
                   </c:if>            
-                  </td>
                  
-               </tr>
+     
             
 
 </div>

@@ -6,6 +6,10 @@
       select count(*) from SPRING_review
    </select>
    
+   <select id="selectCount1"  parameterType="int" resultType="int">
+      select count(*) from SPRING_review where goodsidx = #{idx}
+   </select>
+   
    <insert id="insertReview" parameterType="reviewVO">
       insert into SPRING_REVIEW (IDX, content, attached, name, star, goodsidx, ref, seq, lev)
       values (spring_review_idx_seq.nextval, #{content}, #{attached}, #{name}, #{star}, #{goodsidx},spring_review_idx_seq.currval, 0, 0)
