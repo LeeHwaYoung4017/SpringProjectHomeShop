@@ -343,7 +343,6 @@ public class JW_HomeController {
 	    */
 	   @RequestMapping("/mainHome")
 		public String mainHome(HttpServletRequest request, Model model) {
-		   System.out.println("리디넌!");
 		   System.out.println("main실행");
 		   MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);      
 		   AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
@@ -353,5 +352,10 @@ public class JW_HomeController {
 		   model.addAttribute("newMain", newMain);
 		   model.addAttribute("bestSlide", bestSlide);
 		   return "mainHome";
+		}
+	   
+	   @RequestMapping("/rootPage")
+		public String rootPage() {
+		   return "rootPage";
 		}
 }
