@@ -14,7 +14,6 @@
 .left-side {
 width:500px;
 height:650px;
-background-color:yellow;
 float:left;
 margin:20px;
 margin-left: 100px;
@@ -25,7 +24,6 @@ margin-left: 100px;
 .right_side {
 width:500px;
 height:650px;
-background-color:red;
 float:left;
 margin:20px;
 
@@ -128,8 +126,10 @@ height: 35px;
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
-function resize(img){
 
+
+function resize(img){
+	
     // 원본 이미지 사이즈 저장
     var width = img.width;
     var height = img.height;
@@ -192,7 +192,7 @@ window.onload = function(){
     for(var i=1; i <= nn; i++){
        var sp = document.createElement("span")
        sp.innerHTML =  "<img src='${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/"
-          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)'/>";
+          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)'/><br/>";
        img.appendChild(sp);      
     }
 }
@@ -471,7 +471,7 @@ $('#review_message').click(function(){
          <div class="sub_contents_inner">
             <div class="contents_inner" align="center">
             <div class="left-side">
-               <img src="${pageContext.request.contextPath}/resources/goodsupload/goodsupload_${vo.category}/${vo.id_Number}"/> 
+               <img src="${pageContext.request.contextPath}/resources/goodsupload/goodsupload_${vo.category}/${vo.id_Number}" onload="resize(this)"/> 
                <input type="hidden" value="${vo.category}" id="category">
                <input type="hidden" value="${vo.id_Number}" id="id_number">
                 <input type="hidden" value="${idx}" id="hidIdx">
@@ -564,14 +564,13 @@ $('#review_message').click(function(){
                
                <!-- request 영역의 noticeList 객체에서 1페이지 분량의 글이 저장된 ArrayList(noticeList)의 내용만 얻어내서 별도의 변수에 저장한다. -->
                <c:set var="list" value="${reviewList.reviewList}"/>
-               <c:set var="goodslist" value="${goodslist}"/>
                
                
                <!-- 테이블에 글이 없으면 없다고 출력한다. -->
                <c:if test="${list.size() == 0}">
-               <tr>
-                  <td colspan="4" align="center">리뷰 글이 없습니다.</td>
-               </tr>
+               <span>
+                  리뷰 글이 없습니다.
+               </span>
                </c:if>
                
                <!-- 테이블에 글이 있으면 화면에 출력할 글의 개수 만큼 반복하며 글을 출력한다. -->
@@ -580,16 +579,9 @@ $('#review_message').click(function(){
                <!-- 컴퓨터 시스템의 현재 날짜와 시간을 기억하는 Date 클래스 객체를 만든다. -->	
                <jsp:useBean id="date" class="java.util.Date"/>
                
-               <c:set var="i" value="0"/>
                <c:forEach var="vo" items="${list}">
-               <tr class="line"><!-- 사진 -->
-                  <td align="center" >
-               <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>
-              
-                  </td>
-               <c:set var="i" value="${i+1}"/>
-                    <td > ${goodslist[i].name}
-                     <br/> ${vo.star}
+         	<span style="display: inline-block; width: 90%;text-align: left;">
+               <span style="float: left; color: #e27e37; size: 10px; font-size: 20px;">
                      <c:if test="${vo.star == 1 }">
                      ★☆☆☆☆
                      </c:if> 
@@ -606,24 +598,28 @@ $('#review_message').click(function(){
                      ★★★★★
                      </c:if>
                      
-               <br/>
                   <!-- 오늘 입력된 글은 new를 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <img src="${pageContext.request.contextPath }/resources/images/new.png"/>
                      </c:if>
-                     
+            </span>
+                  <span style="float: right;">   
+                  	<u style="color: #a59a9a;"><sub>작성자</sub></u><br/>
+                     ${vo.name}
+                  </span>
+              
+                  <br/>
+                  
+                  <span style="float: left;">
+                  
                      <c:set var="content" value="${fn:replace(fn:trim(vo.content), '<', '&lt;')}"/>
                      <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
                      <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
-                     <a href="contentView_goods?idx=${vo.goodsidx}&currentPage=${reviewList.currentPage}">
-                        ${content}
-                     </a>
-            
-                    </td> 
-                    <td align="center" >
-                     ${vo.name}
-                  </td>
-                  <td align="center" >
+                        ${content} 
+                  </span>
+                  <br/>
+                 <span style="float: right;"><u style="color: #a59a9a;"><sub>작성일</sub></u>
+                 <br/>
                      <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
@@ -631,14 +627,19 @@ $('#review_message').click(function(){
                      <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date}">
                         <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)"/>
                      </c:if>
-                  </td>
-               </tr>
-              
+              	 </span> 
+                        
+                        <br/>
+                    <span style="float: left;"> <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
+                         onerror="this.style.display='none'" style="width: 100px;"/>
+                	</span> 
+                   
+                  </span> 
+              	<hr style="background: #ccc; height:2px; border: 0; margin-bottom: 5px;"/>
                </c:forEach>
                </c:if>
                <!-- 페이지 이동 버튼 -->
-               <tr>
-                  <td align="left" colspan="3">
+               <br/>
                   
                   <!-- 처음으로, 10페이지 앞으로 -->
                   <c:if test="${reviewList.startPage > 1}">
@@ -669,9 +670,8 @@ $('#review_message').click(function(){
                      <input class="button btn" type="button" value=">>" 
                            onclick="location.href='?currentPage=${reviewList.totalPage}'" title="마지막 페이지로 이동합니다."/>
                   </c:if>            
-                  </td>
                  
-               </tr>
+     
             
 
 </div>
