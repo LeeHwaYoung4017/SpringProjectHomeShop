@@ -560,9 +560,12 @@ $('#review_message').click(function(){
      
 </div>
 </form>
-      <!-- 리뷰 글 나오는 부분!! -->
-      <div id="reviewList">
-       <c:set var="list" value="${reviewList.reviewList}"/>
+<!-- 리뷰리스트!! -->
+               
+               <!-- request 영역의 noticeList 객체에서 1페이지 분량의 글이 저장된 ArrayList(noticeList)의 내용만 얻어내서 별도의 변수에 저장한다. -->
+               <c:set var="list" value="${reviewList.reviewList}"/>
+               <c:set var="goodslist" value="${goodslist}"/>
+               
                
                <!-- 테이블에 글이 없으면 없다고 출력한다. -->
                <c:if test="${list.size() == 0}">
@@ -574,14 +577,37 @@ $('#review_message').click(function(){
                <!-- 테이블에 글이 있으면 화면에 출력할 글의 개수 만큼 반복하며 글을 출력한다. -->
                <c:if test="${list.size() != 0}">
                
-               <!-- 컴퓨터 시스템의 현재 날짜와 시간을 기억하는 Date 클래스 객체를 만든다. -->
+               <!-- 컴퓨터 시스템의 현재 날짜와 시간을 기억하는 Date 클래스 객체를 만든다. -->	
                <jsp:useBean id="date" class="java.util.Date"/>
                
+               <c:set var="i" value="0"/>
                <c:forEach var="vo" items="${list}">
-               <tr>
-                  <td align="center">${vo.idx}</td>
-                  <td>
-                     <!-- 오늘 입력된 글은 new를 표시한다. -->
+               <tr class="line"><!-- 사진 -->
+                  <td align="center" >
+               <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>
+              
+                  </td>
+               <c:set var="i" value="${i+1}"/>
+                    <td > ${goodslist[i].name}
+                     <br/> ${vo.star}
+                     <c:if test="${vo.star == 1 }">
+                     ★☆☆☆☆
+                     </c:if> 
+                     <c:if test="${vo.star == 2}">
+                     ★★☆☆☆
+                     </c:if> 
+                     <c:if test="${vo.star == 3}">
+                     ★★★☆☆
+                     </c:if> 
+                     <c:if test="${vo.star == 4}">
+                     ★★★★☆
+                     </c:if>
+                      <c:if test="${vo.star == 5}">
+                     ★★★★★
+                     </c:if>
+                     
+               <br/>
+                  <!-- 오늘 입력된 글은 new를 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <img src="${pageContext.request.contextPath }/resources/images/new.png"/>
                      </c:if>
@@ -592,11 +618,12 @@ $('#review_message').click(function(){
                      <a href="contentView_goods?idx=${vo.goodsidx}&currentPage=${reviewList.currentPage}">
                         ${content}
                      </a>
-                  </td>
-                  <td align="center">
+            
+                    </td> 
+                    <td align="center" >
                      ${vo.name}
                   </td>
-                  <td align="center">
+                  <td align="center" >
                      <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
@@ -606,11 +633,12 @@ $('#review_message').click(function(){
                      </c:if>
                   </td>
                </tr>
+              
                </c:forEach>
                </c:if>
                <!-- 페이지 이동 버튼 -->
                <tr>
-                  <td align="center" colspan="4">
+                  <td align="left" colspan="3">
                   
                   <!-- 처음으로, 10페이지 앞으로 -->
                   <c:if test="${reviewList.startPage > 1}">
@@ -642,8 +670,9 @@ $('#review_message').click(function(){
                            onclick="location.href='?currentPage=${reviewList.totalPage}'" title="마지막 페이지로 이동합니다."/>
                   </c:if>            
                   </td>
+                 
                </tr>
-      </div>
+            
 
 </div>
 </div>

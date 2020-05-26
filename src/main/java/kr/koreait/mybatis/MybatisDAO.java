@@ -104,6 +104,7 @@ public interface MybatisDAO {
 	
 //	메인 페이지에 띄워주는 new 상품 긁어오기
 	ArrayList<GoodsVO> newMain();
+	ArrayList<ReviewVO> selectList2(HashMap<String, Integer> hmap);
 	
 	
 	

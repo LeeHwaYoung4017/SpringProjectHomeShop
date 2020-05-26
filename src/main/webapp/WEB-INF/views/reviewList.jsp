@@ -186,8 +186,8 @@ function resize(img){
                <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>
               
                   </td>
-               <c:set var="i" value="${i+1}"/>
                     <td > ${goodslist[i].name}
+               <c:set var="i" value="${i+1}"/>
                      <br/> ${vo.star}
                      <c:if test="${vo.star == 1 }">
                      ★☆☆☆☆

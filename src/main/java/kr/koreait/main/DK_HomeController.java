@@ -211,7 +211,8 @@ public class DK_HomeController {
 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 			hmap.put("startNo", reviewList.getStartNo());
 			hmap.put("endNo", reviewList.getEndNo());
-			reviewList.setReviewList(mapper1.selectList1(hmap));
+			hmap.put("goodsidx", idx);
+			reviewList.setReviewList(mapper1.selectList2(hmap));
 			model.addAttribute("reviewList", reviewList);
 	      
 	      return "contentView_goods";
