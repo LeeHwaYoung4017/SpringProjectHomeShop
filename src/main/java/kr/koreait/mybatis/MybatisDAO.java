@@ -112,6 +112,14 @@ public interface MybatisDAO {
 	void VolumeAcc(StatusVO vo);
 	void VolumeBottom(StatusVO vo);
 	
+	//서브 카테고리
+	int subTopCount(int sub);
+	ArrayList<GoodsVO> subTopList(HashMap<String, Integer> hmap);
+	int subBottomCount(int sub);
+	ArrayList<GoodsVO> subBottomList(HashMap<String, Integer> hmap);
+	int subAccCount(int sub);
+	ArrayList<GoodsVO> subAccList(HashMap<String, Integer> hmap);
+	
 	
 	
 }

@@ -92,12 +92,12 @@ select {
 	        +   "width: 100px;   height: 150px;'> " 
 	        + "<legend id='col' style='font-size:small; margin: 0px'>"
 	        + category + "</legend>"
-	        + "<input type='checkbox' value='맨투맨/후드' name='sub_Category' id='sub_Category'/>맨투맨/후드<br/>"
-	        + "<input type='checkbox' value='니트' name='sub_Category' id='sub_Category'>니트<br/>"
-	        + "<input type='checkbox' value='긴판티' name='sub_Category' id='sub_Category'>긴판티<br/>"
-	        + "<input type='checkbox' value='반팔티' name='sub_Category' id='sub_Category'>반팔티<br/>"
-	        + "<input type='checkbox' value='나시' name='sub_Category' id='sub_Category'>나시<br/>"
-	        + "<input type='checkbox' value='프린팅티' name='sub_Category' id='sub_Category'>프린팅티<br/>"
+	        + "<input type='checkbox' value='1' name='sub_Category' id='sub_Category'/>맨투맨/후드<br/>"
+	        + "<input type='checkbox' value='2' name='sub_Category' id='sub_Category'>니트<br/>"
+	        + "<input type='checkbox' value='3' name='sub_Category' id='sub_Category'>긴판티<br/>"
+	        + "<input type='checkbox' value='4' name='sub_Category' id='sub_Category'>반팔티<br/>"
+	        + "<input type='checkbox' value='5' name='sub_Category' id='sub_Category'>나시<br/>"
+	        + "<input type='checkbox' value='6' name='sub_Category' id='sub_Category'>프린팅티<br/>"
 	        +"</fieldset>  ";
 	        var sub_Categoty = document.getElementById("sub_Categoty");
 	        sub_Categoty.appendChild(ho);
@@ -106,11 +106,11 @@ select {
 	        +   "width: 100px;   height: 130px;'> " 
 	        + "<legend id='col' style='font-size:small; margin: 0px'>"
 	        + category + "</legend>"
-	        + "<input type='checkbox' value='슬랙스' name='sub_Category' id='sub_Category'/>슬랙스<br/>"
-	        + "<input type='checkbox' value='면바지' name='sub_Category' id='sub_Category'>면바지<br/>"
-	        + "<input type='checkbox' value='청바지' name='sub_Category' id='sub_Category'>청바지<br/>"
-	        + "<input type='checkbox' value='밴딩팬츠' name='sub_Category' id='sub_Category'>밴딩팬츠<br/>"
-	        + "<input type='checkbox' value='반바지' name='sub_Category' id='sub_Category'>반바지<br/>"
+	        + "<input type='checkbox' value='1' name='sub_Category' id='sub_Category'/>슬랙스<br/>"
+	        + "<input type='checkbox' value='2' name='sub_Category' id='sub_Category'>면바지<br/>"
+	        + "<input type='checkbox' value='3' name='sub_Category' id='sub_Category'>청바지<br/>"
+	        + "<input type='checkbox' value='4' name='sub_Category' id='sub_Category'>밴딩팬츠<br/>"
+	        + "<input type='checkbox' value='5' name='sub_Category' id='sub_Category'>반바지<br/>"
 	        +"</fieldset>  ";
 	        var sub_Categoty = document.getElementById("sub_Categoty");
 	        sub_Categoty.appendChild(ho);
@@ -119,11 +119,11 @@ select {
 	        +   "width: 100px;   height: 130px;'> " 
 	        + "<legend id='col' style='font-size:small; margin: 0px'>"
 	        + category + "</legend>"
-	        + "<input type='checkbox' value='모자' name='sub_Category' id='sub_Category'/>모자<br/>"
-	        + "<input type='checkbox' value='양말' name='sub_Category' id='sub_Category'>양말<br/>"
-	        + "<input type='checkbox' value='반지' name='sub_Category' id='sub_Category'>반지<br/>"
-	        + "<input type='checkbox' value='목걸이' name='sub_Category' id='sub_Category'>목걸이<br/>"
-	        + "<input type='checkbox' value='신발' name='sub_Category' id='sub_Category'>신발<br/>"
+	        + "<input type='checkbox' value='1' name='sub_Category' id='sub_Category'/>모자<br/>"
+	        + "<input type='checkbox' value='2' name='sub_Category' id='sub_Category'>양말<br/>"
+	        + "<input type='checkbox' value='3' name='sub_Category' id='sub_Category'>반지<br/>"
+	        + "<input type='checkbox' value='4' name='sub_Category' id='sub_Category'>목걸이<br/>"
+	        + "<input type='checkbox' value='5' name='sub_Category' id='sub_Category'>신발<br/>"
 	        +"</fieldset>  ";
 	        var sub_Categoty = document.getElementById("sub_Categoty");
 	        sub_Categoty.appendChild(ho);

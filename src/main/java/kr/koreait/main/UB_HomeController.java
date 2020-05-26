@@ -244,7 +244,7 @@ public class UB_HomeController {
 		ArrayList<String> savedFileName_sub;
 		goodsVO.setGoodsidx(goodIdx);
 		goodsVO.setGoodsColor(vo.getColor());
-		String sub_Category = request.getParameter("sub_Category");
+		int sub_Category = Integer.parseInt(request.getParameter("sub_Category"));
 		goodsVO.setSub_Category(sub_Category);
 //		컬러, 색상, 사이즈 분류 알고리즘
 		String[] color_array = vo.getColor().split(",");
