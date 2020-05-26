@@ -107,6 +107,11 @@ public interface MybatisDAO {
 	ArrayList<ReviewVO> selectList2(HashMap<String, Integer> hmap);
 	int selectCount1(int idx);
 	
+	//상품 주문량 증가
+	void VolumeTop(StatusVO vo);
+	void VolumeAcc(StatusVO vo);
+	void VolumeBottom(StatusVO vo);
+	
 	
 	
 }

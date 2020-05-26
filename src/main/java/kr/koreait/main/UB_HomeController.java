@@ -88,7 +88,6 @@ public class UB_HomeController {
 	@RequestMapping(value="/order")
 	   public void order(HttpServletRequest request, Model model){
 	      
-	      MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 	      System.out.println("order페이지 입장");
 	      CartVO cartVO = new CartVO();
 	      cartVO.setItem_name(request.getParameter("item_name"));
@@ -110,6 +109,7 @@ public class UB_HomeController {
 	       statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
 	       statusVO.setEa(Integer.parseInt(request.getParameter("ea")));
 	       statusVO.setItem_size(request.getParameter("size"));
+	       statusVO.setIdx(Integer.parseInt(request.getParameter("idx")));
 	       statusList.add(statusVO); 
 	       System.out.println(statusList);
 	   }
@@ -131,12 +131,13 @@ public class UB_HomeController {
 			return "login";
 		}
 			
-		
+			
 		   LoginVO loginVO= (LoginVO) session.getAttribute("vo");
 		    String id = loginVO.getId();
 		    String addr = loginVO.getaddr();
 		    String email = loginVO.getEmail();
 		    String phone = loginVO.getPhone();
+		    
 		      model.addAttribute("id", id);
 		      model.addAttribute("addr", addr);
 		      model.addAttribute("email", email);
@@ -162,26 +163,41 @@ public class UB_HomeController {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		System.out.println("orderOK 들어옴");
 		/* statusVO.setStatus(1); */
-		System.out.println(request. getParameter("addr"));
-		System.out.println(request. getParameter("phone"));
-		System.out.println(request. getParameter("email"));
+		
+		
 		System.out.println(request. getParameter("name"));
 		
 		LoginVO loginVO= (LoginVO) session.getAttribute("vo");
+		/*
+		 * for(int i=0; i<statusList.size(); i++) { StatusVO vo = statusList.get(i);
+		 * vo.getAddr(); }
+		 */
+		
 	      for(StatusVO vo : statusList) {
+	    	  int idx=vo.getIdx();
+	    	  String category = vo.getCategory();
+	    	  int ea = vo.getEa();
 	    	  vo.setPhone(request. getParameter("phone"));
 	    	  vo.setName(request. getParameter("name"));
 	    	  vo.setEmail(request. getParameter("email"));
 			  vo.setAddr(request. getParameter("addr"));
 			  vo.setUser_id(loginVO.getId());
-			  mapper.insertStatus(vo);  
+			/* vo.setStatus(1);  스테이튜스 1로 바꿔주기*/
+			  mapper.insertStatus(vo);
+			  
+			  if(category.equals("top")) {
+				  mapper.VolumeTop(vo);
+			  }else if (category.equals("acc")) {
+				  mapper.VolumeAcc(vo);
+			}else if (category.equals("bottom")) {
+				mapper.VolumeBottom(vo);
+			}
 	      }
 	      
 	      model.addAttribute("statusList", statusList);
 	      System.out.println(statusList);
 	      
 	      statusList = new ArrayList<StatusVO>();
-		//굿즈 브이오 볼륨 1증가, 스테이터스 결제대기로 변경, 스테이터스 브이오 채우기 메소드 만들기
 		return "orderOK";
 	}
 	
