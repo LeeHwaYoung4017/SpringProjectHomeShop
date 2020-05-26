@@ -109,6 +109,8 @@ public interface MybatisDAO {
 //	비밀번호 찾기 - 해당 아이디 객체 얻어오기
 	LoginVO search_pw(String id);
 	
+	void GetKey(String user_id, String key);
+	
 	
 	
 }

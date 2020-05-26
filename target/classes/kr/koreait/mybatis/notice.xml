@@ -206,7 +206,4 @@
 		]]>		   
 	</select>
 	
-	<select id="search_pw" resultType="kr.koreait.vo.LoginVO" parameterType="String">
-	      select * from spring_member where id=#{id}
-	</select>
 </mapper>

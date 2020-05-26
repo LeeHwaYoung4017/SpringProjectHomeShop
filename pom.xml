@@ -166,21 +166,13 @@
 			<version>4.2</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-email</artifactId>
+		    <version>1.5</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<!-- 이메일 인증 2020.05.26 JW -->
-		
 	</dependencies>
+	
     <build>
         <plugins>
             <plugin>

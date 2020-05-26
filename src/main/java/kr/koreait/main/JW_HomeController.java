@@ -16,6 +16,9 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.koreait.email.FindUtil;
+import kr.koreait.email.MailUtil;
 import kr.koreait.mybatis.MybatisDAO;
 import kr.koreait.vo.CartVO;
 import kr.koreait.vo.GoodsList;
@@ -370,9 +373,27 @@ public class JW_HomeController {
 		   String name = request.getParameter("name");
 		   String id = request.getParameter("id");
 		   MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
-		   
 		   LoginVO vo = mapper.search_pw(id);
+		   
+		   if(vo.getName()==null || !vo.getName().equals(name) || !vo.getEmail().equals(email)) {
+			   model.addAttribute("result","fail");
+			   return "/member/searchPassword";
+		   }else {
+			   try {
+					String keyCode = FindUtil.createKey();
+					session.setAttribute("keyCode", keyCode);
+					String subject = "[MIN-HA!] 다예쁘 비밀번호 찾기 인증코드 안내";
+					String msg = "";
+					msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+					msg += "<h3 style='color: blue;'>비밀번호 찾기 인증코드입니다.</h3>";
+					msg += "<div style='font-size: 130%'>";
+					msg += "비밀번호 찾기 페이지로 돌아가 인증코드 <strong>";
+					msg += keyCode + "</strong> 를 입력해주세요.</div><br/>";
+					MailUtil.sendMail(vo.getEmail().trim(), subject, msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		   }
 		   return "/member/searchPassword";
 		}
-	   
 }
