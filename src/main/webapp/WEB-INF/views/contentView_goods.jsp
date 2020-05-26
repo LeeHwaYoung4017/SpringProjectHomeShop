@@ -649,15 +649,15 @@ $('#review_message').click(function(){
                   </c:if>
                   
                   <!-- 페이지 이동 -->
-                  <c:forEach var="i" begin="${reviewList.startPage}" end="${reviewList.endPage}" step="1">
+                  <c:forEach var="j" begin="${reviewList.startPage}" end="${reviewList.endPage}" step="1">
                   
-                     <c:if test="${i == reviewList.currentPage}">
-                        <input class="button btn" type="button" value="${i}" disabled="disabled"/>
+                     <c:if test="${j == reviewList.currentPage}">
+                        <input class="button btn" type="button" value="${j}" disabled="disabled"/>
                      </c:if>
                      
-                     <c:if test="${i != reviewList.currentPage}">
-                        <input class="button btn"  type="button" value="${i}" onclick="location.href='?currentPage=${i}'" 
-                           title="${i}페이지로 이동합니다."/>
+                     <c:if test="${j != reviewList.currentPage}">
+                        <input class="button btn"  type="button" value="${j}" onclick="location.href='?currentPage=${j}'" 
+                           title="${j}페이지로 이동합니다."/>
                      </c:if>
                   
                   </c:forEach>
