@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet"> <!-- Noto Sans JP -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://han3283.cafe24.com/js/lightslider/js/lightslider.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <style type="text/css">
 #wrap {
@@ -146,7 +147,6 @@ background: white;
 display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
 height:auto;
 padding:0px;
-margin:0px;
 border:0px;
 position:absolute;
 width:400px;
@@ -155,7 +155,31 @@ z-index:200;
 /*left:0;*/
 }
 
+.sub_menu1 { cursor: pointer;}
+.sub_menu2 { 
+	display: none;
+	margin-top: -28px;
+    line-height: 26px;
+    background-color: white !important;
+    z-index: 1;
+    box-shadow: 1px 1px 1px 1px #F2F2F2;	
+    
+ 	   
+}
+.sub_menu2 a{
+	color:black;
+}
+.sub_font { font-family: font-family: 'Noto Sans JP', sans-serif; font-size: 15px;}
+
 </style>
+
+<script type="text/javascript">
+$(function() {
+	$("li > a").hover(function() {
+		$(this).next().slideDown(10).end().parent().siblings().find("ul").slideUp(10);
+	})
+})
+</script>
 </head>
 <body>
 <div id="wrap">
@@ -172,42 +196,46 @@ z-index:200;
 					<li>
 						<a href="newList" style="color:black; letter-spacing: 3px"><h6>NEW</h6></a>
 					</li>
+					
 					<li>
 						<a href="bestList" style="color:black; letter-spacing: 3px"><h6>BEST</h6></a>
 					</li>
-					<li>
-						<a href="topList" style="color:black; letter-spacing: 3px"><h6>TOP</h6></a>
-						<ul>
-							 <li><a href="#">맨투맨&후드티</a></li>
-							 <li><a href="#">니트</a></li>
-						     <li><a href="#">긴팔티</a></li>
-						     <li><a href="#">반팔티</a></li>
-						     <li><a href="#">나시</a></li>
-						     <li><a href="#">프린팅티</a></li>
+				</ul>	
+				<ul type="square" class="main_menu">
+					<li class="sub_menu1">
+						<a ondblclick="location.href='topList'" style="color:black; letter-spacing: 3px"><h6>TOP</h6></a>
+						<ul type="disc" class="sub_menu2" style="margin-left: 120px; width: 100px; background: none;">
+							 <li><a href="#" class="sub_font">맨투맨&후드</a></li>
+							 <li><a href="#" class="sub_font">니트</a></li>
+						     <li><a href="#" class="sub_font">긴팔티</a></li>
+						     <li><a href="#" class="sub_font">반팔티</a></li>
+						     <li><a href="#" class="sub_font">나시</a></li>
+						     <li><a href="#" class="sub_font">프린팅티</a></li>
 						</ul>
 					</li>
-					<li>
-						<a href="bottomList" style="color:black; letter-spacing: 3px"><h6>BOTTOM</h6></a>
-						 <ul>
-					 		<li><a href="#">슬랙스</a></li>
-					 		<li><a href="#">면바지</a></li>
-					 		<li><a href="#">청바지</a></li>
-					 		<li><a href="#">밴딩팬츠</a></li>
-					 		<li><a href="#">반바지</a></li>
+					
+					<li class="sub_menu1">
+						<a ondblclick="location.href='bottomList'" style="color:black; letter-spacing: 3px"><h6>BOTTOM</h6></a>
+						 <ul type="disc" class="sub_menu2" style="margin-left: 120px; width: 100px; background: none;">
+					 		<li><a href="#" class="sub_font">슬랙스</a></li>
+					 		<li><a href="#" class="sub_font">면바지</a></li>
+					 		<li><a href="#" class="sub_font">청바지</a></li>
+					 		<li><a href="#" class="sub_font">밴딩팬츠</a></li>
+					 		<li><a href="#" class="sub_font">반바지</a></li>
 					 	</ul>
 					</li>
-					<li>
-						<a href="accList" style="color:black; letter-spacing: 3px"><h6>ACC</h6></a>
-						<ul>
-							<li><a href="#">모자</a></li>
-							<li><a href="#">양말</a></li>
-							<li><a href="#">반지</a></li>
-							<li><a href="#">목걸이</a></li>
+					
+					<li class="sub_menu1">
+						<a ondblclick="location.href='accList'" style="color:black; letter-spacing: 3px"><h6>ACC</h6></a>
+						<ul type="disc" class="sub_menu2" style="margin-left: 120px; width: 100px; background: none;">
+							<li><a href="#" class="sub_font">모자</a></li>
+							<li><a href="#" class="sub_font">양말</a></li>
+							<li><a href="#" class="sub_font">반지</a></li>
+							<li><a href="#" class="sub_font">목걸이</a></li>
 					 	</ul>
 					</li>
-				</ul>
-				<br/>
-				<ul>	
+					
+					<br/>
 					<li>
 						<a href="reviewList" style="color:black; letter-spacing: 3px"><h6>REVIEW</h6></a>
 					</li>
