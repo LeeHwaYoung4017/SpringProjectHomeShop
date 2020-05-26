@@ -583,7 +583,7 @@ $('#review_message').click(function(){
                
                <c:forEach var="vo" items="${list}">
          	<span style="display: inline-block; width: 90%;text-align: left;">
-               <span style="float: left;">
+               <span style="float: left; color: #e27e37; size: 10px; font-size: 20px;">
                      <c:if test="${vo.star == 1 }">
                      ★☆☆☆☆
                      </c:if> 
@@ -606,7 +606,7 @@ $('#review_message').click(function(){
                      </c:if>
             </span>
                   <span style="float: right;">   
-                  		<u><sub>작성자</sub></u><br/>
+                  	<u style="color: #a59a9a;"><sub>작성자</sub></u><br/>
                      ${vo.name}
                   </span>
               
@@ -620,7 +620,7 @@ $('#review_message').click(function(){
                         ${content} 
                   </span>
                   <br/>
-                 <span style="float: right;"><u><sub>작성일</sub></u>
+                 <span style="float: right;"><u style="color: #a59a9a;"><sub>작성일</sub></u>
                  <br/>
                      <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
