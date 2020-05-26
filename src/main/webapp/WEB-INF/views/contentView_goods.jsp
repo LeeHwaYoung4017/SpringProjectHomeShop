@@ -614,7 +614,6 @@ $('#review_message').click(function(){
                      <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
                         ${content}
                          <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  onerror="this.style.display='none'"/>
-            
                  </div>
                    
                   <div>작성일
