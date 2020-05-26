@@ -22,6 +22,17 @@
 	]]>	 
    </select>
    
+    <!-- 한페이지 분량의 글 얻어오기O -->
+   <select id="selectList2" parameterType="java.util.HashMap"  resultType="reviewVo">
+  <![CDATA[
+	select * from (
+		select rownum rnum, AA.* from (
+			select * from SPRING_review where goodsidx=${goodsidx} order by idx desc
+		)AA where rownum <= #{endNo}
+	) where rnum >= #{startNo}
+	]]>	 
+   </select>
+   
    <select id="selectReviewIdx" resultType="int">
 	   SELECT MAX(idx) FROM(
 	      SELECT IDX FROM SPRING_review
