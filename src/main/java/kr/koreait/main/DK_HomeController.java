@@ -305,7 +305,6 @@ public class DK_HomeController {
 	       MybatisDAO mapper1 = sqlSession1.getMapper(MybatisDAO.class);
 	       ArrayList<GoodsVO> goodslist = new ArrayList<GoodsVO>(); 
 	       try {
-			
 		
 	       for (int i = 0; i <  10; i++) {
 	          ReviewVO vo = reviewList.getReviewList().get(i);

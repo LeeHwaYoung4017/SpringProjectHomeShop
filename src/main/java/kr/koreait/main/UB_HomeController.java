@@ -148,6 +148,7 @@ public class UB_HomeController {
 		/*
 		 * statusVO.setAddr(addr); statusVO.setUser_id(id);
 		 */
+		      
 		return "order";
 	}
 	/**
@@ -161,25 +162,25 @@ public class UB_HomeController {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		System.out.println("orderOK 들어옴");
 		/* statusVO.setStatus(1); */
-		 
-		System.out.println(request.getParameter("totalEa"));
-		System.out.println(request.getParameter("totalPrice"));
+		System.out.println(request. getParameter("addr"));
+		System.out.println(request. getParameter("phone"));
+		System.out.println(request. getParameter("email"));
+		System.out.println(request. getParameter("name"));
+		
 		LoginVO loginVO= (LoginVO) session.getAttribute("vo");
 	      for(StatusVO vo : statusList) {
-	    	  
-			  vo.setAddr(loginVO.getaddr());
+	    	  vo.setPhone(request. getParameter("phone"));
+	    	  vo.setName(request. getParameter("name"));
+	    	  vo.setEmail(request. getParameter("email"));
+			  vo.setAddr(request. getParameter("addr"));
 			  vo.setUser_id(loginVO.getId());
-			 
 			  mapper.insertStatus(vo);  
 	      }
+	      
 	      model.addAttribute("statusList", statusList);
 	      System.out.println(statusList);
 	      
-		/*
-		 * String email= request.getParameter("email"); String pay=
-		 * request.getParameter("pay"); System.out.println(email);
-		 * System.out.println(pay);
-		 */
+	      statusList = new ArrayList<StatusVO>();
 		//굿즈 브이오 볼륨 1증가, 스테이터스 결제대기로 변경, 스테이터스 브이오 채우기 메소드 만들기
 		return "orderOK";
 	}

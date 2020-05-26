@@ -6,6 +6,9 @@ public class StatusVO {
 	private int idx;
 	private String user_id;
 	private String addr;
+	private String name;
+	private String phone;
+	private String email;
 	private String item_name;  //상품 이름
 	private String id_number;  //상품 파일 이름
 	private int ea;				// 주문량
@@ -16,6 +19,25 @@ public class StatusVO {
 	private String category;
 	private String item_size;
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getItem_size() {
 		return item_size;
 	}
@@ -90,10 +112,12 @@ public class StatusVO {
 	}
 	@Override
 	public String toString() {
-		return "StatusVO [idx=" + idx + ", user_id=" + user_id + ", addr=" + addr + ", item_name=" + item_name
-				+ ", id_number=" + id_number + ", ea=" + ea + ", status=" + status + ", price=" + price + ", color="
-				+ color + ", writedate=" + writedate + ", category=" + category + ", item_size=" + item_size + "]";
+		return "StatusVO [idx=" + idx + ", user_id=" + user_id + ", addr=" + addr + ", name=" + name + ", phone="
+				+ phone + ", email=" + email + ", item_name=" + item_name + ", id_number=" + id_number + ", ea=" + ea
+				+ ", status=" + status + ", price=" + price + ", color=" + color + ", writedate=" + writedate
+				+ ", category=" + category + ", item_size=" + item_size + "]";
 	}
+	
 	
 
 	
