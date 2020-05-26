@@ -112,20 +112,20 @@ strong {
 					<td width="400">상품</td>
 					<td width="100">판매가</td>
 					<td width="50">수량</td>
-					
-					<td width="150">TOTAL</td>
-					<td width="150">TOTAL</td>
-					<td width="150">TOTAL</td>
+					<td width="150">받으시는 분</td>
+					<td width="150">EMAIL</td>
+					<td width="150">PHONE</td>
+					<td width="150">배송 주소</td>
 				</tr>
 				<c:forEach var="list" items="${statusList}">
 					<tr align="left">
 						<td><img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${list.category}/${list.id_number}">
 							${list.item_name}(${list.color},${list.item_size},${list.ea})</td>
-						<td>${(list.price)*(list.ea)}</td>
-						<td>${list.id_number}</td>
-					
-						<td>${list.category}</td>
-						<td>${list.user_id}</td>
+						<td>${list.price}</td>
+						<td>${list.ea}</td>
+						<td>${list.name}</td>
+						<td>${list.email}</td>
+						<td>${list.phone}</td>
 						<td>${list.addr}</td>
 					
 					</tr>
