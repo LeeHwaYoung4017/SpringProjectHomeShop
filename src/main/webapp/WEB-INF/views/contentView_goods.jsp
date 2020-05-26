@@ -14,7 +14,6 @@
 .left-side {
 width:500px;
 height:650px;
-background-color:yellow;
 float:left;
 margin:20px;
 margin-left: 100px;
@@ -25,7 +24,6 @@ margin-left: 100px;
 .right_side {
 width:500px;
 height:650px;
-background-color:red;
 float:left;
 margin:20px;
 
@@ -194,7 +192,7 @@ window.onload = function(){
     for(var i=1; i <= nn; i++){
        var sp = document.createElement("span")
        sp.innerHTML =  "<img src='${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/"
-          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)'/>";
+          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)'/><br/>";
        img.appendChild(sp);      
     }
 }
@@ -473,7 +471,7 @@ $('#review_message').click(function(){
          <div class="sub_contents_inner">
             <div class="contents_inner" align="center">
             <div class="left-side">
-               <img src="${pageContext.request.contextPath}/resources/goodsupload/goodsupload_${vo.category}/${vo.id_Number}"/> 
+               <img src="${pageContext.request.contextPath}/resources/goodsupload/goodsupload_${vo.category}/${vo.id_Number}" onload="resize(this)"/> 
                <input type="hidden" value="${vo.category}" id="category">
                <input type="hidden" value="${vo.id_Number}" id="id_number">
                 <input type="hidden" value="${idx}" id="hidIdx">
