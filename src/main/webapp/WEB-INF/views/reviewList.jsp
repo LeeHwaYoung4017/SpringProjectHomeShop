@@ -10,7 +10,7 @@
    
 <style type="text/css">
    a { color: black; text-decoration: none; }
-   #line tr:hover { color: white; font-weight: bold; background: purple; }
+   .tbody tr:hover { color: white; font-weight: bold; background: purple; }
 
 /* 내가 손댄 부분 */
 table.type09 {
@@ -128,14 +128,7 @@ function resize(img){
     img.height = resizeHeight;
  }
  
-window.onload = function(){
-	
-var star = "${vo.star}";
-for (var i = 0; i < star; i++) {
-	
-}
-	
-};
+
  
 
  
@@ -189,33 +182,31 @@ for (var i = 0; i < star; i++) {
                <c:set var="i" value="0"/>
                <c:forEach var="vo" items="${list}">
                <tr class="line"><!-- 사진 -->
-                  <td align="center" rowspan="3">
-               <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>  
+                  <td align="center" >
+               <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>
+              
                   </td>
+                    <td > ${goodslist[i].name}
                <c:set var="i" value="${i+1}"/>
-                    <td> ${goodslist[i].name}</td> 
-                    <td align="center" rowspan="3">
-                     ${vo.name}
-                  </td>
-                  <td align="center" rowspan="3">
-                     <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
-                     <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
-                        <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
+                     <br/> ${vo.star}
+                     <c:if test="${vo.star == 1 }">
+                     ★☆☆☆☆
+                     </c:if> 
+                     <c:if test="${vo.star == 2}">
+                     ★★☆☆☆
+                     </c:if> 
+                     <c:if test="${vo.star == 3}">
+                     ★★★☆☆
+                     </c:if> 
+                     <c:if test="${vo.star == 4}">
+                     ★★★★☆
                      </c:if>
-                     <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date}">
-                        <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)"/>
+                      <c:if test="${vo.star == 5}">
+                     ★★★★★
                      </c:if>
-                  </td>
-               </tr>
-               <tr class="line"> <!--별점  -->
-                  <td id="star" onload="changeStar(${vo.star})">
-                 	
-                  </td>
-               </tr>
-               <tr class="line">
-                  <td>
                      
-                     <!-- 오늘 입력된 글은 new를 표시한다. -->
+               <br/>
+                  <!-- 오늘 입력된 글은 new를 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <img src="${pageContext.request.contextPath }/resources/images/new.png"/>
                      </c:if>
@@ -226,10 +217,22 @@ for (var i = 0; i < star; i++) {
                      <a href="contentView_goods?idx=${vo.goodsidx}&currentPage=${reviewList.currentPage}">
                         ${content}
                      </a>
-                     
-                     
+            
+                    </td> 
+                    <td align="center" >
+                     ${vo.name}
                   </td>
-                  </tr>
+                  <td align="center" >
+                     <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
+                     <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
+                        <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
+                     </c:if>
+                     <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date}">
+                        <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)"/>
+                     </c:if>
+                  </td>
+               </tr>
+              
                </c:forEach>
                </c:if>
                </tbody>

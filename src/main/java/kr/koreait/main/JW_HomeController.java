@@ -202,7 +202,7 @@ public class JW_HomeController {
 			session.setAttribute("id", vo.getId());
 			session.setAttribute("vo", vo);
 		}
-		return "mainHome";
+		return "redirect:mainHome";
 	}
 	
 	
@@ -263,7 +263,7 @@ public class JW_HomeController {
 	   @RequestMapping("/logout")
 	   public String logout(HttpServletRequest request, Model model) {
 		   session.invalidate();
-		   return "mainHome";
+		   return "redirect:mainHome";
 	   }
 	   
 	   /**
@@ -356,6 +356,23 @@ public class JW_HomeController {
 	   
 	   @RequestMapping("/rootPage")
 		public String rootPage() {
-		   return "rootPage";
+		   return "/root/rootPage";
 		}
+	   
+	   @RequestMapping("/searchPW")
+		public String searchPW() {
+		   return "/member/searchPassword";
+		}
+	   
+	   @RequestMapping("/search_pw")
+		public String search_pw(HttpServletRequest request, Model model) {
+		   String email = request.getParameter("email");
+		   String name = request.getParameter("name");
+		   String id = request.getParameter("id");
+		   MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
+		   
+		   LoginVO vo = mapper.search_pw(id);
+		   return "/member/searchPassword";
+		}
+	   
 }

@@ -258,10 +258,9 @@ z-index:200;
 					<li><a href="shoppingCart"  style="color:black; letter-spacing: 3px"><h6>Cart</h6></a></li>
 					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
 					
-					<c:if test="${vo.id == root}">
-						<li><a href="rootPage"  style="color:black; letter-spacing: 3px"><h6>관리자 페이지</h6></a></li>
+					<c:if test="${id == 'root'}">
+						<li><a href="rootPage"  style="color:black; letter-spacing: 3px"><h6>Set</h6></a></li>
 					</c:if>
-					
 				</ul>
 			</div>
 		</div>

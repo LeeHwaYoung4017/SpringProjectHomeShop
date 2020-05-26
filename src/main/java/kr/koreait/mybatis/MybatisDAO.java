@@ -104,6 +104,10 @@ public interface MybatisDAO {
 	
 //	메인 페이지에 띄워주는 new 상품 긁어오기
 	ArrayList<GoodsVO> newMain();
+	ArrayList<ReviewVO> selectList2(HashMap<String, Integer> hmap);
+	
+//	비밀번호 찾기 - 해당 아이디 객체 얻어오기
+	LoginVO search_pw(String id);
 	
 	
 	

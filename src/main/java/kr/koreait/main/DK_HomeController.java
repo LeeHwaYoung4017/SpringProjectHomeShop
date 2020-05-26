@@ -211,7 +211,8 @@ public class DK_HomeController {
 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 			hmap.put("startNo", reviewList.getStartNo());
 			hmap.put("endNo", reviewList.getEndNo());
-			reviewList.setReviewList(mapper1.selectList1(hmap));
+			hmap.put("goodsidx", idx);
+			reviewList.setReviewList(mapper1.selectList2(hmap));
 			model.addAttribute("reviewList", reviewList);
 	      
 	      return "contentView_goods";
@@ -303,7 +304,10 @@ public class DK_HomeController {
 //	       상품별로 리스트 가져오기.
 	       MybatisDAO mapper1 = sqlSession1.getMapper(MybatisDAO.class);
 	       ArrayList<GoodsVO> goodslist = new ArrayList<GoodsVO>(); 
-	       for (int i = 0; i < 10; i++) {
+	       try {
+			
+		
+	       for (int i = 0; i <  10; i++) {
 	          ReviewVO vo = reviewList.getReviewList().get(i);
 	          System.out.println(vo);
 	          int idx = vo.getGoodsidx();
@@ -311,7 +315,10 @@ public class DK_HomeController {
 	          goodslist.add(goodsVO);
 	          System.out.println(goodslist);
 	       }
+	       
 	       model.addAttribute("goodslist", goodslist);
+	       } catch (IndexOutOfBoundsException e) {
+			}
 	       
 	       return "reviewList";
 
