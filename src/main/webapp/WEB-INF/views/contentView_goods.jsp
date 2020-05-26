@@ -128,8 +128,10 @@ height: 35px;
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
-function resize(img){
 
+
+function resize(img){
+	
     // 원본 이미지 사이즈 저장
     var width = img.width;
     var height = img.height;
@@ -613,7 +615,8 @@ $('#review_message').click(function(){
                      <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
                      <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
                         ${content}
-                         <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  onerror="this.style.display='none'"/>
+                         <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
+                         onerror="this.style.display='none'" style="width: 100px;"/>
                  </div>
                    
                   <div>작성일
