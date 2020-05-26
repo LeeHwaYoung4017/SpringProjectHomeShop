@@ -232,6 +232,7 @@ $(function() {
 							<li><a href="#" class="sub_font">양말</a></li>
 							<li><a href="#" class="sub_font">반지</a></li>
 							<li><a href="#" class="sub_font">목걸이</a></li>
+							<li><a href="#" class="sub_font">신발</a></li>
 					 	</ul>
 					</li>
 					

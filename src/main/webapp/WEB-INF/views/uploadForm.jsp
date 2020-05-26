@@ -83,6 +83,52 @@ select {
          var here = document.getElementById("here");
          here.appendChild(ho);
    }
+   
+   function addCategory() {
+      var category = document.querySelector("#category").value
+      var ho = document.createElement("div")
+      if(category=="top"){
+	      	ho.innerHTML = "<fieldset id='eaSize' style= 'border: 2px solid grey; width: 100; padding-top : 0px; padding-left: 5px;"
+	        +   "width: 100px;   height: 150px;'> " 
+	        + "<legend id='col' style='font-size:small; margin: 0px'>"
+	        + category + "</legend>"
+	        + "<input type='checkbox' value='맨투맨/후드' name='sub_Category' id='sub_Category'/>맨투맨/후드<br/>"
+	        + "<input type='checkbox' value='니트' name='sub_Category' id='sub_Category'>니트<br/>"
+	        + "<input type='checkbox' value='긴판티' name='sub_Category' id='sub_Category'>긴판티<br/>"
+	        + "<input type='checkbox' value='반팔티' name='sub_Category' id='sub_Category'>반팔티<br/>"
+	        + "<input type='checkbox' value='나시' name='sub_Category' id='sub_Category'>나시<br/>"
+	        + "<input type='checkbox' value='프린팅티' name='sub_Category' id='sub_Category'>프린팅티<br/>"
+	        +"</fieldset>  ";
+	        var sub_Categoty = document.getElementById("sub_Categoty");
+	        sub_Categoty.appendChild(ho);
+       } else if(category=="bottom"){
+	      	ho.innerHTML = "<fieldset id='eaSize' style= 'border: 2px solid grey; width: 100; padding-top : 0px; padding-left: 5px;"
+	        +   "width: 100px;   height: 130px;'> " 
+	        + "<legend id='col' style='font-size:small; margin: 0px'>"
+	        + category + "</legend>"
+	        + "<input type='checkbox' value='슬랙스' name='sub_Category' id='sub_Category'/>슬랙스<br/>"
+	        + "<input type='checkbox' value='면바지' name='sub_Category' id='sub_Category'>면바지<br/>"
+	        + "<input type='checkbox' value='청바지' name='sub_Category' id='sub_Category'>청바지<br/>"
+	        + "<input type='checkbox' value='밴딩팬츠' name='sub_Category' id='sub_Category'>밴딩팬츠<br/>"
+	        + "<input type='checkbox' value='반바지' name='sub_Category' id='sub_Category'>반바지<br/>"
+	        +"</fieldset>  ";
+	        var sub_Categoty = document.getElementById("sub_Categoty");
+	        sub_Categoty.appendChild(ho);
+       } else if(category=="acc"){
+	      	ho.innerHTML = "<fieldset id='eaSize' style= 'border: 2px solid grey; width: 100; padding-top : 0px; padding-left: 5px;"
+	        +   "width: 100px;   height: 130px;'> " 
+	        + "<legend id='col' style='font-size:small; margin: 0px'>"
+	        + category + "</legend>"
+	        + "<input type='checkbox' value='모자' name='sub_Category' id='sub_Category'/>모자<br/>"
+	        + "<input type='checkbox' value='양말' name='sub_Category' id='sub_Category'>양말<br/>"
+	        + "<input type='checkbox' value='반지' name='sub_Category' id='sub_Category'>반지<br/>"
+	        + "<input type='checkbox' value='목걸이' name='sub_Category' id='sub_Category'>목걸이<br/>"
+	        + "<input type='checkbox' value='신발' name='sub_Category' id='sub_Category'>신발<br/>"
+	        +"</fieldset>  ";
+	        var sub_Categoty = document.getElementById("sub_Categoty");
+	        sub_Categoty.appendChild(ho);
+       } else{}
+   }
 
    function checkUp(){
 	   var mainfile= document.getElementById("main");
@@ -144,15 +190,20 @@ select {
                               <tr id ="here">  
                                 
                              </tr>
+                             
                              <tr>
                                 <td> 
-                                   <select name="category">
+                                   <select name="category" id="category">
                                       <option>===카테고리===</option>
                                       <option value="top">상의</option>
                                       <option value="bottom">하의</option>
                                       <option value="acc">악세사리</option>
                                      </select>
+                                     <input type="button" onclick="addCategory()" value="추가"/>
                                 </td>
+                             </tr>
+                             <tr id ="sub_Categoty"> 
+                                
                              </tr>
                               
                              <tr>
