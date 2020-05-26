@@ -67,6 +67,16 @@
 	insert into spring_status(idx,user_id,addr,item_name,id_number,color,category,item_size,price,ea,name,phone,email) 
 		values(SPRING_STATUS_IDX_SEQ.nextval,#{user_id},#{addr},#{item_name},#{id_number},#{color},#{category},#{item_size},#{price},#{ea},#{name},#{phone},#{email})
 	</insert>
+	<!-- 주문된 상품에 주문량을 올려준다. -->
+	<update id="VolumeTop" parameterType="kr.koreait.vo.StatusVO">
+		update spring_top set volume = volume+#{ea} where idx = #{idx}
+	</update>
+	<update id="VolumeAcc" parameterType="kr.koreait.vo.StatusVO">
+		update spring_acc set volume = volume+#{ea} where idx = #{idx}
+	</update>
+	<update id="VolumeBottom" parameterType="kr.koreait.vo.StatusVO">
+		update spring_bottom set volume = volume+#{ea} where idx = #{idx}
+	</update>
 	
 	<insert id="insertStoke" parameterType="kr.koreait.vo.StokeVO">
 		insert into SPRING_STOKE(idx, color, ea, size1) values(#{idx}, #{color}, #{ea}, #{size1})
