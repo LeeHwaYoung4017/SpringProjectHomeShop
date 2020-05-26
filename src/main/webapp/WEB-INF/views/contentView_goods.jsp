@@ -453,6 +453,7 @@ function showReview() {
 function reviewProcess() {
 	if(searchRequest.readyState == 4 && searchRequest.status == 200) {
 		alert("gkgkkg");/* 여기부터!!!*/
+		alert("wpqkf.");
 	}
 }
 
