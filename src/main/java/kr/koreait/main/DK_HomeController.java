@@ -431,6 +431,7 @@ public class DK_HomeController {
 	     public String imagePopup(HttpServletRequest request, Model model, HttpServletResponse response) {
 	    	 System.out.println("이미지 팝업!");
 	    	String img = request.getParameter("image");
+	    	model.addAttribute("img", img);
 	    	System.out.println(img);
 	    	 return "imagePopup";
 	     } 

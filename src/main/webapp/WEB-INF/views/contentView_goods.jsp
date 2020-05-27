@@ -192,7 +192,7 @@ window.onload = function(){
     for(var i=1; i <= nn; i++){
        var sp = document.createElement("span")
        sp.innerHTML =  "<img src='${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/"
-          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)'/><br/>";
+          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)' onclick='popup(this.src)'/><br/>";
        img.appendChild(sp);      
     }
 }
@@ -531,24 +531,22 @@ $('#review_message').click(function(){
    }
 });   
 });
+
+/* 이미지 팝업창 띄우기 */
 var imagePreview = new Image();
 function popup(filepath) {
 	if(filepath ==""){
 		alert("등록된 이미지가 없어요");
 		return;
 	}
-	alert(filepath);
 	imagePreview.src = filepath;
-	
-//	var url = "./imagePopup?image="+ encodeURIComponent(document.getElementById("Rimage").value); // 새로 띄울 창에 표시할 페이지
+	var width = imagePreview.width + 30;
+    var height = imagePreview.height + 30;
+    alert(width);
+	var url = "./imagePopup?image="+ encodeURIComponent(filepath); // 새로 띄울 창에 표시할 페이지
 	var title = "이미지 윈도우"; // 윈도우 이름
-	var option = "top=200, left=600, width=500px, height=500px, scrollbar=no, resizable=no";
-//	window.open();
-//	window.open(url);
-	/* imageWin = window.open("", title, option);
-	imageWin.document.write("<html><head><meta charset="UTF-8"><title>이미지</title></head><body title='Close' onclick='window.close()'>");
-	imageWin.document.write("<img src='" + imagePreview.src + "'>");
-	imageWin.document.write("</body></html>"); */
+	var option = "top=200, left=600, width="+width+", height="+height+", scrollbar=no, resizable=no";
+	window.open(url, title, option);
 	
 }
 
@@ -702,9 +700,9 @@ function popup(filepath) {
 	                     <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
 	                        ${content} 
                  	</div>
-                 	 <div  id="Rimage" style="margin-bottom: 10px;"> <a href="#" onclick="popup(this.form)">
+                 	 <div  id="Rimage" style="margin-bottom: 10px;"> 
                  	 <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
-                         onerror="this.style.display='none'" style="width: 100px;"/></a>
+                         onerror="this.style.display='none'" style="width: 100px;" onclick="popup(this.src)"/>
                 	</div> 
          		</div>
          		<div class="box">
