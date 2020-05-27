@@ -281,7 +281,6 @@ text-decoration:none;
 					<li><a href="shoppingCart"  style="color:black; letter-spacing: 3px"><h6>Cart</h6></a></li>
 					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
 					
-					<li><a href="uploadForm"  style="color:black; letter-spacing: 3px"><h6>uploadForm</h6></a></li>
 					<li><a href="administrator"  style="color:black; letter-spacing: 3px"><h6>administrator</h6></a></li>
 				</ul>
 			</div>
