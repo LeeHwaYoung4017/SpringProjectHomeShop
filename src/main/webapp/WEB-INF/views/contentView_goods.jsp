@@ -569,7 +569,7 @@ function popup(filepath) {
                <div style="">${vo.name}</div>
                <input type="hidden" value="${vo.name}" id="item_name">
                <c:set var="price" value="${vo.price}"/>
-               <div style="margin-top: 20px">${price} won <input type="hidden" value="${price}" id="price"></div> 
+               <div style="margin-top: 20px; font-weight: bold; font-size: 1.3em;">${price} won <input type="hidden" value="${price}" id="price"></div> 
                <br/>
                <div  style="margin-top: 20px;margin-bottom: 20px; font-weight: bold;">-comment<br/></div>
                       ${vo.item_comment}<br/>

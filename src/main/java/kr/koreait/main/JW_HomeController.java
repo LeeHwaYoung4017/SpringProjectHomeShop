@@ -16,6 +16,9 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.koreait.email.FindUtil;
+import kr.koreait.email.MailUtil;
 import kr.koreait.mybatis.MybatisDAO;
 import kr.koreait.vo.CartVO;
 import kr.koreait.vo.GoodsList;
@@ -71,7 +74,6 @@ public class JW_HomeController {
 		return "redirect:shoppingCart";
 	}
 	
-	
 	/**
 	 * @return 로그인 페이지 이동
 	 */
@@ -80,7 +82,6 @@ public class JW_HomeController {
 		System.out.println("컨트롤러의 login 실행");
 		return "login";
 	}
-	
 
 	/**
 	 * @return 회원가입 페이지 이동
@@ -90,15 +91,6 @@ public class JW_HomeController {
 		System.out.println("컨트롤러의 join 실행");
 		return "join";
 	}
-
-	/**
-	 * 솔직히 말하자면 누가 만든지 모르겠습니다. 
-	 */
-	@RequestMapping("/popUp")
-	public String popUp(HttpServletRequest request, Model model) {
-		return "popUp";
-	}
-	
 	
 	/**
 	 * @return API를 이용한 주소 검색 페이지를 요청 
@@ -202,7 +194,7 @@ public class JW_HomeController {
 			session.setAttribute("id", vo.getId());
 			session.setAttribute("vo", vo);
 		}
-		return "mainHome";
+		return "redirect:mainHome";
 	}
 	
 	
@@ -263,7 +255,7 @@ public class JW_HomeController {
 	   @RequestMapping("/logout")
 	   public String logout(HttpServletRequest request, Model model) {
 		   session.invalidate();
-		   return "mainHome";
+		   return "redirect:mainHome";
 	   }
 	   
 	   /**
@@ -343,7 +335,6 @@ public class JW_HomeController {
 	    */
 	   @RequestMapping("/mainHome")
 		public String mainHome(HttpServletRequest request, Model model) {
-		   System.out.println("리디넌!");
 		   System.out.println("main실행");
 		   MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);      
 		   AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
@@ -354,4 +345,57 @@ public class JW_HomeController {
 		   model.addAttribute("bestSlide", bestSlide);
 		   return "mainHome";
 		}
+	   
+	   @RequestMapping("/rootPage")
+		public String rootPage() {
+		   return "/root/rootPage";
+		}
+	   
+	   @RequestMapping("/searchPW")
+		public String searchPW() {
+		   return "/member/searchPassword";
+		}
+	   
+	   /**
+	    * 1. 사용자가 입력한 아이디와 이메일 이름을 데이터베이스에 저장된 정보와 일치하는지 확인한다.
+	    * 2. 일치하지 않으면 result에 fail을 담아 리턴시킨다.
+	    * 3. 일치하면 임시 비밀번호를 발급하여 이메일로 보낸 후 사용자의 비밀번호를 임시 비밀번호로 변경시킨다.
+	    * 4. result에 success를 담아 리턴시킨다.
+	    */
+	   @RequestMapping("/search_pw")
+		public String search_pw(HttpServletRequest request, Model model) {
+		   String email = request.getParameter("email");
+		   String name = request.getParameter("name");
+		   String id = request.getParameter("id");
+		   MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
+		   LoginVO vo = mapper.search_pw(id);
+		   
+		   if(vo.getName()==null || !vo.getName().equals(name) || !vo.getEmail().equals(email)) {
+			   model.addAttribute("result","fail");
+		   }else {
+			   try {
+					String keyCode = FindUtil.createKey();
+					String subject = "[MIN-HA!] 다예쁘 비밀번호 찾기 인증코드 안내";
+					String msg = "";
+					msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+					msg += "<h3 style='color: blue;'>임시 비밀번호입니다.</h3>";
+					msg += "<div style='font-size: 130%'>";
+					msg += "고객님의 임시비밀번호는 <strong>";
+					msg += keyCode + "</strong>입니다. 임시비밀번호를 통해 로그인한 뒤 비밀번호를 변경해주세요.</div><br/>";
+					MailUtil.sendMail(vo.getEmail().trim(), subject, msg);
+					
+//					메일 전송이 완료되면 회원의 비밀번호를 전송한 임시비밀번호로 바꾼다.
+					HashMap<String, String> hmap = new HashMap<String, String>();
+					hmap.put("keyCode", keyCode);
+					hmap.put("id", id);
+					mapper.updatePassword(hmap);
+					model.addAttribute("result","success");
+				} catch (Exception e) {
+					e.printStackTrace();
+					model.addAttribute("result","fail");
+				}//end catch
+		   }//end else
+		   
+		   return "/member/searchPassword";
+		}//END search_pw()
 }

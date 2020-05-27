@@ -43,8 +43,8 @@
          ho.innerHTML=
             "<td>입금자명 : <input type='text' value='${name}' name='payName' id='payName'/>"
             +"<br/>입금은행 : <select name='bank' id='bank'>"
-            +"<option value='nhBank'>농협은행 : 000-0000-0000-00 심운보</option>"
-            +"<option value='wooriBank'>우리은행 : 000-0000-0000-00 심운보</option>"
+            +"<option>농협은행 : 000-0000-0000-00 심운보</option>"
+            +"<option>우리은행 : 000-0000-0000-00 심운보</option>"
             +"</select></td>";
                         
 		 document.getElementById("sb").innerHTML="무통장 결제";
@@ -146,6 +146,9 @@ table {
   margin: auto;
   margin-bottom: 25px;
 }
+table #buybuy td{
+	text-align: center;
+}
 input[type=button]{
 width: 100px;
 }
@@ -184,12 +187,11 @@ strong {
                   <h2 class="Title" style="font-family: font-family: 'Noto Sans JP', sans-serif;">ORDER</h2>
 	                  <table width="700" cellpadding="0" cellspacing="8">
 	                  	<caption>주문내역</caption>
-	                  	<tr>
+	                  	<tr id="buybuy">
 							<td width="400">상품</td>
-							<td width="100">판매가</td>
+							<td width="100">가격</td>
 							<td width="50">수량</td>
 							
-							<td width="150">TOTAL</td>
 						</tr>
 						<c:set var="totalEa" value="0"/>
 						<c:set var="totalPrice" value="0"/>
@@ -199,17 +201,20 @@ strong {
 										${vo.item_name}(${vo.color},${vo.size},${vo.ea})</td>
 									<td>${(vo.price)*(vo.ea)}</td>
 									<td>${vo.ea}</td>
-									
-									<td><c:set var="total" value="${(vo.price)*(vo.ea)+2500}"/>${total}</td>
+									<c:set var="total" value="${(vo.price)*(vo.ea)}"/>
 									<c:set var="totalPrice" value="${totalPrice+total}" />
 									<c:set var="totalEa" value="${totalEa+vo.ea}" />
 								</tr>
 					   </c:forEach>
+								<tr style="border-top: 3px solid #168;">
+								
+								<td style="font-weight: bold; font-size: 2.0em;">TOTAL</td>
+								<td colspan="3" style="text-align: center; color:red; font-size: 1.5em;"><c:set var="totalPay" value="${totalPrice+2500}"/>${totalPay}</td>
+								</tr>
 					   
 					    <input type="hidden" value="${totalEa}" name="totalEa"/>
            				<input type="hidden" value="${totalPrice}" name="totalPrice"/>
-                  		<c:out value="${totalEa}"/>
-                  		<c:out value="${totalPrice}"/>
+                  		
 	                  </table>
 	                  <div style="margin-left: 70%; font-size: 10px;">*배송비 2,500추가된 가격입니다.</div>
 	                 <%--  <input type="hidden" value="${totalPrice}" name="totalPrice"/> --%>

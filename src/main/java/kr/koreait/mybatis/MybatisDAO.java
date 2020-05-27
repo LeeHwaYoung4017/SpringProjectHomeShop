@@ -112,6 +112,20 @@ public interface MybatisDAO {
 	void VolumeAcc(StatusVO vo);
 	void VolumeBottom(StatusVO vo);
 	
+	//서브 카테고리
+	int subTopCount(int sub);
+	ArrayList<GoodsVO> subTopList(HashMap<String, Integer> hmap);
+	int subBottomCount(int sub);
+	ArrayList<GoodsVO> subBottomList(HashMap<String, Integer> hmap);
+	int subAccCount(int sub);
+	ArrayList<GoodsVO> subAccList(HashMap<String, Integer> hmap);
+	
+//	비밀번호 찾기 - 해당 아이디 객체 얻어오기
+	LoginVO search_pw(String id);
+	
+//	비밀번호 찾기 - 해당 아이디의 비밀번호 임시비밀번호로 변경하기	
+	void updatePassword(HashMap<String, String> hmap);
+	
 	
 	
 }

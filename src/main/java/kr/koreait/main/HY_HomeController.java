@@ -111,7 +111,6 @@ public class HY_HomeController {
 		} catch(NumberFormatException e) { }
 		int totalCount = mapper.topCount();
 		logger.info("topCount is = " + totalCount);
-		
 		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
 		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
 		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
@@ -393,6 +392,360 @@ public class HY_HomeController {
       @RequestMapping("/companyAboutUs")
       public String companyAboutUs() {
     	  return "companyAboutUs";
+      }
+      
+      /**
+       * 
+       * @param request
+       * @param model
+       * @return 상의 카테고리에서 세부적인 카테고리를 보여준다.
+       */
+      @RequestMapping("/subTopList")
+      public String subTopList(HttpServletRequest request, Model model) {
+         
+        String sub_TopCategory = request.getParameter("sub");
+        System.out.println(sub_TopCategory);
+         
+        MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+ 		
+ 		int pageSize = 12;
+ 		int currentPage = 1;
+ 		try {
+ 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+ 		} catch(NumberFormatException e) { }
+ 		System.out.println("맨투맨/후드=1 / 니트=2 / 긴팔티=3 / 반팔=4 / 나시=5 / 프린팅티=6 ");
+ 		if(sub_TopCategory.equals("1")) {
+ 			int sub = 1;
+	 		int totalCount = mapper.subTopCount(sub);
+	 		System.out.println(totalCount);
+	 		
+	 		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+	 		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+	 		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+	 		
+	 		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+	 		hmap.put("startNo", goodsList.getStartNo());
+	 		hmap.put("endNo", goodsList.getEndNo());
+	 		hmap.put("sub", sub);
+	 		goodsList.setGoodList(mapper.subTopList(hmap));
+	 		
+	 		model.addAttribute("goodsList", goodsList);
+	 		return "subTopList";
+ 		}
+ 		else if(sub_TopCategory.equals("2")) {
+ 			int sub = 2;
+ 			int totalCount = mapper.subTopCount(sub);
+ 			System.out.println(totalCount);
+ 			
+ 			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+ 			GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+ 			goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+ 			
+ 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+ 			hmap.put("startNo", goodsList.getStartNo());
+ 			hmap.put("endNo", goodsList.getEndNo());
+ 			hmap.put("sub", sub);
+ 			goodsList.setGoodList(mapper.subTopList(hmap));
+ 			
+ 			model.addAttribute("goodsList", goodsList);
+ 			return "subTopList";
+ 		}
+ 		else if(sub_TopCategory.equals("3")) {
+ 			int sub = 3;
+ 			int totalCount = mapper.subTopCount(sub);
+ 			System.out.println(totalCount);
+ 			
+ 			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+ 			GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+ 			goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+ 			
+ 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+ 			hmap.put("startNo", goodsList.getStartNo());
+ 			hmap.put("endNo", goodsList.getEndNo());
+ 			hmap.put("sub", sub);
+ 			goodsList.setGoodList(mapper.subTopList(hmap));
+ 			
+ 			model.addAttribute("goodsList", goodsList);
+ 			return "subTopList";
+ 		}
+ 		else if(sub_TopCategory.equals("4")) {
+ 			int sub = 4;
+ 			int totalCount = mapper.subTopCount(sub);
+ 			System.out.println(totalCount);
+ 			
+ 			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+ 			GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+ 			goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+ 			
+ 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+ 			hmap.put("startNo", goodsList.getStartNo());
+ 			hmap.put("endNo", goodsList.getEndNo());
+ 			hmap.put("sub", sub);
+ 			goodsList.setGoodList(mapper.subTopList(hmap));
+ 			
+ 			model.addAttribute("goodsList", goodsList);
+ 			return "subTopList";
+ 		}
+ 		else if(sub_TopCategory.equals("5")) {
+ 			int sub = 5;
+ 			int totalCount = mapper.subTopCount(sub);
+ 			System.out.println(totalCount);
+ 			
+ 			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+ 			GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+ 			goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+ 			
+ 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+ 			hmap.put("startNo", goodsList.getStartNo());
+ 			hmap.put("endNo", goodsList.getEndNo());
+ 			hmap.put("sub", sub);
+ 			goodsList.setGoodList(mapper.subTopList(hmap));
+ 			
+ 			model.addAttribute("goodsList", goodsList);
+ 			return "subTopList";
+ 		}
+ 		else {
+ 			int sub = 6;
+ 			int totalCount = mapper.subTopCount(sub);
+ 			System.out.println(totalCount);
+ 			
+ 			AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+ 			GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+ 			goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+ 			
+ 			HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+ 			hmap.put("startNo", goodsList.getStartNo());
+ 			hmap.put("endNo", goodsList.getEndNo());
+ 			hmap.put("sub", sub);
+ 			goodsList.setGoodList(mapper.subTopList(hmap));
+ 			
+ 			model.addAttribute("goodsList", goodsList);
+ 			return "subTopList";
+ 		}
+      }
+      
+      /**
+       * 
+       * @param request
+       * @param model
+       * @return 하의 카테고리에서 세부적인 카테고리를 보여준다.
+       */
+      @RequestMapping("/subBottomList")
+      public String subBottomList(HttpServletRequest request, Model model) {
+    	  
+    	  String sub_BottomCategory = request.getParameter("sub");
+    	  System.out.println(sub_BottomCategory);
+    	  
+    	  MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+    	  
+    	  int pageSize = 12;
+    	  int currentPage = 1;
+    	  try {
+    		  currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    	  } catch(NumberFormatException e) { }
+    	  System.out.println("슬랙스=1 / 면바지=2 / 청바지=3 / 밴딩팬츠=4 / 반바지=5 ");
+    	  if(sub_BottomCategory.equals("1")) {
+    		  int sub = 1;
+    		  int totalCount = mapper.subBottomCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subBottomList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subBottomList";
+    	  }
+    	  else if(sub_BottomCategory.equals("2")) {
+    		  int sub = 2;
+    		  int totalCount = mapper.subBottomCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subBottomList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subBottomList";
+    	  }
+    	  else if(sub_BottomCategory.equals("3")) {
+    		  int sub = 3;
+    		  int totalCount = mapper.subBottomCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subBottomList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subBottomList";
+    	  }
+    	  else if(sub_BottomCategory.equals("4")) {
+    		  int sub = 4;
+    		  int totalCount = mapper.subBottomCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subBottomList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subBottomList";
+    	  }
+    	  else {
+    		  int sub = 5;
+    		  int totalCount = mapper.subBottomCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subBottomList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subBottomList";
+    	  }
+      }
+      
+      /**
+       * 
+       * @param request
+       * @param model
+       * @return 액세사리 카테고리에서 세부적인 카테고리를 보여준다.
+       */
+      @RequestMapping("/subAccList")
+      public String subAccList(HttpServletRequest request, Model model) {
+    	  
+    	  String sub_AccCategory = request.getParameter("sub");
+    	  System.out.println(sub_AccCategory);
+    	  
+    	  MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+    	  
+    	  int pageSize = 12;
+    	  int currentPage = 1;
+    	  try {
+    		  currentPage = Integer.parseInt(request.getParameter("currentPage"));
+    	  } catch(NumberFormatException e) { }
+    	  System.out.println("슬랙스=1 / 면바지=2 / 청바지=3 / 밴딩팬츠=4 / 반바지=5 ");
+    	  if(sub_AccCategory.equals("1")) {
+    		  int sub = 1;
+    		  int totalCount = mapper.subAccCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subAccList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subAccList";
+    	  }
+    	  else if(sub_AccCategory.equals("2")) {
+    		  int sub = 2;
+    		  int totalCount = mapper.subAccCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subAccList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subAccList";
+    	  }
+    	  else if(sub_AccCategory.equals("3")) {
+    		  int sub = 3;
+    		  int totalCount = mapper.subAccCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subAccList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subAccList";
+    	  }
+    	  else if(sub_AccCategory.equals("4")) {
+    		  int sub = 4;
+    		  int totalCount = mapper.subAccCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subAccList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subAccList";
+    	  }
+    	  else {
+    		  int sub = 5;
+    		  int totalCount = mapper.subAccCount(sub);
+    		  System.out.println(totalCount);
+    		  
+    		  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+    		  GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
+    		  goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
+    		  
+    		  HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    		  hmap.put("startNo", goodsList.getStartNo());
+    		  hmap.put("endNo", goodsList.getEndNo());
+    		  hmap.put("sub", sub);
+    		  goodsList.setGoodList(mapper.subAccList(hmap));
+    		  
+    		  model.addAttribute("goodsList", goodsList);
+    		  return "subAccList";
+    	  }
       }
 }
 

@@ -39,8 +39,13 @@
 		select id from SPRING_MEMBER where idx = #{i}
 	</select>
 	
+	<select id="search_pw" resultType="kr.koreait.vo.LoginVO" parameterType="String">
+      select * from spring_member where id=#{id}
+	</select>
 	
-	
+	<update id="updatePassword" parameterType="java.util.HashMap" >
+		update spring_member set pw=#{keyCode} where id=#{id}
+	</update>
 </mapper>
 
 
