@@ -67,9 +67,13 @@ function resize(img){
 table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 65%;
+     border-top: 3px solid #168;
+  width: 75%;
   margin: auto;
   margin-bottom: 25px;
+}
+table tr td{
+	text-align: center;
 }
 input[type=button]{
 width: 100px;
@@ -97,6 +101,33 @@ input[type=text] , input[type=password]{
 strong {
     font-weight: bold;
 }
+div input{
+	  width:100px;
+
+    background-color: #168;
+
+    border: none;
+
+    color:#fff;
+
+    padding: 15px 0;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 15px;
+
+    margin: 4px;
+
+    cursor: pointer;
+    
+	border-radius:10px;
+
+
+}
 
 </style>
 </head>
@@ -106,16 +137,17 @@ strong {
 		<div id="contents">
            <div class="sub_contents_inner">
               <div class="contents_inner">
-			 <table width="700" cellpadding="0" cellspacing="8">
-               	<caption>주문내역</caption>
+			 <table style="width:700; cellpadding:0; cellspacing:8;">
+             <caption><strong> <h3>결제 상품</h3></strong> <br/><br/></caption>
+            
                	<tr>
 					<td width="400">상품</td>
-					<td width="100">판매가</td>
+					<td width="70">판매가</td>
 					<td width="50">수량</td>
 					<td width="150">받으시는 분</td>
-					<td width="150">EMAIL</td>
-					<td width="150">PHONE</td>
-					<td width="150">배송 주소</td>
+					<td width="100">EMAIL</td>
+					<td width="100">PHONE</td>
+					<td width="250">배송 주소</td>
 				</tr>
 				<c:forEach var="list" items="${statusList}">
 					<tr align="left">
@@ -127,10 +159,26 @@ strong {
 						<td>${list.email}</td>
 						<td>${list.phone}</td>
 						<td>${list.addr}</td>
-					
 					</tr>
 				</c:forEach>
             </table>
+             <table>
+             <caption><strong> <h3>결제 정보</h3></strong> <br/><br/></caption>
+             <tr>
+					<td width="150">입금자명</td>
+					<td width="250">입금은행</td>
+					<td width="250">최종결제 금액</td>
+				</tr>
+				<tr>
+				<td>${payName}</td>
+				<td>${bank}</td>
+				<td style="font-size:1.5em; color:red; font-weight: bold;">${totalPrice+2500} won</td>
+				</tr>
+              </table>
+              <input type="button" value="쇼핑 하러" onclick="location.href='mainHome'"/>
+              <input type="button" value="장바구니로"/>
+              
+              
               </div>
            </div>
         </div>

@@ -182,7 +182,7 @@ public class UB_HomeController {
 	    	  vo.setEmail(request. getParameter("email"));
 			  vo.setAddr(request. getParameter("addr"));
 			  vo.setUser_id(loginVO.getId());
-			/* vo.setStatus(1);  스테이튜스 1로 바꿔주기*/
+			  vo.setStatus(1);
 			  mapper.insertStatus(vo);
 			  
 			  if(category.equals("top")) {
@@ -195,11 +195,19 @@ public class UB_HomeController {
 	      }
 	      
 	      model.addAttribute("statusList", statusList);
+	      String payName=request.getParameter("payName");
+	      String bank=request.getParameter("bank");
+	      String totalPrice=request.getParameter("totalPrice");
+	      model.addAttribute("payName", payName);
+	      model.addAttribute("bank", bank);
+	      model.addAttribute("totalPrice", totalPrice);
+	      
 	      System.out.println(statusList);
 	      
 	      statusList = new ArrayList<StatusVO>();
 		return "orderOK";
 	}
+	
 	
 	/**
 	 * 

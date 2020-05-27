@@ -64,8 +64,8 @@
 	</select>
 	<!-- 주문한 상품을 넣어준다. -->
 	<insert id="insertStatus" parameterType="kr.koreait.vo.StatusVO">
-	insert into spring_status(idx,user_id,addr,item_name,id_number,color,category,item_size,price,ea,name,phone,email) 
-		values(SPRING_STATUS_IDX_SEQ.nextval,#{user_id},#{addr},#{item_name},#{id_number},#{color},#{category},#{item_size},#{price},#{ea},#{name},#{phone},#{email})
+	insert into spring_status(idx,user_id,addr,item_name,id_number,color,category,item_size,price,ea,name,phone,email,status) 
+		values(SPRING_STATUS_IDX_SEQ.nextval,#{user_id},#{addr},#{item_name},#{id_number},#{color},#{category},#{item_size},#{price},#{ea},#{name},#{phone},#{email},#{status})
 	</insert>
 	<!-- 주문된 상품에 주문량을 올려준다. -->
 	<update id="VolumeTop" parameterType="kr.koreait.vo.StatusVO">
