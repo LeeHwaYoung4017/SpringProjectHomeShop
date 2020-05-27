@@ -499,7 +499,7 @@ function reviewProcess() {
           newPage.appendChild(div);      	
 
 		}
-		//1페이지 눌릴수 있게...사실 의도는 pagen버튼을 disabled하고싶었어ㅜㅡㅜ.....
+		//1페이지 눌릴수 있게...사실 의도는 pagen버튼을 disabled하고싶었어ㅜㅡㅜ..
 		var changePage = document.getElementById("changePage");
 		 changePage.innerHTML = "<c:forEach var='i' begin='${reviewList.startPage}' end='${reviewList.endPage}' step='1'>"
 		 				+ "<c:if test='${i == \""+ pagen +"\"}'>"
