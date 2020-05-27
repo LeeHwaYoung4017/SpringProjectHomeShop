@@ -542,7 +542,6 @@ function popup(filepath) {
 	imagePreview.src = filepath;
 	var width = imagePreview.width + 30;
     var height = imagePreview.height + 30;
-    alert(width);
 	var url = "./imagePopup?image="+ encodeURIComponent(filepath); // 새로 띄울 창에 표시할 페이지
 	var title = "이미지 윈도우"; // 윈도우 이름
 	var option = "top=200, left=600, width="+width+", height="+height+", scrollbar=no, resizable=no";

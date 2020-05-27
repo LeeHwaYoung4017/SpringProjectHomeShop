@@ -10,6 +10,6 @@
 
 <img src="${img}" onclick="window.close()"/>
 
-
+       
 </body>
 </html>

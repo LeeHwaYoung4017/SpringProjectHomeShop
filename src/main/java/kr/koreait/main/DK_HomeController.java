@@ -432,8 +432,14 @@ public class DK_HomeController {
 	    	 System.out.println("이미지 팝업!");
 	    	String img = request.getParameter("image");
 	    	model.addAttribute("img", img);
-	    	System.out.println(img);
 	    	 return "imagePopup";
-	     } 
+	     }
+	     
+	     @RequestMapping("/administrator")
+	     public String administrator(HttpServletRequest request, Model model) {
+	    	 System.out.println("관리자페이지!!");
+	    	 
+	    	 return "administrator";
+	     }
 
 }
