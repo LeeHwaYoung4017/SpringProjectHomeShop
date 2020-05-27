@@ -398,4 +398,34 @@ public class JW_HomeController {
 		   
 		   return "/member/searchPassword";
 		}//END search_pw()
+	   
+//		아이디 찾기 창으로 넘어간다.	   
+	   @RequestMapping("/searchID")
+		public String searchID() {
+		   return "/member/searchID";
+	   }
+	   
+	   @RequestMapping("/selectID")
+		public void selectID(HttpServletRequest request, HttpServletResponse response) {
+		   System.out.println("selectID 실행");
+		   String name = request.getParameter("name");
+		   String email = request.getParameter("email");
+		   MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
+		   HashMap<String, String> hmap = new HashMap<String, String>();
+		   hmap.put("name", name);
+		   hmap.put("email", email);
+		   String resultID = mapper.selectID(hmap);
+		   
+		   StringBuffer result = new StringBuffer();
+			result.append("{\"result\":[");
+			result.append("[{\"value\":\"" + resultID+ "\"}],");
+			result.append("]}");
+			try {
+				response.getWriter().write(result.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	   }// END selectID()
+	   
+	   
 }
