@@ -322,8 +322,51 @@ public class DK_HomeController {
 	       return "reviewList";
 
 	    }
-	      
-	      String savedFileName= "";
+	     
+	     @RequestMapping("/showReview")
+	     public void showReview(HttpServletRequest request, Model model, HttpServletResponse response, ReviewVO vo) throws IOException {
+	    	 System.out.println("리뷰보여주는 아작스입니다.....");
+	    	 MybatisDAO mapper = sqlSession3.getMapper(MybatisDAO.class);
+	    	 int pageSize = 8;
+				int idx = Integer.parseInt(request.getParameter("idx"));
+				int currentPage = Integer.parseInt(request.getParameter("page"));//여기서 에러,.
+				System.out.println(currentPage);
+				int totalCount = mapper.selectCount1(idx);//해당아이템의 리뷰개수
+				
+				
+				response.getWriter().write(show(pageSize, idx, currentPage, totalCount));
+	    	 
+	     }
+	    
+	      private String show(int pageSize, int idx, int currentPage, int totalCount) {
+	    	  System.out.println("show() 작동??");
+	    	  
+	    	  AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+				ReviewList reviewList = ctx.getBean("reviewList", ReviewList.class);
+				reviewList.initReviewList(pageSize, totalCount, currentPage);
+				HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+				hmap.put("startNo", reviewList.getStartNo());
+				hmap.put("endNo", reviewList.getEndNo());
+				hmap.put("goodsidx", idx);
+				ArrayList<ReviewVO> reviewA =  sqlSession3.getMapper(MybatisDAO.class).selectList2(hmap);
+				StringBuffer result = new StringBuffer();
+				result.append("{\"result\":[");
+				for (int i = 0; i < reviewA.size(); i++) {
+					result.append("[{\"value\":\"" + reviewA.get(i).getContent() + "\"},");
+					result.append("{\"value\":\"" + reviewA.get(i).getGoodsidx() + "\"},");
+					result.append("{\"value\":\"" + reviewA.get(i).getName()+ "\"},");
+					result.append("{\"value\":\"" + reviewA.get(i).getWriteDate() + "\"},");
+					result.append("{\"value\":\"" + reviewA.get(i).getAttached() + "\"}],");
+					result.append("{\"value\":\"" + reviewA.get(i).getStar() + "\"}],");
+				}
+				result.append("]}");
+				
+				return result.toString();
+		}
+
+
+
+		String savedFileName= "";
 //	    리뷰 작성하기
 	      /**
 	       * 리뷰 업로드

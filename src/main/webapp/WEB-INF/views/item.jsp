@@ -205,33 +205,34 @@ $(function() {
 					<li class="sub_menu1">
 						<a ondblclick="location.href='topList'" style="color:black; letter-spacing: 3px"><h6>TOP</h6></a>
 						<ul type="disc" class="sub_menu2" style="margin-left: 120px; width: 100px; background: none;">
-							 <li><a href="#" class="sub_font">맨투맨&후드</a></li>
-							 <li><a href="#" class="sub_font">니트</a></li>
-						     <li><a href="#" class="sub_font">긴팔티</a></li>
-						     <li><a href="#" class="sub_font">반팔티</a></li>
-						     <li><a href="#" class="sub_font">나시</a></li>
-						     <li><a href="#" class="sub_font">프린팅티</a></li>
+							 <li><a href="subTopList?sub=${'1'}" class="sub_font">맨투맨&후드</a></li>
+							 <li><a href="subTopList?sub=${'2'}" class="sub_font">니트</a></li>
+						     <li><a href="subTopList?sub=${'3'}" class="sub_font">긴팔티</a></li>
+						     <li><a href="subTopList?sub=${'4'}" class="sub_font">반팔티</a></li>
+						     <li><a href="subTopList?sub=${'5'}" class="sub_font">나시</a></li>
+						     <li><a href="subTopList?sub=${'6'}" class="sub_font">프린팅티</a></li>
 						</ul>
 					</li>
 					
 					<li class="sub_menu1">
 						<a ondblclick="location.href='bottomList'" style="color:black; letter-spacing: 3px"><h6>BOTTOM</h6></a>
 						 <ul type="disc" class="sub_menu2" style="margin-left: 120px; width: 100px; background: none;">
-					 		<li><a href="#" class="sub_font">슬랙스</a></li>
-					 		<li><a href="#" class="sub_font">면바지</a></li>
-					 		<li><a href="#" class="sub_font">청바지</a></li>
-					 		<li><a href="#" class="sub_font">밴딩팬츠</a></li>
-					 		<li><a href="#" class="sub_font">반바지</a></li>
+					 		<li><a href="subBottomList?sub=${'1'}" class="sub_font">슬랙스</a></li>
+					 		<li><a href="subBottomList?sub=${'2'}" class="sub_font">면바지</a></li>
+					 		<li><a href="subBottomList?sub=${'3'}" class="sub_font">청바지</a></li>
+					 		<li><a href="subBottomList?sub=${'4'}" class="sub_font">밴딩팬츠</a></li>
+					 		<li><a href="subBottomList?sub=${'5'}" class="sub_font">반바지</a></li>
 					 	</ul>
 					</li>
 					
 					<li class="sub_menu1">
 						<a ondblclick="location.href='accList'" style="color:black; letter-spacing: 3px"><h6>ACC</h6></a>
 						<ul type="disc" class="sub_menu2" style="margin-left: 120px; width: 100px; background: none;">
-							<li><a href="#" class="sub_font">모자</a></li>
-							<li><a href="#" class="sub_font">양말</a></li>
-							<li><a href="#" class="sub_font">반지</a></li>
-							<li><a href="#" class="sub_font">목걸이</a></li>
+							<li><a href="subAccList?sub=${'1'}" class="sub_font">모자</a></li>
+							<li><a href="subAccList?sub=${'2'}" class="sub_font">양말</a></li>
+							<li><a href="subAccList?sub=${'3'}" class="sub_font">반지</a></li>
+							<li><a href="subAccList?sub=${'4'}" class="sub_font">목걸이</a></li>
+							<li><a href="subAccList?sub=${'5'}" class="sub_font">신발</a></li>
 					 	</ul>
 					</li>
 					
@@ -277,14 +278,18 @@ $(function() {
 						<li><a href="login" style="color:black"><h6>Login</h6></a></li>
 						<li><a href="join" style="color:black; letter-spacing: 3px"><h6>Join</h6></a></li>
 					</c:if>
+					
 					<c:if test="${name != null}">
 						<li><a href="logout" style="color:black"><h6>Logout</h6></a></li>
 					</c:if>
+					
 					<li><a href="orderBuy"  style="color:black; letter-spacing: 3px"><h6>Order</h6></a></li>
 					<li><a href="shoppingCart"  style="color:black; letter-spacing: 3px"><h6>Cart</h6></a></li>
 					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
 					
-					<li><a href="uploadForm"  style="color:black; letter-spacing: 3px"><h6>uploadForm</h6></a></li>
+					<c:if test="${id == 'root'}">
+						<li><a href="uploadForm"  style="color:black; letter-spacing: 3px"><h6>Set</h6></a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

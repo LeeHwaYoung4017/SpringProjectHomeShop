@@ -440,6 +440,23 @@ function insertProcess(){
    }
 }
 
+var showRequest = new XMLHttpRequest();
+function showReview() {
+	alert("일단1.");
+	var url = "./showReview?page="+ encodeURIComponent(document.getElementById("page1").value)
+				+ "&idx=" + encodeURIComponent(document.getElementById("hidIdx").value);
+	alert(document.getElementById("page1").value);/* undefined */	
+	searchRequest.open("post",url,true);
+	searchRequest.onreadystatechange = reviewProcess;
+	searchRequest.send(null);
+}
+function reviewProcess() {
+	if(searchRequest.readyState == 4 && searchRequest.status == 200) {
+		alert("gkgkkg");/* 여기부터!!!*/
+		alert("wpqkf.");
+	}
+}
+
 /* 별점 */
 $(function(){
 $('.filebox span').click(function(){
@@ -641,7 +658,7 @@ $('#review_message').click(function(){
                   <c:if test="${reviewList.startPage > 1}">
                      <input class="button btn" type="button" value="<<" onclick="location.href='?currentPage=1'" title="첫 페이지로 이동합니다."/>
                      <input class="button btn" type="button" value="<" 
-                           onclick="location.href='?currentPage=${reviewList.startPage - 1}'" 
+                           onclick="showReview()" 
                            title="이전 10 페이지로 이동합니다."/>
                   </c:if>
                   
@@ -653,7 +670,7 @@ $('#review_message').click(function(){
                      </c:if>
                      
                      <c:if test="${j != reviewList.currentPage}">
-                        <input class="button btn"  type="button" value="${j}" onclick="location.href='?currentPage=${j}'" 
+                        <input class="button btn"  id="page1" type="button" value="${j}" onclick="showReview()" 
                            title="${j}페이지로 이동합니다."/>
                      </c:if>
                   
@@ -662,9 +679,9 @@ $('#review_message').click(function(){
                   <!-- 마지막으로, 10페이지 뒤로 -->
                   <c:if test="${reviewList.endPage < reviewList.totalPage}">
                      <input class="button btn" type="button" value=">" 
-                           onclick="location.href='?currentPage=${reviewList.endPage + 1}'" title="다음 10 페이지로 이동합니다."/>
+                           onclick="showReview()" title="다음 10 페이지로 이동합니다."/>
                      <input class="button btn" type="button" value=">>" 
-                           onclick="location.href='?currentPage=${reviewList.totalPage}'" title="마지막 페이지로 이동합니다."/>
+                           onclick="showReview()" title="마지막 페이지로 이동합니다."/>
                   </c:if>            
                  
      

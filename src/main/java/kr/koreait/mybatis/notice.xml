@@ -42,20 +42,20 @@
 	
 	<!-- 상품 등록(악세사리) -->
 	<insert id="insertGoods_acc" parameterType="kr.koreait.vo.GoodsVO">
-		insert into SPRING_ACC (IDX, name,goodsDir ,price,category,id_number,photo, item_comment, goodsColor)
-		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor})
+		insert into SPRING_ACC (IDX, name,goodsDir ,price,category,id_number,photo, item_comment, goodsColor,sub_category)
+		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor}, #{sub_Category})
 	</insert>
 	
 	<!-- 상품 등록(상의) -->
 	<insert id="insertGoods_top" parameterType="kr.koreait.vo.GoodsVO">
-		insert into SPRING_TOP (IDX, name,goodsDir ,price,category,id_number,photo, item_comment, goodsColor)
-		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor})
+		insert into SPRING_TOP (IDX, name,goodsDir ,price,category,id_number,photo, item_comment, goodsColor,sub_category)
+		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor}, #{sub_Category})
 	</insert>
 	
 	<!-- 상품 등록(하의) -->
 	<insert id="insertGoods_bottom" parameterType="kr.koreait.vo.GoodsVO">
-		insert into SPRING_BOTTOM (IDX, name, goodsDir ,price,category,id_number,photo, item_comment, goodsColor)
-		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor})
+		insert into SPRING_BOTTOM (IDX, name, goodsDir ,price,category,id_number,photo, item_comment, goodsColor,sub_category)
+		values (spring_acc_idx_seq.nextval, #{name}, #{goodsDir},#{price},#{category},#{id_Number},#{photo}, #{item_comment}, #{goodsColor}, #{sub_Category})
 	</insert>
 	
 	<!-- 상품 이름idx을 얻어온다. -->
@@ -216,4 +216,46 @@
 		]]>		   
 	</select>
 	
+	<!-- 상의 서브카테고리 -->
+	<select id="subTopCount" parameterType="int" resultType="int">
+		select count(*) from SPRING_TOP where sub_category = #{sub}
+	</select>
+	
+	<select id="subTopList" parameterType="java.util.HashMap" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (
+				select rownum rnum, AA.* from (	
+					select * from SPRING_TOP where sub_category = #{sub} order by idx desc
+				)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+		]]>	
+	</select>
+	<!-- 하의 서브카테고리 -->
+	<select id="subBottomCount" parameterType="int" resultType="int">
+		select count(*) from SPRING_BOTTOM where sub_category = #{sub}
+	</select>
+	
+	<select id="subBottomList" parameterType="java.util.HashMap" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (
+				select rownum rnum, AA.* from (	
+					select * from SPRING_BOTTOM where sub_category = #{sub} order by idx desc
+				)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+		]]>	
+	</select>
+	<!-- 액세사리 서브카테고리 -->
+	<select id="subAccCount" parameterType="int" resultType="int">
+		select count(*) from SPRING_ACC where sub_category = #{sub}
+	</select>
+	
+	<select id="subAccList" parameterType="java.util.HashMap" resultType="kr.koreait.vo.GoodsVO">
+		<![CDATA[
+			select * from (
+				select rownum rnum, AA.* from (	
+					select * from SPRING_ACC where sub_category = #{sub} order by idx desc
+				)AA where rownum <= #{endNo}
+			) where rnum >= #{startNo}
+		]]>	
+	</select>
 </mapper>
