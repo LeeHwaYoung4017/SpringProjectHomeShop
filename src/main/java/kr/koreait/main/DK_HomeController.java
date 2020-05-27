@@ -353,14 +353,13 @@ public class DK_HomeController {
 				result.append("{\"result\":[");
 				for (int i = 0; i < reviewA.size(); i++) {
 					result.append("[{\"value\":\"" + reviewA.get(i).getContent() + "\"},");
-					result.append("{\"value\":\"" + reviewA.get(i).getGoodsidx() + "\"},");
 					result.append("{\"value\":\"" + reviewA.get(i).getName()+ "\"},");
 					result.append("{\"value\":\"" + reviewA.get(i).getWriteDate() + "\"},");
-					result.append("{\"value\":\"" + reviewA.get(i).getAttached() + "\"}],");
+					result.append("{\"value\":\"" + reviewA.get(i).getAttached() + "\"},");
 					result.append("{\"value\":\"" + reviewA.get(i).getStar() + "\"}],");
 				}
 				result.append("]}");
-				
+				System.out.println(result);
 				return result.toString();
 		}
 
