@@ -531,14 +531,24 @@ $('#review_message').click(function(){
    }
 });   
 });
-
-function popup() {
-	var url = "./imagePopup?image="+ encodeURIComponent(document.getElementById("Rimage").value); // 새로 띄울 창에 표시할 페이지
-	var title = "자식 윈도우"; // 윈도우 이름
+var imagePreview = new Image();
+function popup(filepath) {
+	if(filepath ==""){
+		alert("등록된 이미지가 없어요");
+		return;
+	}
+	alert(filepath);
+	imagePreview.src = filepath;
+	
+//	var url = "./imagePopup?image="+ encodeURIComponent(document.getElementById("Rimage").value); // 새로 띄울 창에 표시할 페이지
+	var title = "이미지 윈도우"; // 윈도우 이름
 	var option = "top=200, left=600, width=500px, height=500px, scrollbar=no, resizable=no";
 //	window.open();
 //	window.open(url);
-	window.open(url, title, option);
+	/* imageWin = window.open("", title, option);
+	imageWin.document.write("<html><head><meta charset="UTF-8"><title>이미지</title></head><body title='Close' onclick='window.close()'>");
+	imageWin.document.write("<img src='" + imagePreview.src + "'>");
+	imageWin.document.write("</body></html>"); */
 	
 }
 
@@ -692,7 +702,7 @@ function popup() {
 	                     <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
 	                        ${content} 
                  	</div>
-                 	 <div  id="Rimage" style="margin-bottom: 10px;"> <a href="#" onclick="popup()">
+                 	 <div  id="Rimage" style="margin-bottom: 10px;"> <a href="#" onclick="popup(this.form)">
                  	 <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
                          onerror="this.style.display='none'" style="width: 100px;"/></a>
                 	</div> 
