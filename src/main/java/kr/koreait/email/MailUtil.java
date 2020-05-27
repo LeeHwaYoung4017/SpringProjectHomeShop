@@ -13,7 +13,7 @@ public class MailUtil {
         String hostSMTPpwd = "dhrtus1234!@";    // 비밀번호
         // 보내는 사람			
         String fromEmail = "wlsdnjs5681@naver.com";
-        String fromName = "이진원";
+        String fromName = "주식회사 다예쁘";
         // email 전송
         HtmlEmail mail = new HtmlEmail();
         try {

@@ -105,11 +105,26 @@ public interface MybatisDAO {
 //	메인 페이지에 띄워주는 new 상품 긁어오기
 	ArrayList<GoodsVO> newMain();
 	ArrayList<ReviewVO> selectList2(HashMap<String, Integer> hmap);
+	int selectCount1(int idx);
+	
+	//상품 주문량 증가
+	void VolumeTop(StatusVO vo);
+	void VolumeAcc(StatusVO vo);
+	void VolumeBottom(StatusVO vo);
+	
+	//서브 카테고리
+	int subTopCount(int sub);
+	ArrayList<GoodsVO> subTopList(HashMap<String, Integer> hmap);
+	int subBottomCount(int sub);
+	ArrayList<GoodsVO> subBottomList(HashMap<String, Integer> hmap);
+	int subAccCount(int sub);
+	ArrayList<GoodsVO> subAccList(HashMap<String, Integer> hmap);
 	
 //	비밀번호 찾기 - 해당 아이디 객체 얻어오기
 	LoginVO search_pw(String id);
 	
-	void GetKey(String user_id, String key);
+//	비밀번호 찾기 - 해당 아이디의 비밀번호 임시비밀번호로 변경하기	
+	void updatePassword(HashMap<String, String> hmap);
 	
 	
 	

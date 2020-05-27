@@ -76,7 +76,7 @@
       <beans:property name="mapperLocations" value="classpath:kr/koreait/mybatis/qa.xml"/>
    </beans:bean>
    
-   <!-- QA -->
+   <!-- QA -->`
    <beans:bean id="sqlSession2" class="org.mybatis.spring.SqlSessionTemplate">
       <beans:constructor-arg index="0" ref="sqlSessionFactory2"/>
    </beans:bean>
@@ -96,7 +96,9 @@
    </beans:bean>
    <!-- review -->
    <beans:bean class="java.lang.String" id="uploadPath3">
-      <beans:constructor-arg value="C:\\git\SpringProjectHomeShop\src\main\webapp\resources\reviewimage"/>
+      <beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\reviewimage"/>
    </beans:bean>
 
+	<!-- C:\spring\workspace\homeProject\src\main\webapp\resources - 화영 -->
+	<!-- C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources - 누구경로인지모름 -->
 </beans:beans>

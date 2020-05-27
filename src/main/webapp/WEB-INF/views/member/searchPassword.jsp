@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +24,13 @@ input[type=text]{
   box-sizing: border-box;
   border-bottom: 2px solid gray;
 }
+#result{font-size: 12px; color: blue;}
 </style>
 </head>
 <body>
+<c:if test="${result eq 'fail'}">
+	<script type="text/javascript"> alert("일치하는 회원 정보가 없습니다."); </script>
+</c:if>
 <jsp:include page="../item.jsp"/>
 <div id="contents">
 	<div class="sub_contents_inner">
@@ -49,8 +56,19 @@ input[type=text]{
 						</tr>
 						<tr><td><br></td></tr>
 						<tr>
-							<td colspan="2" align="center"><input type="submit" value="비밀번호 찾기"></td>
+							<td colspan="2" align="center"><input type="submit" value="비밀번호 찾기">
+															<input type="button" value="돌아가기" onclick="location.href='history.back()'"></td>
 						</tr>
+						
+						<c:if test="${result eq 'success'}">
+							<tr>
+								<td colspan="2" align="center">
+								<p id="result">회원님의 이메일로 임시비밀번호를 전송했습니다.<br>
+													전송된 임시 비밀번호를 통해 로그인해주세요.</p><br>
+								<input type="button" value="로그인하기" onclick="location.href='login'"></td>
+							</tr>
+						</c:if>
+						
 					</table>
 				</form>
 			</div>

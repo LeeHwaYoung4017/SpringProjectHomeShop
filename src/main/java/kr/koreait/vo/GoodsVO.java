@@ -12,6 +12,7 @@ String name;      // 이름
 int price;      // 가격
 String id_Number;   // 저장되는 파일이름
 String category;   // 카테고리
+int sub_Category;   // 카테고리
 String item_comment;// 설명
 int volume;         // 주문량
 String goodsDir;   // 경로
@@ -102,12 +103,18 @@ public int getPhoto() {
 public void setPhoto(int photo) {
    this.photo = photo;
 }
+public int getSub_Category() {
+	return sub_Category;
+}
+public void setSub_Category(int sub_Category) {
+	this.sub_Category = sub_Category;
+}
 @Override
 public String toString() {
-   return "GoodsVO [idx=" + idx + ", name=" + name + ", price=" + price + ", id_Number=" + id_Number + ", category="
-         + category + ", item_comment=" + item_comment + ", volume=" + volume + ", goodsDir=" + goodsDir
-         + ", goodsidx=" + goodsidx + ", photo=" + photo + ", goodsColor=" + goodsColor + ", sub_file=" + sub_file
-         + "]";
+	return "GoodsVO [idx=" + idx + ", name=" + name + ", price=" + price + ", id_Number=" + id_Number + ", category="
+			+ category + ", sub_Category=" + sub_Category + ", item_comment=" + item_comment + ", volume=" + volume
+			+ ", goodsDir=" + goodsDir + ", goodsidx=" + goodsidx + ", photo=" + photo + ", goodsColor=" + goodsColor
+			+ ", sub_file=" + sub_file + ", writeDate=" + writeDate + "]";
 }
    
 }
