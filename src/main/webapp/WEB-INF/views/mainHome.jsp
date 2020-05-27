@@ -36,8 +36,8 @@ function resize(img){
     var width = img.width;
     var height = img.height;
 
-    var newW = 400;
-    var newH = 400;
+    var newW = 450;
+    var newH = 450;
     
     var ratio = newW/width;
     var ratio2 = newH/height;
@@ -318,8 +318,8 @@ a{text-decoration: none}
 						<div class="slide-content" align="center">
 							<h2 style="font-family: font-family: 'Noto Sans JP', sans-serif; font-weight: lighter; letter-spacing: 7px; margin: 0px 0 37px; font-size: 17px"; >BEST</h2>
 						    <ul id="slider" class="slider">
-						    <li class="item1">
 						    	<c:forEach var="vo" items="${bestSlide}">
+									<li class="item1">
 						            	<c:if test="${vo.category.equals('top')}">
 		            						<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_top/${vo.id_Number}">
 						            	</c:if>
@@ -329,12 +329,11 @@ a{text-decoration: none}
 							            <c:if test="${vo.category.equals('acc')}">
 						            		<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_acc/${vo.id_Number}">
 						            	</c:if>
+						        	</li>						    	
 						    	</c:forEach>
-						    	</li>	
-						    </ul><!-- END SLIDER -->
+						    </ul>
 						</div>
 					</div>
-				</div>
 					<!-- 중간 베스트 아이템 -->
 					<div id="hotItem">
 					   <!--   신상품 타이틀  -->
@@ -368,6 +367,7 @@ a{text-decoration: none}
 							          </li>
 					            </c:forEach>
 					   </ul>
+					</div>					
 				</div>
 			</div>
 		</div>
