@@ -731,7 +731,6 @@ $('#review_message').click(function(){
                         <input class="button btn"  type="button" value="${i}" id="page1" onclick="showReview(${i})" 
                            title="${i}페이지로 이동합니다."/>
                      </c:if>
-                  
                   </c:forEach>
                   </span>
                   <!-- 마지막으로, 10페이지 뒤로 -->
