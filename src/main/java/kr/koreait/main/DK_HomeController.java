@@ -426,5 +426,13 @@ public class DK_HomeController {
 	   	  	return sqlSession3.getMapper(MybatisDAO.class).insertReview(vo); 
 				
 	     }
+	     
+	     @RequestMapping("/imagePopup")
+	     public String imagePopup(HttpServletRequest request, Model model, HttpServletResponse response) {
+	    	 System.out.println("이미지 팝업!");
+	    	String img = request.getParameter("image");
+	    	System.out.println(img);
+	    	 return "imagePopup";
+	     } 
 
 }
