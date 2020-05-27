@@ -192,7 +192,7 @@ window.onload = function(){
     for(var i=1; i <= nn; i++){
        var sp = document.createElement("span")
        sp.innerHTML =  "<img src='${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/"
-          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)'/><br/>";
+          + num[0]+"_"+ i + "."+num[1] +"' onload='resize(this)' onclick='popup(this.src)'/><br/>";
        img.appendChild(sp);      
     }
 }
@@ -409,7 +409,7 @@ var reviewInsertRequest = new XMLHttpRequest();
 function insertReview(frm){
    frm.submit();
    var star = document.getElementsByClassName("starR on");
-   alert(star.length)
+   
 
    var url = "./insertReview?idx=" + encodeURIComponent(document.getElementById("hidIdx").value)
                      + "&content=" + encodeURIComponent(document.getElementById("review_message").value)
@@ -441,20 +441,74 @@ function insertProcess(){
 }
 
 var showRequest = new XMLHttpRequest();
-function showReview() {
-	alert("일단1.");
-	var url = "./showReview?page="+ encodeURIComponent(document.getElementById("page1").value)
+var pagen;
+function showReview(num) {
+	var url = "./showReview?page="+ encodeURIComponent(num)
 				+ "&idx=" + encodeURIComponent(document.getElementById("hidIdx").value);
-	alert(document.getElementById("page1").value);/* undefined */	
+	alert(num);/* 2로 따로 집어넣을때는 작동, 근데 >>>등 10페이지 뛰기면?? */	
+	pagen = num;
 	searchRequest.open("post",url,true);
 	searchRequest.onreadystatechange = reviewProcess;
 	searchRequest.send(null);
 }
 function reviewProcess() {
 	if(searchRequest.readyState == 4 && searchRequest.status == 200) {
-		alert("gkgkkg");/* 여기부터!!!*/
-		alert("wpqkf.");
-	}
+		var object = eval("(" + searchRequest.responseText + ")");	
+		var result = object.result;
+//		alert(result.length); //8
+		var newPage = document.getElementById("newPage");
+		newPage.innerHTML = "";
+		
+		for (var i = 0; i < result.length; i++) {
+		var div = document.createElement("div");
+//			tbody에 넣어줄 행을 만든다.
+			/* 내용 */
+			var content = result[i][0].value;
+			/* 이름 */
+			var name = result[i][1].value;
+			/* 날짜 */
+			var date = result[i][2].value;
+			/* 사진 */
+			var img = "<img src='${pageContext.request.contextPath }/resources/reviewimage/"+ result[i][3].value 
+				+"' onerror='this.style.display= \"none\"' style='width: 100px;'/>";
+			/* 별 */
+			var stars = result[i][4].value;
+			var shape;
+			if (stars == 1) {
+				shape = '★☆☆☆☆';
+			}else if(stars ==2){
+				shape = '★★☆☆☆';
+			}else if(stars ==3){
+				shape = '★★★☆☆';
+			}else if(stars == 4){
+				shape = '★★★★☆';
+			}else if(stars ==5){
+				shape = '★★★★★';
+			}
+ 		 
+ 		div.innerHTML = "<div style='display: grid;grid-template-columns: 80% 20%; width: 90%;text-align: left;"
+ 					+	"border-bottom: solid 2px #ccc; margin-bottom: 7px;'>"
+ 					+ "<div class='box'>"
+ 					+ "<span style='color: #e27e37; size: 10px; font-size: 20px;' id='star'>"+ shape +"</span>"
+ 					+ "<div id='Rcontent'>"+ content +"</div>"
+ 					+ "<div  id='Rimage' style='margin-bottom: 10px;'>"+ img +"</div></div>"
+ 					+ "<div class='box'><div ><u style='color: #a59a9a;'><sub>작성자</sub></u><br/>"
+                    + "<span id=Rname>"+ name + "</span> </div>"
+                    + "<div ><u style='color: #a59a9a;'><sub>작성일</sub></u> <br/>"
+                    + " <span id='day'>"+ date +"</span></div> </div> </div>";
+          newPage.appendChild(div);      	
+
+		}
+		//1페이지 눌릴수 있게...사실 의도는 pagen버튼을 disabled하고싶었어ㅜㅡㅜ..
+		var changePage = document.getElementById("changePage");
+		 changePage.innerHTML = "<c:forEach var='i' begin='${reviewList.startPage}' end='${reviewList.endPage}' step='1'>"
+		 				+ "<c:if test='${i == \""+ pagen +"\"}'>"
+         				+ "<input class='button btn' type='button' value='${"+ pagen +"}' disabled='disabled'/> </c:if>"
+         				+ " <c:if test='${i != \""+ pagen +"\"}'>"
+         				+ " <input class='button btn'  type='button' value='${i}' id='page1' onclick='showReview(${i})'"
+         				+ " title='${i}페이지로 이동합니다.'/> </c:if></c:forEach>";
+         
+}
 }
 
 /* 별점 */
@@ -477,6 +531,24 @@ $('#review_message').click(function(){
    }
 });   
 });
+
+/* 이미지 팝업창 띄우기 */
+var imagePreview = new Image();
+function popup(filepath) {
+	if(filepath ==""){
+		alert("등록된 이미지가 없어요");
+		return;
+	}
+	imagePreview.src = filepath;
+	var width = imagePreview.width + 30;
+    var height = imagePreview.height + 30;
+    alert(width);
+	var url = "./imagePopup?image="+ encodeURIComponent(filepath); // 새로 띄울 창에 표시할 페이지
+	var title = "이미지 윈도우"; // 윈도우 이름
+	var option = "top=200, left=600, width="+width+", height="+height+", scrollbar=no, resizable=no";
+	window.open(url, title, option);
+	
+}
 
 
 </script>
@@ -580,8 +652,9 @@ $('#review_message').click(function(){
 <!-- 리뷰리스트!! -->
                
                <!-- request 영역의 noticeList 객체에서 1페이지 분량의 글이 저장된 ArrayList(noticeList)의 내용만 얻어내서 별도의 변수에 저장한다. -->
-               <c:set var="list" value="${reviewList.reviewList}"/>
-               
+               <c:set  var="list" value="${reviewList.reviewList}"/>
+               <div id="newPage">
+             
                
                <!-- 테이블에 글이 없으면 없다고 출력한다. -->
                <c:if test="${list.size() == 0}">
@@ -599,7 +672,7 @@ $('#review_message').click(function(){
                <c:forEach var="vo" items="${list}">
          	<div style="display: grid;grid-template-columns: 80% 20%; width: 90%;text-align: left; border-bottom: solid 2px #ccc; margin-bottom: 7px;">
          		<div class="box">
-         			<span style="color: #e27e37; size: 10px; font-size: 20px;">
+         			<span style="color: #e27e37; size: 10px; font-size: 20px;" id="star">
 	         			<c:if test="${vo.star == 1 }">
 	                     ★☆☆☆☆
 	                     </c:if> 
@@ -621,23 +694,25 @@ $('#review_message').click(function(){
 		                        <img src="${pageContext.request.contextPath }/resources/images/new.png"/>
 		                     </c:if>
                  	</span>
-                 	<div>
+                 	<div id="Rcontent">
                  		 <c:set var="content" value="${fn:replace(fn:trim(vo.content), '<', '&lt;')}"/>
 	                     <c:set var="content" value="${fn:replace(content, '>', '&gt;')}"/>
 	                     <!-- 제목에 하이퍼링크를 걸어준다. => 하이퍼링크를 클릭하면 클릭된 글의 내용을 표시한다. -->
 	                        ${content} 
                  	</div>
-                 	 <div style="margin-bottom: 10px;"> <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
-                         onerror="this.style.display='none'" style="width: 100px;"/>
+                 	 <div  id="Rimage" style="margin-bottom: 10px;"> 
+                 	 <img src="${pageContext.request.contextPath }/resources/reviewimage/${vo.attached}"  
+                         onerror="this.style.display='none'" style="width: 100px;" onclick="popup(this.src)"/>
                 	</div> 
          		</div>
          		<div class="box">
          			<div >   
                   	<u style="color: #a59a9a;"><sub>작성자</sub></u><br/>
-                     ${vo.name}
+                     <span id=Rname>${vo.name}</span> 
                   </div>
               	 <div ><u style="color: #a59a9a;"><sub>작성일</sub></u>
                 	 <br/>
+                	 <span id="day">
                      <!-- 오늘 입력된 글은 시간만 어제 이전에 입력된 글은 날짜만 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
                         <fmt:formatDate value="${vo.writeDate}" pattern="a h:mm"/>
@@ -645,16 +720,17 @@ $('#review_message').click(function(){
                      <c:if test="${date.year != vo.writeDate.year || date.month != vo.writeDate.month || date.date != vo.writeDate.date}">
                         <fmt:formatDate value="${vo.writeDate}" pattern="yyyy.MM.dd(E)"/>
                      </c:if>
+                     </span>
               	 	</div> 
          		</div>
             </div>
-            
                </c:forEach>
-               </c:if>
+               </c:if>            
+                </div> <!-- ajax를 변동될 부분. -->
                <!-- 페이지 이동 버튼 -->
                <br/>
                   
-                  <!-- 처음으로, 10페이지 앞으로 -->
+                  <!-- 처음으로, 10페이지 앞으로 만약 내가 지금 이걸 js로 바꾸면 필요없움,-->
                   <c:if test="${reviewList.startPage > 1}">
                      <input class="button btn" type="button" value="<<" onclick="location.href='?currentPage=1'" title="첫 페이지로 이동합니다."/>
                      <input class="button btn" type="button" value="<" 
@@ -662,20 +738,20 @@ $('#review_message').click(function(){
                            title="이전 10 페이지로 이동합니다."/>
                   </c:if>
                   
-                  <!-- 페이지 이동 -->
-                  <c:forEach var="j" begin="${reviewList.startPage}" end="${reviewList.endPage}" step="1">
+                   <!-- 페이지 이동 -->
+                   <span id="changePage">
+                  <c:forEach var="i" begin="${reviewList.startPage}" end="${reviewList.endPage}" step="1">
                   
-                     <c:if test="${j == reviewList.currentPage}">
-                        <input class="button btn" type="button" value="${j}" disabled="disabled"/>
+                     <c:if test="${i == reviewList.currentPage}">
+                        <input class="button btn" type="button" value="${i}" disabled="disabled"/>
                      </c:if>
                      
-                     <c:if test="${j != reviewList.currentPage}">
-                        <input class="button btn"  id="page1" type="button" value="${j}" onclick="showReview()" 
-                           title="${j}페이지로 이동합니다."/>
+                     <c:if test="${i != reviewList.currentPage}">
+                        <input class="button btn"  type="button" value="${i}" id="page1" onclick="showReview(${i})" 
+                           title="${i}페이지로 이동합니다."/>
                      </c:if>
-                  
                   </c:forEach>
-                  
+                  </span>
                   <!-- 마지막으로, 10페이지 뒤로 -->
                   <c:if test="${reviewList.endPage < reviewList.totalPage}">
                      <input class="button btn" type="button" value=">" 

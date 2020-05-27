@@ -353,14 +353,13 @@ public class DK_HomeController {
 				result.append("{\"result\":[");
 				for (int i = 0; i < reviewA.size(); i++) {
 					result.append("[{\"value\":\"" + reviewA.get(i).getContent() + "\"},");
-					result.append("{\"value\":\"" + reviewA.get(i).getGoodsidx() + "\"},");
 					result.append("{\"value\":\"" + reviewA.get(i).getName()+ "\"},");
 					result.append("{\"value\":\"" + reviewA.get(i).getWriteDate() + "\"},");
-					result.append("{\"value\":\"" + reviewA.get(i).getAttached() + "\"}],");
+					result.append("{\"value\":\"" + reviewA.get(i).getAttached() + "\"},");
 					result.append("{\"value\":\"" + reviewA.get(i).getStar() + "\"}],");
 				}
 				result.append("]}");
-				
+				System.out.println(result);
 				return result.toString();
 		}
 
@@ -427,5 +426,14 @@ public class DK_HomeController {
 	   	  	return sqlSession3.getMapper(MybatisDAO.class).insertReview(vo); 
 				
 	     }
+	     
+	     @RequestMapping("/imagePopup")
+	     public String imagePopup(HttpServletRequest request, Model model, HttpServletResponse response) {
+	    	 System.out.println("이미지 팝업!");
+	    	String img = request.getParameter("image");
+	    	model.addAttribute("img", img);
+	    	System.out.println(img);
+	    	 return "imagePopup";
+	     } 
 
 }
