@@ -33,6 +33,7 @@ import kr.koreait.vo.NoticeList;
 import kr.koreait.vo.NoticeVO;
 import kr.koreait.vo.ReviewList;
 import kr.koreait.vo.ReviewVO;
+import kr.koreait.vo.StatusVO;
 import kr.koreait.vo.StokeVO;
 
 /**
@@ -502,5 +503,46 @@ public class DK_HomeController {
 	    	 
 	    	 return "financial";
 	     }
+	     
+	     @RequestMapping("/revenue")
+	     public void revenue(HttpServletRequest request, Model model, HttpServletResponse response, StatusVO vo) throws IOException {
+	    	 System.out.println("날짜별로 매출현황을 보여주는 아작스입니다");
+	    	 String sdate = request.getParameter("startDate");
+	    	 String edate = request.getParameter("endDate");
+				response.getWriter().write(getJSON1(sdate, edate));
+	    	 
+	     }
+	    
+	      private String getJSON1(String sdate, String edate) {
+	    	  System.out.println("날짜 작동??");
+	    	  System.out.println("sdate: "+ sdate);
+	    	  MybatisDAO mapper = sqlSession4.getMapper(MybatisDAO.class);
+//	  		테이블에서 입력한 문자열이 이름에 포함된 레코드를 얻어온다. 
+	    	HashMap<String, String> hmap = new HashMap<String, String>();
+	  		hmap.put("sdate", sdate);
+	  		hmap.put("edate", edate);
+	  		System.out.println("hmap: " + hmap);
+	  		ArrayList<StatusVO> ajaxList = mapper.datesearch(hmap);
+	  		System.out.println(ajaxList);
+	  		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	  		
+//	  		입력된 문자열이 포함된 레코드를 얻어와서 하나의 문자열로 연결한다.
+	  		StringBuffer result = new StringBuffer();
+	  		result.append("{\"result\":[");
+	  		for (int i = 0; i < ajaxList.size(); i++) {
+	  			result.append("[{\"value\":\"" + ajaxList.get(i).getItem_name() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getUser_id() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getEa() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getItem_size() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getColor() + "\"},");
+	  			result.append("{\"value\":\"" + sdf.format(ajaxList.get(i).getWritedate()) + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getCategory() + "\"}],");
+	  		}
+	  		result.append("]}");
+	  		System.out.println(result);
+	  		
+//	  		StringBuffer 타입의 객체를 String 타입으로 리턴시키기 위해 toString() 메소드를 실행해서 리턴시킨다.
+	  		return result.toString();
+		}
 
 }

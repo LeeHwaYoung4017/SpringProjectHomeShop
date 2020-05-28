@@ -2,9 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.koreait.mybatis.MybatisDAO">
 	
-   <!-- 한페이지 분량의 글 얻어오기O -->
+   <!-- 해당이름의 회원리스트 가져오기 -->
    <select id="search" parameterType="String" resultType="LoginVo">
   		select * from spring_member where name like '%'||#{name}||'%' order by idx
+   </select>
+   
+   <!-- 한페이지 분량의 글 얻어오기O -->
+   <select id="datesearch" parameterType="java.util.HashMap" resultType="StatusVO">
+  		select * from spring_status where STATUS = '1' and WRITEDATE between to_date(#{sdate}, 'YYYY-MM-DD') and to_date(#{edate}, 'YYYY-MM-DD')+1
    </select>
    
   
