@@ -749,6 +749,26 @@ public class HY_HomeController {
     		  return "subAccList";
     	  }
       }
+      
+      @RequestMapping("/changePass")
+      public String changePass(HttpServletRequest request, Model model) {
+    	  
+    	  return "changePass";
+      }
+      
+      @RequestMapping("/changePassOK")
+      public String changePassOK(HttpServletRequest request, Model model) {
+    	  String id = request.getParameter("ids");
+    	  String pw = request.getParameter("pw");
+    	  System.out.println("id = "+id + "pw = " + pw);
+    	  MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
+    	  HashMap<String, String> hmap = new HashMap<String, String>();
+    	  hmap.put("pw", pw);
+    	  hmap.put("id", id);
+    	  mapper.changePassword(hmap);
+    	  
+    	  return "changePassOK";
+      }
 }
 
 

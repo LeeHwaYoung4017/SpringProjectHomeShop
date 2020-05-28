@@ -6,6 +6,8 @@
 		<typeAlias alias="vo" type="kr.koreait.vo.NoticeVO"/>
 		<typeAlias alias="reviewVo" type="kr.koreait.vo.ReviewVO"/>
 		<typeAlias alias="LoginVo" type="kr.koreait.vo.LoginVO"/>
+		<typeAlias alias="StatusVO" type="kr.koreait.vo.StatusVO"/>
+		<typeAlias alias="StockVO" type="kr.koreait.vo.StokeVO"/>
 	</typeAliases>
 	
 </configuration>

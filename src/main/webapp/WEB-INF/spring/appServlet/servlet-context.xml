@@ -102,7 +102,7 @@
    <!-- 회원관리 -->
      <beans:bean id="sqlSessionFactory4" class="org.mybatis.spring.SqlSessionFactoryBean">
       <beans:property name="dataSource" ref="dataSource"/>
-      <beans:property name="mapperLocations" value="classpath:kr/koreait/mybatis/member.xml"/>
+      <beans:property name="mapperLocations" value="classpath:kr/koreait/mybatis/admin.xml"/>
       <beans:property name="configLocation" value="classpath:kr/koreait/mybatis/mybatis-config.xml"/>
    </beans:bean>
    <!--회원관리 -->

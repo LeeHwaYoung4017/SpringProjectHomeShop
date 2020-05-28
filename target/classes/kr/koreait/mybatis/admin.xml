@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.koreait.mybatis.MybatisDAO">
+	
+   <!-- 해당이름의 회원리스트 가져오기 -->
+   <select id="search" parameterType="String" resultType="LoginVo">
+  		select * from spring_member where name like '%'||#{name}||'%' order by idx
+   </select>
+   
+   <!-- 배달완료된 매출현황 날짜별로 가져오기 -->
+   <select id="datesearch" parameterType="java.util.HashMap" resultType="StatusVO">
+  		select * from spring_status where STATUS = '1' and WRITEDATE between to_date(#{sdate}, 'YYYY-MM-DD') and to_date(#{edate}, 'YYYY-MM-DD')+1
+   </select>
+   
+  <!-- 재고내역 가져오기 -->
+   <select id="searchStock" parameterType="String" resultType="StockVO">
+  		select * from spring_stoke where category = #{category} order by idx desc
+   </select>
+   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

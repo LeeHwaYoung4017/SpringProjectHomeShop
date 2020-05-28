@@ -19,8 +19,8 @@ function resize(img){
     var width = img.width;
     var height = img.height;
 
-    var newW = 300;
-    var newH = 300;
+    var newW = 350;
+    var newH = 350;
     
     var ratio = newW/width;
     var ratio2 = newH/height;

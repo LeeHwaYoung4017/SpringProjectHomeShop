@@ -79,7 +79,7 @@
 	</update>
 	
 	<insert id="insertStoke" parameterType="kr.koreait.vo.StokeVO">
-		insert into SPRING_STOKE(idx, color, ea, size1) values(#{idx}, #{color}, #{ea}, #{size1})
+		insert into SPRING_STOKE(idx, color, ea, size1, category, item_name) values(#{idx}, #{color}, #{ea}, #{size1}, #{category}, #{item_name})
 	</insert>
 	
 	<select id="topCount" resultType="int">
