@@ -206,13 +206,12 @@ function itemList(selectVal){
      var ho = document.createElement("td");
      var color;
      var size_t = selectVal;
-
-     if(selectVal != "1"){
-            color = document.querySelector("#cili").value.toUpperCase()
-            var list = "-" + color +"/" + size_t/* ex)-white/S */
-                ho.innerHTML = name1 +"<br/> "+ list;
-                /* $("#num1").attr("readonly", true); */
-      } 
+     
+    
+      color = document.querySelector("#cili").value.toUpperCase()
+      var list = "-" + color +"/" + size_t/* ex)-white/S */
+      ho.innerHTML = name1 +"<br/> "+ list;
+          /* $("#num1").attr("readonly", true); */
      
       tr.appendChild(ho); 
       /* 수량설정 */
@@ -355,11 +354,15 @@ function reSizeProcess(){
       var hero = document.getElementById("hero");
       
       var str =  "SIZE <select name='sizeSelection' id='sizeSelection' onchange='itemList(this.value)'>" + 
-                 "<option value ='1'>--[필수] 사이즈 선택--</option>";
+                 "<option disabled>--[필수] 사이즈 선택--</option>";
                  
       for (var i = 0; i < result.length; i++) {
-         var str = str + "<option value='" + result[i][0].value + "'>" +result[i][0].value + "</option>";
-         ho.innerHTML = str;
+	    	 if(result[i][1].value != 0){
+	    		 var str = str + "<option value='"+result[i][0].value+"'>" +result[i][0].value + "</option>";	         	
+	    	 }else{
+	    		 var str = str + "<option disabled>" +result[i][0].value + " - SOLD OUT</option>";
+	    	 }
+	         ho.innerHTML = str;
       }
       str= str + "</select>";
       hero.appendChild(ho);

@@ -266,17 +266,23 @@ public class JW_HomeController {
 	   public void reSize(HttpServletRequest request, Model model, HttpServletResponse response) {
 		    System.out.println("reSize함수 실행");
 		    String color = request.getParameter("color");
+		    System.out.println(color);
+		    
 		    MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		    int idx = Integer.parseInt(request.getParameter("idx"));
 		    Resize re = new Resize(color, idx);
 		    ArrayList<String> size_List = mapper.reSize(re);
-		    
+		    System.out.println(size_List);
 		    StringBuffer result = new StringBuffer();
 			result.append("{\"result\":[");
 			for (int i = 0; i < size_List.size(); i++) {
-				result.append("[{\"value\":\"" + size_List.get(i)+ "\"}],");
+				result.append("[{\"value\":\"" + size_List.get(i)+ "\"},");
+				re.setSize(size_List.get(i));
+				int ea = mapper.getEA(re);
+				result.append("{\"value\":\"" + ea+ "\"}],");
 			}
 			result.append("]}");
+			System.out.println(result);
 			try {
 				response.getWriter().write(result.toString());
 			} catch (IOException e) {

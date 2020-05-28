@@ -126,6 +126,8 @@ public interface MybatisDAO {
 	void updatePassword(HashMap<String, String> hmap);
 //	아이디 찾기 
 	String selectID(HashMap<String, String> hmap);
+//	품절 처리를 위한 수량 검색	
+	int getEA(Resize re);
 	
 	
 	

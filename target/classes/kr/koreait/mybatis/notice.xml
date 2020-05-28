@@ -258,4 +258,8 @@
 			) where rnum >= #{startNo}
 		]]>	
 	</select>
+	
+	<select id="getEA" parameterType="kr.koreait.vo.Resize" resultType="int">
+		select ea from SPRING_STOKE where idx=#{idx} AND color=#{color} AND size1=#{size}
+	</select>
 </mapper>

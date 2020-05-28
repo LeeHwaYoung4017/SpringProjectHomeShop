@@ -3,7 +3,15 @@ package kr.koreait.vo;
 public class Resize {
 	String color;
 	int idx;
+	String size;
 	
+	
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
 	public String getColor() {
 		return color;
 	}
@@ -24,6 +32,10 @@ public class Resize {
 	public Resize(String color, int idx) {
 		this.color = color;
 		this.idx = idx;
+	}
+	@Override
+	public String toString() {
+		return "Resize [color=" + color + ", idx=" + idx + ", size=" + size + "]";
 	}
 	
 	
