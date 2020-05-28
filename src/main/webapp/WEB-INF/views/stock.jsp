@@ -40,7 +40,6 @@ function searchProcess() {
 						 cell.appendChild(btn);
 					
 				}else {
-					
 					cell.innerHTML = result[i][j].value;
 				}
 			}
