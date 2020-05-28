@@ -213,7 +213,7 @@ public class JW_HomeController {
 	    ArrayList<StatusVO> list  = mapper.selectStatus(id);
 	    System.out.println(list);
 	    StatusCount countVO = new StatusCount();
-	    for(StatusVO vo : list) {
+	    for(StatusVO vo : list) { 
 	    	switch (vo.getStatus()) {
 			case 0:
 				countVO.setNdeposit(countVO.getNdeposit()+1);
