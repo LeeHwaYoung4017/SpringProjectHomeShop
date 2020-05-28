@@ -128,10 +128,10 @@ th {
 						<td width="150">TOTAL</td>
 						<td width="100">NOW</td>
 			</tr>
+			
 			<c:forEach var="vo" items="${list}">
-				<c:if test="${vo.status==0}">
 					<tr align="left">
-						<td><img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/${vo.id_number}">
+						<td><img onload="resize(this)" src="${pageContext.request.contextPath}/resources/goodsupload/goodsupload_${vo.category}/${vo.id_number}">
 							${vo.item_name}(${vo.color})</td>
 						<td>${vo.price}</td>
 						<td>${vo.ea}</td>
@@ -140,7 +140,6 @@ th {
 						<td><c:if test="${vo.status==0}">입금전</c:if><c:if test="${vo.status==1}">배송준비중</c:if><c:if test="${vo.status==2}">배송중</c:if>
 						<c:if test="${vo.status==3}">배송중</c:if><c:if test="${vo.status==4}">취소/반품</c:if></td>
 					</tr>
-				</c:if>
 			</c:forEach>
 			
 			<tr><td><br><br><br><br><hr><br><br><br><br></td></tr>

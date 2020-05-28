@@ -207,10 +207,11 @@ public class JW_HomeController {
 		System.out.println("마이페이지(myPage)");
 		if(session.getAttribute("name")==null) {
 			   return "login";
-		   }
+		 }
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 	    String id = (String) session.getAttribute("id");
 	    ArrayList<StatusVO> list  = mapper.selectStatus(id);
+	    System.out.println(list);
 	    StatusCount countVO = new StatusCount();
 	    for(StatusVO vo : list) {
 	    	switch (vo.getStatus()) {
