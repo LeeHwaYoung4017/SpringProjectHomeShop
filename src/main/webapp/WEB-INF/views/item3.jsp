@@ -193,69 +193,20 @@ text-decoration:none;
 			<div class="category">
 				<ul>
 					<li>
-						<a href="newList" style="color:black; letter-spacing: 3px"><h6>NEW</h6></a>
+						<a href="memberAdm" style="color:black; letter-spacing: 3px"><h6>회원관리</h6></a>
 					</li>
 					<li>
-						<a href="bestList" style="color:black; letter-spacing: 3px"><h6>BEST</h6></a>
+						<a href="financial" style="color:black; letter-spacing: 3px"><h6>매출현황</h6></a>
 					</li>
 					<li>
-						<a href="topList" style="color:black; letter-spacing: 3px"><h6>TOP</h6></a>
-						<ul>
-						   <li><a href="subTopList?sub=${'1'}" class="sub_font">맨투맨&후드</a></li>
-	                       <li><a href="subTopList?sub=${'2'}" class="sub_font">니트</a></li>
-	                       <li><a href="subTopList?sub=${'3'}" class="sub_font">긴팔티</a></li>
-	                       <li><a href="subTopList?sub=${'4'}" class="sub_font">반팔티</a></li>
-	                       <li><a href="subTopList?sub=${'5'}" class="sub_font">나시</a></li>
-	                       <li><a href="subTopList?sub=${'6'}" class="sub_font">프린팅티</a></li>
-
-						</ul>
+						<a href="stock" style="color:black; letter-spacing: 3px"><h6>재고관리</h6></a>
+						
 					</li>
-					<li>
-						<a href="bottomList" style="color:black; letter-spacing: 3px"><h6>BOTTOM</h6></a>
-						 <ul>
-					 		<li><a href="subBottomList?sub=${'1'}" class="sub_font">슬랙스</a></li>
-		                    <li><a href="subBottomList?sub=${'2'}" class="sub_font">면바지</a></li>
-		                    <li><a href="subBottomList?sub=${'3'}" class="sub_font">청바지</a></li>
-		                    <li><a href="subBottomList?sub=${'4'}" class="sub_font">밴딩팬츠</a></li>
-		                    <li><a href="subBottomList?sub=${'5'}" class="sub_font">반바지</a></li>
-					 	</ul>
-					</li>
-					<li>
-						<a href="accList" style="color:black; letter-spacing: 3px"><h6>ACC</h6></a>
-						<ul>
-							<li><a href="subAccList?sub=${'1'}" class="sub_font">모자</a></li>
-	                        <li><a href="subAccList?sub=${'2'}" class="sub_font">양말</a></li>
-	                        <li><a href="subAccList?sub=${'3'}" class="sub_font">반지</a></li>
-	                        <li><a href="subAccList?sub=${'4'}" class="sub_font">목걸이</a></li>
-	                        <li><a href="subAccList?sub=${'5'}" class="sub_font">신발</a></li>
-					 	</ul>
-					</li>
+					
 				</ul>
-				<br/>
-				<ul>	
-					<li>
-						<a href="reviewList" style="color:black; letter-spacing: 3px"><h6>REVIEW</h6></a>
-					</li>
-					<li>
-						<a href="list" style="color:black; letter-spacing: 3px"><h6>NOTICE</h6></a>
-					</li>
-					<li>
-						<a href="QAlist" style="color:black; letter-spacing: 3px"><h6>Q&A</h6></a>
-					</li>
-				</ul>
+				
 			</div>
-			<div onclick="window.open('https://pf.kakao.com/','NewWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=550,height=800')" style="z-index:9999;cursor:pointer;position:fixed;bottom:65px;left:20px;width:40px;height:40px;border:1px solid #DBC500;border-radius:50%;overflow:hidden;background:#F9E000">
-			    <div style="position: absolute; top:0;left:0px;width:40px;height:40px;"><img src="http://centumcode2.cafe24.com/image/kakao-4.png" width="100%"></div>
-			</div>
-			<div onclick="window.open('https://www.youtube.com/','NewWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=550,height=800')" style="z-index:9999;cursor:pointer;position:fixed;bottom:110px;left:20px;width:40px;height:40px;border:1px solid #DBC500;border-radius:50%;overflow:hidden;background:#F9E000;">
-			    <div style="position: absolute; top:0;left:0px;width:40px;height:40px;"><img src="http://centumcode2.cafe24.com/image/youtube-4.png" width="100%"></div>
-			</div>
-			<div onclick="window.open('https://blog.naver.com/','NewWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=550,height=800')" style="z-index:9999;cursor:pointer;position:fixed;bottom:155px;left:20px;width:40px;height:40px;border:1px solid #DBC500;border-radius:50%;overflow:hidden;background:#F9E000;">
-			    <div style="position: absolute; top:0;left:0px;width:40px;height:40px;"><img src="http://centumcode2.cafe24.com/image/naver-3.png" width="100%"></div>
-			</div>
-			<div onclick="window.open('https://www.instagram.com/?hl=ko','NewWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=550,height=800')" style="z-index:9999;cursor:pointer;position:fixed;bottom:200px;left:20px;width:40px;height:40px;border:1px solid #DBC500;border-radius:50%;overflow:hidden;background:#F9E000;">
-			    <div style="position: absolute; top:0;left:0px;width:40px;height:40px;"><img src="http://centumcode2.cafe24.com/image/instagram.png" width="100%"></div>
-			</div>
+			
 		</div>
 		
 		<!-- 오른쪽 틀 -->
@@ -281,7 +232,7 @@ text-decoration:none;
 					<li><a href="shoppingCart"  style="color:black; letter-spacing: 3px"><h6>Cart</h6></a></li>
 					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
 					
-					<li><a href="administrator"  style="color:black; letter-spacing: 3px"><h6>administrator</h6></a></li>
+					<li><a href="uploadForm"  style="color:black; letter-spacing: 3px"><h6>uploadForm</h6></a></li>
 				</ul>
 			</div>
 		</div>

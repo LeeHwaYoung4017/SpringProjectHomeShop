@@ -46,6 +46,10 @@
 	<update id="updatePassword" parameterType="java.util.HashMap" >
 		update spring_member set pw=#{keyCode} where id=#{id}
 	</update>
+	
+	<update id="changePassword" parameterType="java.util.HashMap" >
+		update spring_member set pw=#{pw} where id=#{id}
+	</update>
 </mapper>
 
 

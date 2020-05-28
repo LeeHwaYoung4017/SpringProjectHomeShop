@@ -293,7 +293,8 @@ strong {
                                        <input type="radio" id="phonePay" name="pay" value="phonePay">
                                           <label for="phonePay">핸드폰 결제</label> 
                                        <input type="radio" id="directPay" name="pay" value="directPay">
-                                          <label for="directPay">무통장 입금</label>
+                                          <label for="directPay">무통장 입금 </label>
+                                          <c:out value="${totalPay}"/>
                                     </div> 
                                  </td> 
                               </tr>
@@ -301,9 +302,9 @@ strong {
                                 <!-- 동적 페이지 띄우는 곳 -->
                                 
                               </tr>
+                                 <input type="hidden" value="${totalPay}"  name="totalPay" id="totalPay"/>
                <!-- 총 결제 금액 가져오기 --><tr><td><span id="sb"></span> 총 결제 금액 : <span class="payPrice" id="totalPayc"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="button" value="결제하기" id="checkPayBtn" onclick="checkPay()"/></td></tr>
-                                 <input type="hidden" value="${totalPay}"  name="totalPay" id="totalPay"/>
                         </table><!-- 결제 수단 끝 -->
                        </form>
                </div>

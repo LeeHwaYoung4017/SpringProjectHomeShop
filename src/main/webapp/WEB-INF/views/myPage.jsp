@@ -61,6 +61,14 @@ function resize(img){
     img.width = resizeWidth;
     img.height = resizeHeight;
  }
+ 
+ //	비밀번호 변경
+function changePass(){
+	   var url = "changePass";
+	   var title = "pw";
+	   var option = "width=700,height=420, scrollbars=yes, resizable=none";
+	   window.open(url,title,option);
+}
 </script>
 <style type="text/css">
 .order{ margin-left: 50px; margin-top: 100px;}
@@ -150,7 +158,8 @@ th {
 						<span class="font2">이름　　　: ${name}</span><br><br>
 						<span class="font2">생년월일　: ${vo.birth}</span><br><br>
 						<span class="font2">핸드폰　　: ${vo.phone}</span><br><br>	
-						<span class="font2">주소　　　: ${vo.addr}</span><br><br>						
+						<span class="font2">주소　　　: ${vo.addr}</span><br><br>
+						<span class="font2"><input type="button" value="비밀번호 변경" onclick="changePass()"/></span><br><br>
 				</td>
 			</tr>
 		</table>

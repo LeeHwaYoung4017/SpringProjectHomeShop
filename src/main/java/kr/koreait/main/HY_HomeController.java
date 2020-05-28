@@ -111,6 +111,7 @@ public class HY_HomeController {
 		} catch(NumberFormatException e) { }
 		int totalCount = mapper.topCount();
 		logger.info("topCount is = " + totalCount);
+		
 		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
 		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
 		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
@@ -746,6 +747,26 @@ public class HY_HomeController {
     		  model.addAttribute("goodsList", goodsList);
     		  return "subAccList";
     	  }
+      }
+      
+      @RequestMapping("/changePass")
+      public String changePass(HttpServletRequest request, Model model) {
+    	  
+    	  return "changePass";
+      }
+      
+      @RequestMapping("/changePassOK")
+      public String changePassOK(HttpServletRequest request, Model model) {
+    	  String id = request.getParameter("ids");
+    	  String pw = request.getParameter("pw");
+    	  System.out.println("id = "+id + "pw = " + pw);
+    	  MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
+    	  HashMap<String, String> hmap = new HashMap<String, String>();
+    	  hmap.put("pw", pw);
+    	  hmap.put("id", id);
+    	  mapper.changePassword(hmap);
+    	  
+    	  return "changePassOK";
       }
 }
 

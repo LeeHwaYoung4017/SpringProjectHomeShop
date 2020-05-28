@@ -78,7 +78,6 @@ function addComma(num) {
 window.onload = function () {
 	var totalPrice = "${totalPrice}";
 	totalPrice *=1 ;
-	totalPrice += 2500;
 	addComma(totalPrice);
 	
 }
@@ -199,7 +198,7 @@ div input{
               </table>
               <div align="center">
               <input type="button" value="쇼핑 하기" onclick="location.href='mainHome'"/>
-              <input type="button" value="장바구니로" onclick="location.href='shoppingCart'"/>
+              <input type="button" value="마이페이지로" onclick="location.href='myPage'"/>
               </div>
               
               

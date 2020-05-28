@@ -267,6 +267,8 @@ public class UB_HomeController {
 			for(int j=start; j<=end; j++) {
 				StokeVO stoke = new StokeVO();
 				stoke.setIdx(goodIdx);
+				stoke.setItem_name(goodsVO.getName());
+				stoke.setCategory(goodsVO.getCategory());
 				stoke.setColor(color_array[i]);
 				stoke.setEa(ea_array[j]);
 				switch (count++) {
