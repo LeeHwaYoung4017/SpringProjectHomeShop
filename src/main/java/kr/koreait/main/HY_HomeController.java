@@ -120,6 +120,7 @@ public class HY_HomeController {
 		hmap.put("startNo", goodsList.getStartNo());
 		hmap.put("endNo", goodsList.getEndNo());
 		goodsList.setGoodList(mapper.topList(hmap));
+		System.out.println(goodsList.getGoodList().size());
 		model.addAttribute("goodsList", goodsList);
 		return "topList";
 	}

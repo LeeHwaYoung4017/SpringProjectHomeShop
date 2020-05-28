@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>administrator</title>
+<<<<<<< HEAD
+</head>
+<body>
+<jsp:include page="item3.jsp"/>
+
+<div id="contents">
+         <div class="sub_contents_inner">
+            <div class="contents_inner" align="center">
+            	원하는걸 눌ㄹ러러럴러러럴!! 뾰로롱!!
+=======
 <script type="text/javascript">
 
 
@@ -81,6 +91,7 @@ function searchProcess() {
 				</table>
 			            	
             	
+>>>>>>> branch 'master' of https://github.com/LeeHwaYoung4017/SpringProjectHomeShop.git
             </div>
          </div>
 </div>   

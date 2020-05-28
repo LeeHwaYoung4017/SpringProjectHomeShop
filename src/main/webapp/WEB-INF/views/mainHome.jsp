@@ -319,7 +319,7 @@ a{text-decoration: none}
 							<h2 style="font-family: font-family: 'Noto Sans JP', sans-serif; font-weight: lighter; letter-spacing: 7px; margin: 0px 0 37px; font-size: 17px"; >BEST</h2>
 						    <ul id="slider" class="slider">
 						    	<c:forEach var="vo" items="${bestSlide}">
-									<li class="item1">
+									<a href="contentView_goods?idx=${vo.idx}">
 						            	<c:if test="${vo.category.equals('top')}">
 		            						<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_top/${vo.id_Number}">
 						            	</c:if>
@@ -329,7 +329,7 @@ a{text-decoration: none}
 							            <c:if test="${vo.category.equals('acc')}">
 						            		<img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_acc/${vo.id_Number}">
 						            	</c:if>
-						        	</li>						    	
+									</a>	
 						    	</c:forEach>
 						    </ul>
 						</div>
@@ -341,7 +341,7 @@ a{text-decoration: none}
 					   <ul class="hotItemUL">
 					            <c:forEach var="newVO" items="${newMain}">
 					            <li style="font-size: 17px;">
-					            	 <a href="#">
+					            	 <a href="contentView_goods?idx=${newVO.idx}">
 					            	 	<c:if test="${newVO.category.equals('top')}">
 		            						<img onload="resize2(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_top/${newVO.id_Number}">
 						            	</c:if>

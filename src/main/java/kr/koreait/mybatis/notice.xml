@@ -200,7 +200,7 @@
 				select * from spring_bottom where volume >=10
 				union
 				select * from spring_acc where volume >=10
-			) where rownum <= 6 
+			) where rownum <= 6 order by volume desc
 		]]>	
 	</select>
 	
@@ -257,5 +257,9 @@
 				)AA where rownum <= #{endNo}
 			) where rnum >= #{startNo}
 		]]>	
+	</select>
+	
+	<select id="getEA" parameterType="kr.koreait.vo.Resize" resultType="int">
+		select ea from SPRING_STOKE where idx=#{idx} AND color=#{color} AND size1=#{size}
 	</select>
 </mapper>
