@@ -5,8 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>administrator</title>
-
-
+<style type="text/css">
+th, td {
+    border: 1px solid #cababa;
+  }
+  
+ th{
+ background-color: #d8d8d8;
+ text-align: center;
+ }  
+</style>
 <script type="text/javascript">
 var searchRequest = new XMLHttpRequest();
 
@@ -29,9 +37,9 @@ function searchProcess() {
 
 		for (var i = 0; i < result.length; i++) {
 			var row = table.insertRow(0);
-			for (var j = 0; j < result[i].length; j++) {
+			for (var j = 0; j < result[i].length - 1; j++) {
 				var cell = row.insertCell(j);
-				cell.innerHTML = result[i][j].value;
+				cell.innerHTML = result[i][j + 1].value;
 			}
 		}
 
@@ -59,29 +67,35 @@ onload = function() {
 			
 				<button class="btn btn-primary" type="button" onclick="searchFunction()">검색</button>
 			</div>
-	
-	
-	<table class="table" align="center" style="text-align : center; border: 1px solid #dddddd">
+			<br/>
+			<br/>
+		<table class="table" align="center" style="text-align : center; border: 1px solid #dddddd">
 		<thead>
 			<tr>
-				<th style="background-color: #fafafa; text-align: center;">이름</th>
-				<th style="background-color: #fafafa; text-align: center;">ID</th>
-				<th style="background-color: #fafafa; text-align: center;">E-MAIL</th>
-				<th style="background-color: #fafafa; text-align: center;">번호</th>
-				<th style="background-color: #fafafa; text-align: center;">주소</th>
-				<th style="background-color: #fafafa; text-align: center;">생일</th>
-				<th style="background-color: #fafafa; text-align: center;">성별</th>
+				<th style="width: 100px;">아이디</th>
+				<th style="width: 100px;">E-MAIL</th>
+				<th style="width: 100px;">전화번호</th>
+				<th style=" width: 500px;">주소</th>
+				<th style="width: 80px;">생년월일</th>
+				<th style="width: 80px;">성별</th>
 			</tr>
 		</thead>
-		<tbody id="ajaxTable">
+		<tbody id="ajaxTable" >
 			<tr>
 				
 			</tr>
 				
 		</tbody>		
 	</table>
-   	</div>
-	</div>         	
+            	
+			
+			
+		</div>
+	</div>
+	
+	
+
+
 </div>
 
 </body>

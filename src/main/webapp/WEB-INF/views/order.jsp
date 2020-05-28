@@ -137,6 +137,35 @@
 	    img.width = resizeWidth;
 	    img.height = resizeHeight;
 	 }
+	
+	//1000단위로 콤마 찍어주기
+function addComma(num) {
+	var text1 = document.getElementById("totalPayb");
+	var text2 = document.getElementById("totalPayc");
+	var text3 = document.getElementById("totalPayd");
+	var regexp = /\B(?=(\d{3})+(?!\d))/g;
+	var str = num.toString().replace(regexp, ','); 
+	str += " won";
+	 text1.innerText = str;
+	 text2.innerText = str; 
+	 text3.innerText = str; 
+	}
+function addComma1(num) {
+	var text = document.getElementById("totalPaya");
+	var regexp = /\B(?=(\d{3})+(?!\d))/g;
+	var str = num.toString().replace(regexp, ','); 
+	str += " won";
+	 text.innerText = str; 
+	}
+	
+window.onload = function () {
+	var totalPay = document.getElementById("totalPay").value;
+	totalPay *=1;
+	addComma(totalPay);
+	totalPay-=2500;
+	addComma1(totalPay);
+}
+	
 </script>
 <style type="text/css">
 table {
@@ -203,18 +232,19 @@ strong {
 									<td>${vo.ea}</td>
 									<c:set var="total" value="${(vo.price)*(vo.ea)}"/>
 									<c:set var="totalPrice" value="${totalPrice+total}" />
-									<c:set var="totalEa" value="${totalEa+vo.ea}" />
+									
 								</tr>
 					   </c:forEach>
 								<tr style="border-top: 3px solid #168;">
 								
 								<td style="font-weight: bold; font-size: 2.0em;">TOTAL</td>
-								<td colspan="3" style="text-align: center; color:red; font-size: 1.5em;"><c:set var="totalPay" value="${totalPrice+2500}"/>${totalPay}</td>
+								<td colspan="3" style="text-align: center; color:red; font-size: 1.5em;"id="totalPayd"><c:set var="totalPay" value="${totalPrice+2500}"/>
+								    <input type="hidden" value="${totalEa}" name="totalEa"/>
+		    	       				<!--<input type="hidden" value="${totalPrice}" name="totalPrice"/> -->
+		        	          		
+        	        	  		</td>
 								</tr>
 					   
-					    <input type="hidden" value="${totalEa}" name="totalEa"/>
-           				<input type="hidden" value="${totalPrice}" name="totalPrice"/>
-                  		
 	                  </table>
 	                  <div style="margin-left: 70%; font-size: 10px;">*배송비 2,500추가된 가격입니다.</div>
 	                 <%--  <input type="hidden" value="${totalPrice}" name="totalPrice"/> --%>
@@ -243,12 +273,12 @@ strong {
                      <table border="1">
                         <caption>결제 예정 금액</caption>
                            <tr>
-                              <td scope="row"><strong>총 주문 금액</strong></td>
-                              <td><c:out value="${total}"/></td>
+                              <td scope="row"><strong>총 주문 금액 </strong></td>
+                              <td id="totalPaya"></td>
                            </tr>
                            <tr>
                               <td scope="row"><strong>총 결제 예상 금액</strong></td>
-                              <td class="payPrice"><c:out value="${total}"/></td><!-- 총 결제 금액 가져오기 -->
+                              <td class="payPrice" id="totalPayb"></td><!-- 총 결제 금액 가져오기 -->
                            </tr>
                         </table>
                         <!-- 결제 수단 시작 -->
@@ -261,9 +291,10 @@ strong {
                                        <input type="radio" id="cardPay" name="pay" value="cardPay">
                                           <label for="cardPay">카드결제</label> 
                                        <input type="radio" id="phonePay" name="pay" value="phonePay">
-                                          <label for="phonePay">핸드폰 결제</label `> 
+                                          <label for="phonePay">핸드폰 결제</label> 
                                        <input type="radio" id="directPay" name="pay" value="directPay">
-                                          <label for="directPay">무통장 입금</label>
+                                          <label for="directPay">무통장 입금 </label>
+                                          <c:out value="${totalPay}"/>
                                     </div> 
                                  </td> 
                               </tr>
@@ -271,9 +302,9 @@ strong {
                                 <!-- 동적 페이지 띄우는 곳 -->
                                 
                               </tr>
-               <!-- 총 결제 금액 가져오기 --><tr><td><span id="sb"></span> 총 결제 금액 : <span class="payPrice"><c:out value="${total}"/></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                 <input type="hidden" value="${totalPay}"  name="totalPay" id="totalPay"/>
+               <!-- 총 결제 금액 가져오기 --><tr><td><span id="sb"></span> 총 결제 금액 : <span class="payPrice" id="totalPayc"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="button" value="결제하기" id="checkPayBtn" onclick="checkPay()"/></td></tr>
-                                 
                         </table><!-- 결제 수단 끝 -->
                        </form>
                </div>

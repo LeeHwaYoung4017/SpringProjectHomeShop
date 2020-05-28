@@ -62,6 +62,27 @@ function resize(img){
     img.width = resizeWidth;
     img.height = resizeHeight;
  }
+ 
+	
+	//1000단위로 콤마 찍어주기
+function addComma(num) {
+	var text = document.getElementById("totalPrice")
+	
+		var regexp = /\B(?=(\d{3})+(?!\d))/g;
+	var str = num.toString().replace(regexp, ',');
+	str += " won"; 
+	 text.innerText =str;
+	  
+	}
+	
+window.onload = function () {
+	var totalPrice = "${totalPrice}";
+	totalPrice *=1 ;
+	addComma(totalPrice);
+	
+}
+	
+	
 </script>
 <style type="text/css">
 table {
@@ -125,7 +146,7 @@ div input{
     cursor: pointer;
     
 	border-radius:10px;
-
+	
 
 }
 
@@ -172,11 +193,13 @@ div input{
 				<tr>
 				<td>${payName}</td>
 				<td>${bank}</td>
-				<td style="font-size:1.5em; color:red; font-weight: bold;">${totalPrice+2500} won</td>
+				<td style="font-size:1.5em; color:red; font-weight: bold;" id="totalPrice"></td>
 				</tr>
               </table>
-              <input type="button" value="쇼핑 하러" onclick="location.href='mainHome'"/>
-              <input type="button" value="장바구니로"/>
+              <div align="center">
+              <input type="button" value="쇼핑 하기" onclick="location.href='mainHome'"/>
+              <input type="button" value="마이페이지로" onclick="location.href='myPage'"/>
+              </div>
               
               
               </div>

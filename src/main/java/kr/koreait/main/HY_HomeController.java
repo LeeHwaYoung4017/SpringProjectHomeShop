@@ -120,6 +120,7 @@ public class HY_HomeController {
 		hmap.put("startNo", goodsList.getStartNo());
 		hmap.put("endNo", goodsList.getEndNo());
 		goodsList.setGoodList(mapper.topList(hmap));
+		System.out.println(goodsList.getGoodList().size());
 		model.addAttribute("goodsList", goodsList);
 		return "topList";
 	}
@@ -747,6 +748,26 @@ public class HY_HomeController {
     		  model.addAttribute("goodsList", goodsList);
     		  return "subAccList";
     	  }
+      }
+      
+      @RequestMapping("/changePass")
+      public String changePass(HttpServletRequest request, Model model) {
+    	  
+    	  return "changePass";
+      }
+      
+      @RequestMapping("/changePassOK")
+      public String changePassOK(HttpServletRequest request, Model model) {
+    	  String id = request.getParameter("ids");
+    	  String pw = request.getParameter("pw");
+    	  System.out.println("id = "+id + "pw = " + pw);
+    	  MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
+    	  HashMap<String, String> hmap = new HashMap<String, String>();
+    	  hmap.put("pw", pw);
+    	  hmap.put("id", id);
+    	  mapper.changePassword(hmap);
+    	  
+    	  return "changePassOK";
       }
 }
 

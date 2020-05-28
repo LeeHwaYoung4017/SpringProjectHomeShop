@@ -80,7 +80,7 @@ public class JW_HomeController {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 login 실행");
-		return "login";
+		return "/member/login";
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class JW_HomeController {
 	@RequestMapping("/join")
 	public String join(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 join 실행");
-		return "join";
+		return "/member/join";
 	}
 	
 	/**
@@ -207,12 +207,13 @@ public class JW_HomeController {
 		System.out.println("마이페이지(myPage)");
 		if(session.getAttribute("name")==null) {
 			   return "login";
-		   }
+		 }
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 	    String id = (String) session.getAttribute("id");
 	    ArrayList<StatusVO> list  = mapper.selectStatus(id);
+	    System.out.println(list);
 	    StatusCount countVO = new StatusCount();
-	    for(StatusVO vo : list) {
+	    for(StatusVO vo : list) { 
 	    	switch (vo.getStatus()) {
 			case 0:
 				countVO.setNdeposit(countVO.getNdeposit()+1);
@@ -254,7 +255,9 @@ public class JW_HomeController {
 		 */
 	   @RequestMapping("/logout")
 	   public String logout(HttpServletRequest request, Model model) {
-		   session.invalidate();
+		   session.removeAttribute("name");
+		   session.removeAttribute("id");
+		   session.removeAttribute("vo");
 		   return "redirect:mainHome";
 	   }
 	   
@@ -266,17 +269,23 @@ public class JW_HomeController {
 	   public void reSize(HttpServletRequest request, Model model, HttpServletResponse response) {
 		    System.out.println("reSize함수 실행");
 		    String color = request.getParameter("color");
+		    System.out.println(color);
+		    
 		    MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		    int idx = Integer.parseInt(request.getParameter("idx"));
 		    Resize re = new Resize(color, idx);
 		    ArrayList<String> size_List = mapper.reSize(re);
-		    
+		    System.out.println(size_List);
 		    StringBuffer result = new StringBuffer();
 			result.append("{\"result\":[");
 			for (int i = 0; i < size_List.size(); i++) {
-				result.append("[{\"value\":\"" + size_List.get(i)+ "\"}],");
+				result.append("[{\"value\":\"" + size_List.get(i)+ "\"},");
+				re.setSize(size_List.get(i));
+				int ea = mapper.getEA(re);
+				result.append("{\"value\":\"" + ea+ "\"}],");
 			}
 			result.append("]}");
+			System.out.println(result);
 			try {
 				response.getWriter().write(result.toString());
 			} catch (IOException e) {
@@ -398,4 +407,34 @@ public class JW_HomeController {
 		   
 		   return "/member/searchPassword";
 		}//END search_pw()
+	   
+//		아이디 찾기 창으로 넘어간다.	   
+	   @RequestMapping("/searchID")
+		public String searchID() {
+		   return "/member/searchID";
+	   }
+	   
+	   @RequestMapping("/selectID")
+		public void selectID(HttpServletRequest request, HttpServletResponse response) {
+		   System.out.println("selectID 실행");
+		   String name = request.getParameter("name");
+		   String email = request.getParameter("email");
+		   MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
+		   HashMap<String, String> hmap = new HashMap<String, String>();
+		   hmap.put("name", name);
+		   hmap.put("email", email);
+		   String resultID = mapper.selectID(hmap);
+		   
+		   StringBuffer result = new StringBuffer();
+			result.append("{\"result\":[");
+			result.append("[{\"value\":\"" + resultID+ "\"}],");
+			result.append("]}");
+			try {
+				response.getWriter().write(result.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	   }// END selectID()
+	   
+	   
 }

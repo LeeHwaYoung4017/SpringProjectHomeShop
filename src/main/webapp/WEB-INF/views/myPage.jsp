@@ -61,6 +61,14 @@ function resize(img){
     img.width = resizeWidth;
     img.height = resizeHeight;
  }
+ 
+ //	비밀번호 변경
+function changePass(){
+	   var url = "changePass";
+	   var title = "pw";
+	   var option = "width=700,height=420, scrollbars=yes, resizable=none";
+	   window.open(url,title,option);
+}
 </script>
 <style type="text/css">
 .order{ margin-left: 50px; margin-top: 100px;}
@@ -120,10 +128,10 @@ th {
 						<td width="150">TOTAL</td>
 						<td width="100">NOW</td>
 			</tr>
+			
 			<c:forEach var="vo" items="${list}">
-				<c:if test="${vo.status==0}">
 					<tr align="left">
-						<td><img onload="resize(this)" src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${vo.category}/${vo.id_number}">
+						<td><img onload="resize(this)" src="${pageContext.request.contextPath}/resources/goodsupload/goodsupload_${vo.category}/${vo.id_number}">
 							${vo.item_name}(${vo.color})</td>
 						<td>${vo.price}</td>
 						<td>${vo.ea}</td>
@@ -132,7 +140,6 @@ th {
 						<td><c:if test="${vo.status==0}">입금전</c:if><c:if test="${vo.status==1}">배송준비중</c:if><c:if test="${vo.status==2}">배송중</c:if>
 						<c:if test="${vo.status==3}">배송중</c:if><c:if test="${vo.status==4}">취소/반품</c:if></td>
 					</tr>
-				</c:if>
 			</c:forEach>
 			
 			<tr><td><br><br><br><br><hr><br><br><br><br></td></tr>
@@ -150,7 +157,8 @@ th {
 						<span class="font2">이름　　　: ${name}</span><br><br>
 						<span class="font2">생년월일　: ${vo.birth}</span><br><br>
 						<span class="font2">핸드폰　　: ${vo.phone}</span><br><br>	
-						<span class="font2">주소　　　: ${vo.addr}</span><br><br>						
+						<span class="font2">주소　　　: ${vo.addr}</span><br><br>
+						<span class="font2"><input type="button" value="비밀번호 변경" onclick="changePass()"/></span><br><br>
 				</td>
 			</tr>
 		</table>

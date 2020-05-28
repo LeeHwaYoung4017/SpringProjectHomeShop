@@ -123,6 +123,16 @@ height: 35px;
   width: 1px;
   height: 1px;
 }
+.select {
+    width: 130px; /* 원하는 너비설정 */
+    padding: .1em .2em; /* 여백으로 높이 설정 */
+    font-family: inherit;  /* 폰트 상속 */
+    border: 1px solid #999;
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+#totalF{font-size: 20px;}
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -206,20 +216,21 @@ function itemList(selectVal){
      var ho = document.createElement("td");
      var color;
      var size_t = selectVal;
-
-     if(selectVal != "1"){
-            color = document.querySelector("#cili").value.toUpperCase()
-            var list = "-" + color +"/" + size_t/* ex)-white/S */
-                ho.innerHTML = name1 +"<br/> "+ list;
-                /* $("#num1").attr("readonly", true); */
-      } 
+     
+    if(selectVal == "1"){
+    	return false;
+    }
+      color = document.querySelector("#cili").value.toUpperCase()
+      var list = "-" + color +"/" + size_t/* ex)-white/S */
+      ho.innerHTML = "<br>"+name1 +"<br/> "+ list;
+          /* $("#num1").attr("readonly", true); */
      
       tr.appendChild(ho); 
       /* 수량설정 */
       var ho1 = document.createElement("td")
       
      ho1.innerHTML = "<input type='button'  name='cal' value='-' onclick='minus(this)'>"
-       + "<input type='text' value= '1' name='ea' style='width : 20px'>" 
+       + "<input type='text' value= '1' name='ea' style='width : 15px'>" 
        + "<input type='button' value='+' onclick='plus(this)'>"
        + "<input type='hidden' value='"+color+"' name='color'>"
        + "<input type='hidden' value='"+size_t+"' name='size_t'>";
@@ -354,12 +365,16 @@ function reSizeProcess(){
       var ho = document.createElement("div");
       var hero = document.getElementById("hero");
       
-      var str =  "SIZE <select name='sizeSelection' id='sizeSelection' onchange='itemList(this.value)'>" + 
-                 "<option value ='1'>--[필수] 사이즈 선택--</option>";
+      var str =  "<br/>SIZE &nbsp;&nbsp;&nbsp;&nbsp;<select name='sizeSelection' id='sizeSelection' onchange='itemList(this.value)' class='select'>" + 
+                 "<option value='1'>[필수] 사이즈 선택</option>";
                  
       for (var i = 0; i < result.length; i++) {
-         var str = str + "<option value='" + result[i][0].value + "'>" +result[i][0].value + "</option>";
-         ho.innerHTML = str;
+	    	 if(result[i][1].value != 0){
+	    		 var str = str + "<option value='"+result[i][0].value+"'>" +result[i][0].value + "</option>";	         	
+	    	 }else{
+	    		 var str = str + "<option disabled>" +result[i][0].value + " - SOLD OUT</option>";
+	    	 }
+	         ho.innerHTML = str;
       }
       str= str + "</select>";
       hero.appendChild(ho);
@@ -577,7 +592,7 @@ function popup(filepath) {
             <!--    <input type="button" va> -->
                     
                 
-               <select id="cili" onchange="reSize()">
+               <select id="cili" onchange="reSize()" class="select"> 
                     <option value ="1">--[필수] 색깔 선택--</option>
                     <c:forEach var="item" items="${stc}" >
                        <c:if test="${item.color ne color}"> 
@@ -586,22 +601,18 @@ function popup(filepath) {
                        <c:set var="color" value="${item.color}"/> 
                     </c:forEach>
                </select>
-                    
-                 </div>
-                 
+                </div>
                 
                <div id="hero">SIZE
                </div>
                
                <div>
                   <table id="table1">
-                  
                   </table>
                </div>
-                  
                
             <div id="sum" hidden="hidden">
-            TOTAL <span id ="calc"></span> <!-- 계산공식 -->
+           		<br><strong>TOTAL <span id ="calc"></span></strong> <!-- 계산공식 -->
             </div>   
             
             <div class="btn-goods">

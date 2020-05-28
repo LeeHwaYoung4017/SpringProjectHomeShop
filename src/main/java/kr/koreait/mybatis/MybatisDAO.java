@@ -122,14 +122,19 @@ public interface MybatisDAO {
 	
 //	비밀번호 찾기 - 해당 아이디 객체 얻어오기
 	LoginVO search_pw(String id);
-	
 //	비밀번호 찾기 - 해당 아이디의 비밀번호 임시비밀번호로 변경하기	
 	void updatePassword(HashMap<String, String> hmap);
+//	아이디 찾기 
+	String selectID(HashMap<String, String> hmap);
+//	품절 처리를 위한 수량 검색	
+	int getEA(Resize re);
 	
 //	관리자페이지
 	ArrayList<LoginVO> search(String name);
+	void changePassword(HashMap<String, String> hmap);
 	ArrayList<StatusVO> datesearch(HashMap<String, String> hmap);
 	ArrayList<StokeVO> searchStock(String category);
+	int updateStock(Resize resize);
 	
 	
 	
