@@ -233,7 +233,7 @@ public class UB_HomeController {
 //	업로드
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.GET)
 	public void uploadFormGET(Locale locale, Model model) {
-		logger.info("uploadForm GET");
+		logger.info("uploadForm GETT");
 	}
 	/**
 	 * 
