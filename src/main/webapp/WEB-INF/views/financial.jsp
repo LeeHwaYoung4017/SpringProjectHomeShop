@@ -68,7 +68,6 @@ function searchProcess() {
             	시작 날짜 <input type="date" id="dates" ><br/>
 				마지막 날짜 <input type="date" id="inputDate"/><br/>
             		<input type="button" value="확인" onclick="searchFunction()"/>
-            	
             	</div>
             	<br/>
             	<br/>
