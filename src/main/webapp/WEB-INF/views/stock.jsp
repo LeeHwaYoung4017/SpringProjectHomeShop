@@ -27,14 +27,35 @@ function searchProcess() {
 
 		for (var i = 0; i < result.length; i++) {
 			var row = table.insertRow(0);
-			for (var j = 0; j < result[i].length; j++) {
-				var cell = row.insertCell(j);
-				cell.innerHTML = result[i][j].value;
+			for (var j = 0; j < result[i].length+1; j++) {
+				
+					var cell = row.insertCell(j);
+				if(j == 4){
+					var input = document.createElement("span")
+					 input.innerHTML ="<input type='text' value= '"+ result[i][j].value+"' name='ea' style='width : 20px'>"
+						 cell.appendChild(input);
+				}else if(j == 5){
+					var btn = document.createElement("span")
+					 btn.innerHTML ="<input type='button' value= '수정' style='width : 20px' onclick='update()'>"
+						 cell.appendChild(btn);
+					
+				}else {
+					
+					cell.innerHTML = result[i][j].value;
+				}
 			}
 		}
 	}
 }
 
+function update() {
+	
+	var num = document.getElementsByName("ea").length;
+	alert(num);
+	
+	
+	
+}
 
 </script>
 
