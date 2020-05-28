@@ -98,6 +98,18 @@
    <beans:bean class="java.lang.String" id="uploadPath3">
       <beans:constructor-arg value="C:\Users\Administrator\git\SpringProjectHomeShop\src\main\webapp\resources\reviewimage"/>
    </beans:bean>
+   
+   <!-- 회원관리 -->
+     <beans:bean id="sqlSessionFactory4" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <beans:property name="dataSource" ref="dataSource"/>
+      <beans:property name="mapperLocations" value="classpath:kr/koreait/mybatis/member.xml"/>
+      <beans:property name="configLocation" value="classpath:kr/koreait/mybatis/mybatis-config.xml"/>
+   </beans:bean>
+   <!--회원관리 -->
+   <beans:bean id="sqlSession4" class="org.mybatis.spring.SqlSessionTemplate">
+      <beans:constructor-arg index="0" ref="sqlSessionFactory4"/>
+   </beans:bean>
+   
 
    
 </beans:beans>

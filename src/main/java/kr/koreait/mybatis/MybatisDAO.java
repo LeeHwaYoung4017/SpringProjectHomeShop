@@ -125,6 +125,7 @@ public interface MybatisDAO {
 	
 //	비밀번호 찾기 - 해당 아이디의 비밀번호 임시비밀번호로 변경하기	
 	void updatePassword(HashMap<String, String> hmap);
+	ArrayList<LoginVO> search(String name);
 	
 	
 	
