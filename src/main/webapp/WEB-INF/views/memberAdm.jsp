@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>administrator</title>
+
+
 <script type="text/javascript">
 var searchRequest = new XMLHttpRequest();
 
@@ -27,9 +29,9 @@ function searchProcess() {
 
 		for (var i = 0; i < result.length; i++) {
 			var row = table.insertRow(0);
-			for (var j = 0; j < result[i].length - 1; j++) {
+			for (var j = 0; j < result[i].length; j++) {
 				var cell = row.insertCell(j);
-				cell.innerHTML = result[i][j + 1].value;
+				cell.innerHTML = result[i][j].value;
 			}
 		}
 
@@ -52,23 +54,23 @@ onload = function() {
          <div class="sub_contents_inner">
             <div class="contents_inner" align="center">
             
-            <div class="col-xs-8">
+            <div align="right">
 				<input class="form-control" type="text" size="20" id="userName" onkeyup="searchFunction()"/>
-			</div>
 			
-			<div class="col-xs-2">
 				<button class="btn btn-primary" type="button" onclick="searchFunction()">검색</button>
 			</div>
-		</div>
-	</div>
+	
 	
 	<table class="table" align="center" style="text-align : center; border: 1px solid #dddddd">
 		<thead>
 			<tr>
 				<th style="background-color: #fafafa; text-align: center;">이름</th>
-				<th style="background-color: #fafafa; text-align: center;">핸드폰</th>
+				<th style="background-color: #fafafa; text-align: center;">ID</th>
+				<th style="background-color: #fafafa; text-align: center;">E-MAIL</th>
+				<th style="background-color: #fafafa; text-align: center;">번호</th>
+				<th style="background-color: #fafafa; text-align: center;">주소</th>
+				<th style="background-color: #fafafa; text-align: center;">생일</th>
 				<th style="background-color: #fafafa; text-align: center;">성별</th>
-				<th style="background-color: #fafafa; text-align: center;">이메일</th>
 			</tr>
 		</thead>
 		<tbody id="ajaxTable">
@@ -78,7 +80,8 @@ onload = function() {
 				
 		</tbody>		
 	</table>
-            	
+   	</div>
+	</div>         	
 </div>
 
 </body>

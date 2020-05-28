@@ -474,9 +474,12 @@ public class DK_HomeController {
 	  		result.append("{\"result\":[");
 	  		for (int i = 0; i < ajaxList.size(); i++) {
 	  			result.append("[{\"value\":\"" + ajaxList.get(i).getName() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getId() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getEmail() + "\"},");
 	  			result.append("{\"value\":\"" + ajaxList.get(i).getPhone() + "\"},");
-	  			result.append("{\"value\":\"" + ajaxList.get(i).getGender() + "\"},");
-	  			result.append("{\"value\":\"" + ajaxList.get(i).getEmail() + "\"}],");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getaddr() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getBirth() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getGender() + "\"}],");
 	  		}
 	  		result.append("]}");
 	  		System.out.println(result);
