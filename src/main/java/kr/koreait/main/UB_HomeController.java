@@ -128,6 +128,7 @@ public class UB_HomeController {
 		System.out.println("orderBuy 들어옴");
 		if(session.getAttribute("name")==null) {
 			orderList=new ArrayList<CartVO>();
+			statusList=new ArrayList<StatusVO>();
 			return "login";
 		}
 			
@@ -197,7 +198,8 @@ public class UB_HomeController {
 	      model.addAttribute("statusList", statusList);
 	      String payName=request.getParameter("payName");
 	      String bank=request.getParameter("bank");
-	      String totalPrice=request.getParameter("totalPrice");
+	      String totalPrice=request.getParameter("totalPay");
+	      System.out.println(totalPrice);
 	      model.addAttribute("payName", payName);
 	      model.addAttribute("bank", bank);
 	      model.addAttribute("totalPrice", totalPrice);
