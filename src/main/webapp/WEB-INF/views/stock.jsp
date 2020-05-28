@@ -51,6 +51,7 @@ function searchProcess() {
 function update() {
 	
 	var num = document.getElementsByName("ea").length;
+	
 	alert(num);
 	
 	
