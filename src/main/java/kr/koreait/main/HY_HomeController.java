@@ -111,6 +111,7 @@ public class HY_HomeController {
 		} catch(NumberFormatException e) { }
 		int totalCount = mapper.topCount();
 		logger.info("topCount is = " + totalCount);
+		
 		AbstractApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationCTX.xml");
 		GoodsList goodsList = ctx.getBean("goodsList", GoodsList.class);
 		goodsList.initMvcBoardList(pageSize, totalCount, currentPage);
@@ -119,6 +120,7 @@ public class HY_HomeController {
 		hmap.put("startNo", goodsList.getStartNo());
 		hmap.put("endNo", goodsList.getEndNo());
 		goodsList.setGoodList(mapper.topList(hmap));
+		System.out.println(goodsList.getGoodList().size());
 		model.addAttribute("goodsList", goodsList);
 		return "topList";
 	}

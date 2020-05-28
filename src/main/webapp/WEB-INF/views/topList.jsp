@@ -201,6 +201,7 @@ a{text-decoration: none}
 			   <ul class="hotItemUL">
 			   <c:set var="list" value="${goodsList.goodList}"/>
 			   <jsp:useBean id="date" class="java.util.Date"/>
+			   
 			   <c:forEach var="vo" items="${list}">
 			      <li style="font-size: 17px;">
 			         <a href="contentView_goods?idx=${vo.idx}&currentPage=${goodsList.currentPage}">
@@ -230,6 +231,7 @@ a{text-decoration: none}
 	                     </c:if>
 			      </li>
 			      </c:forEach>
+			      
 			  		 </ul>
 		   		 </div>
 			 </div>	

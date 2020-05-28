@@ -31,7 +31,7 @@
   <![CDATA[
 	select * from (
 		select rownum rnum, AA.* from (
-			select * from SPRING_review where goodsidx=${goodsidx} order by idx desc
+			select * from SPRING_review where goodsidx=#{goodsidx} order by idx desc
 		)AA where rownum <= #{endNo}
 	) where rnum >= #{startNo}
 	]]>	 
@@ -42,26 +42,7 @@
 	      SELECT IDX FROM SPRING_review
 	   )
    </select>
-   
-   <!-- 글 한 건을 얻어온다. -->
-   <select id="QAselectByIdx" parameterType="int" resultType="reviewVO">
-      select * from SPRING_REVIEW where idx = #{idx}
-   </select>
-   
-   <!-- 글 1건 삭제 -->
-   <delete id="QAdelete" parameterType="int">
-      delete from SPRING_REVIEW where idx = #{idx}
-   </delete>
-   
-   <!-- 수정 -->
-   <update id="QAupdate" parameterType="reviewVO">
-      update SPRING_REVIEW set title = #{title}, content = #{content} where idx = #{idx}
-   </update>
-   
-   <!-- 상품 이름idx을 얻어온다. -->
-   <select id="selectQAIdx" resultType="int">
-   select count(*) from SPRING_REVIEW
-   </select>
+  
    
 </mapper>
 

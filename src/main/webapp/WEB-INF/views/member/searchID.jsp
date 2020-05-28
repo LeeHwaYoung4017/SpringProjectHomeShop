@@ -71,7 +71,7 @@ function selectResponse(){
 						<tr><td><br></td></tr>
 						<tr>
 							<td colspan="2" align="center"><input type="button" value="아이디 찾기" onclick="searchID()">
-															<input type="button" value="돌아가기" onclick="location.href='history.back()'"></td>
+															<input type="button" value="돌아가기" onclick="location.href='login'"></td>
 						</tr>
 						<tr><td><br></td></tr>
 						<tr><td colspan="2" align="center"><span id="resultID"></span></td></tr>

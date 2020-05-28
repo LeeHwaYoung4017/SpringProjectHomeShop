@@ -207,7 +207,9 @@ function itemList(selectVal){
      var color;
      var size_t = selectVal;
      
-    
+    if(selectVal == "1"){
+    	return false;
+    }
       color = document.querySelector("#cili").value.toUpperCase()
       var list = "-" + color +"/" + size_t/* ex)-white/S */
       ho.innerHTML = name1 +"<br/> "+ list;
@@ -218,7 +220,7 @@ function itemList(selectVal){
       var ho1 = document.createElement("td")
       
      ho1.innerHTML = "<input type='button'  name='cal' value='-' onclick='minus(this)'>"
-       + "<input type='text' value= '1' name='ea' style='width : 20px'>" 
+       + "<input type='text' value= '1' name='ea' style='width : 15px'>" 
        + "<input type='button' value='+' onclick='plus(this)'>"
        + "<input type='hidden' value='"+color+"' name='color'>"
        + "<input type='hidden' value='"+size_t+"' name='size_t'>";
@@ -354,7 +356,7 @@ function reSizeProcess(){
       var hero = document.getElementById("hero");
       
       var str =  "SIZE <select name='sizeSelection' id='sizeSelection' onchange='itemList(this.value)'>" + 
-                 "<option disabled>--[필수] 사이즈 선택--</option>";
+                 "<option value='1'>--[필수] 사이즈 선택--</option>";
                  
       for (var i = 0; i < result.length; i++) {
 	    	 if(result[i][1].value != 0){
@@ -545,7 +547,6 @@ function popup(filepath) {
 	imagePreview.src = filepath;
 	var width = imagePreview.width + 30;
     var height = imagePreview.height + 30;
-    alert(width);
 	var url = "./imagePopup?image="+ encodeURIComponent(filepath); // 새로 띄울 창에 표시할 페이지
 	var title = "이미지 윈도우"; // 윈도우 이름
 	var option = "top=200, left=600, width="+width+", height="+height+", scrollbar=no, resizable=no";

@@ -28,6 +28,7 @@ import kr.koreait.mybatis.MybatisDAO;
 import kr.koreait.utill.FileUtills;
 import kr.koreait.vo.CartVO;
 import kr.koreait.vo.GoodsVO;
+import kr.koreait.vo.LoginVO;
 import kr.koreait.vo.NoticeList;
 import kr.koreait.vo.NoticeVO;
 import kr.koreait.vo.ReviewList;
@@ -45,7 +46,7 @@ import kr.koreait.vo.StokeVO;
 @Controller
 public class DK_HomeController {
 	@Autowired
-	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
+	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3, sqlSession4;
 	@Autowired
 	HttpSession session;
 	
@@ -432,8 +433,71 @@ public class DK_HomeController {
 	    	 System.out.println("이미지 팝업!");
 	    	String img = request.getParameter("image");
 	    	model.addAttribute("img", img);
-	    	System.out.println(img);
 	    	 return "imagePopup";
-	     } 
+	     }
+	     
+	     @RequestMapping("/administrator")
+	     public String administrator(HttpServletRequest request, Model model) {
+	    	 System.out.println("관리자페이지!!");
+	    	 
+	    	 return "administrator";
+	     }
+	     @RequestMapping("/memberAdm")
+	     public String memberAdm(HttpServletRequest request, Model model) {
+	    	 System.out.println("회원관리페이지!!");
+	    	 
+	    	 return "memberAdm";
+	     }
+	     
+	     @RequestMapping("/AjaxSearch")
+	     public void AjaxSearch(HttpServletRequest request, Model model, HttpServletResponse response, LoginVO vo) throws IOException {
+	    	 System.out.println("회원관리를 보여주는 아작스입니다.....");
+	    	 String name = request.getParameter("name");
+				response.getWriter().write(getJSON(name));
+	    	 
+	     }
+	    
+	      private String getJSON(String name) {
+	    	  System.out.println("show() 작동??");
+	    	  
+//	  		검색할 이름을 입력하지 않고 검색 버튼을 클릭했을 때 null을 공백으로 처리한다.
+	  		if(name == null) {
+	  			name = "";
+	  		}
+	  		System.out.println(name);
+//	  		테이블에서 입력한 문자열이 이름에 포함된 레코드를 얻어온다. 
+	  		ArrayList<LoginVO> ajaxList = sqlSession4.getMapper(MybatisDAO.class).search(name);
+	  		System.out.println(ajaxList);
+	  		
+//	  		입력된 문자열이 포함된 레코드를 얻어와서 하나의 문자열로 연결한다.
+	  		StringBuffer result = new StringBuffer();
+	  		result.append("{\"result\":[");
+	  		for (int i = 0; i < ajaxList.size(); i++) {
+	  			result.append("[{\"value\":\"" + ajaxList.get(i).getName() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getPhone() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getGender() + "\"},");
+	  			result.append("{\"value\":\"" + ajaxList.get(i).getEmail() + "\"}],");
+	  		}
+	  		result.append("]}");
+	  		System.out.println(result);
+	  		
+//	  		StringBuffer 타입의 객체를 String 타입으로 리턴시키기 위해 toString() 메소드를 실행해서 리턴시킨다.
+	  		return result.toString();
+		}
+
+	     
+	     @RequestMapping("/stock")
+	     public String stock(HttpServletRequest request, Model model) {
+	    	 System.out.println("재고관리페이지!!");
+	    	 
+	    	 
+	    	 return "stock";
+	     }
+	     @RequestMapping("/financial")
+	     public String financial(HttpServletRequest request, Model model) {
+	    	 System.out.println("매출페이지!!");
+	    	 
+	    	 return "financial";
+	     }
 
 }

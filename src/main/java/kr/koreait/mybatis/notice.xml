@@ -200,7 +200,7 @@
 				select * from spring_bottom where volume >=10
 				union
 				select * from spring_acc where volume >=10
-			) where rownum <= 6 
+			) where rownum <= 6 order by volume desc
 		]]>	
 	</select>
 	

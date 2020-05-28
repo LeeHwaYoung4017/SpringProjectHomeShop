@@ -128,6 +128,7 @@ public interface MybatisDAO {
 	String selectID(HashMap<String, String> hmap);
 //	품절 처리를 위한 수량 검색	
 	int getEA(Resize re);
+	ArrayList<LoginVO> search(String name);
 	
 	
 	

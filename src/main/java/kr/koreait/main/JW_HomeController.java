@@ -80,7 +80,7 @@ public class JW_HomeController {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 login 실행");
-		return "login";
+		return "/member/login";
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class JW_HomeController {
 	@RequestMapping("/join")
 	public String join(HttpServletRequest request, Model model) {
 		System.out.println("컨트롤러의 join 실행");
-		return "join";
+		return "/member/join";
 	}
 	
 	/**
@@ -254,7 +254,9 @@ public class JW_HomeController {
 		 */
 	   @RequestMapping("/logout")
 	   public String logout(HttpServletRequest request, Model model) {
-		   session.invalidate();
+		   session.removeAttribute("name");
+		   session.removeAttribute("id");
+		   session.removeAttribute("vo");
 		   return "redirect:mainHome";
 	   }
 	   
