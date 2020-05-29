@@ -39,7 +39,7 @@ public class JW_HomeController {
 	@Autowired
 	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
 	
-	@Autowired
+	 @Autowired
 	HttpSession session;
 	
 	@Resource(name= "uploadPath1")
@@ -141,7 +141,7 @@ public class JW_HomeController {
 		String birth = request.getParameter("year") +"-"+ request.getParameter("month") +"-"+ request.getParameter("day");
 		loginVO.setBirth(birth);
 		mapper.insertMemeber(loginVO);
-		return "login";
+		return "/member/login";
 	}
 	
 	/**
@@ -206,7 +206,7 @@ public class JW_HomeController {
 	public String myPage(HttpServletRequest request, Model model){
 		System.out.println("마이페이지(myPage)");
 		if(session.getAttribute("name")==null) {
-			   return "login";
+			   return "/member/login";
 		 }
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 	    String id = (String) session.getAttribute("id");
@@ -244,7 +244,7 @@ public class JW_HomeController {
 	   public String shoppingCart(HttpServletRequest request, Model model) {
 		   System.out.println("장바구니로 갑시다");
 		   if(session.getAttribute("name")==null) {
-			   return "login";
+			   return "/member/login";
 		   }
 		   return "shoppingCart";
 	   }
@@ -414,6 +414,7 @@ public class JW_HomeController {
 		   return "/member/searchID";
 	   }
 	   
+//	   아이디 찾기 (이름과 이메일을 입력받아 아이디를 넘겨준다.)
 	   @RequestMapping("/selectID")
 		public void selectID(HttpServletRequest request, HttpServletResponse response) {
 		   System.out.println("selectID 실행");
@@ -435,6 +436,4 @@ public class JW_HomeController {
 				e.printStackTrace();
 			}
 	   }// END selectID()
-	   
-	   
 }
