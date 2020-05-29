@@ -125,7 +125,7 @@ public class UB_HomeController {
 	 */
 	@RequestMapping(value = "/orderBuy")
 	public String orderBuy(HttpServletRequest request, Model model) {
-		System.out.println("orderBuy 들어옴 ");
+		System.out.println("orderBuy 들어옴  ");
 		if(session.getAttribute("name")==null) {
 			orderList=new ArrayList<CartVO>();
 			statusList=new ArrayList<StatusVO>();
