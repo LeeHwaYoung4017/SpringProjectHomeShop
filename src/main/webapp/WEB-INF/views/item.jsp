@@ -214,7 +214,6 @@ text-decoration:none;
 						<a href="bottomList" style="color:black; letter-spacing: 3px"><h6>BOTTOM</h6></a>
 						 <ul>
 					 		<li><a href="subBottomList?sub=${'1'}" class="sub_font">슬랙스</a></li>
-		                    <li><a href="subBottomList?sub=${'2'}" class="sub_font">면바지</a></li>
 		                    <li><a href="subBottomList?sub=${'3'}" class="sub_font">청바지</a></li>
 		                    <li><a href="subBottomList?sub=${'4'}" class="sub_font">밴딩팬츠</a></li>
 		                    <li><a href="subBottomList?sub=${'5'}" class="sub_font">반바지</a></li>
