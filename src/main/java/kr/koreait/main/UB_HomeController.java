@@ -129,7 +129,7 @@ public class UB_HomeController {
 		if(session.getAttribute("name")==null) {
 			orderList=new ArrayList<CartVO>();
 			statusList=new ArrayList<StatusVO>();
-			return "login";
+			return "/member/login";
 		}
 			
 			

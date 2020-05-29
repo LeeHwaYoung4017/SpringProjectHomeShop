@@ -294,7 +294,7 @@ strong {
                                           <label for="phonePay">핸드폰 결제</label> 
                                        <input type="radio" id="directPay" name="pay" value="directPay">
                                           <label for="directPay">무통장 입금 </label>
-                                          <c:out value="${totalPay}"/>
+                                         
                                     </div> 
                                  </td> 
                               </tr>

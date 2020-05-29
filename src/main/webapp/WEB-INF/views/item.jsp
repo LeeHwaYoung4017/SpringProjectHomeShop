@@ -201,12 +201,11 @@ text-decoration:none;
 					<li>
 						<a href="topList" style="color:black; letter-spacing: 3px"><h6>TOP</h6></a>
 						<ul>
-						   <li><a href="subTopList?sub=${'1'}" class="sub_font">맨투맨&후드</a></li>
-	                       <li><a href="subTopList?sub=${'2'}" class="sub_font">니트</a></li>
+						   <li><a href="subTopList?sub=${'1'}" class="sub_font">아우터/후드</a></li>
+	                       <li><a href="subTopList?sub=${'2'}" class="sub_font">니트/맨투맨</a></li>
 	                       <li><a href="subTopList?sub=${'3'}" class="sub_font">긴팔티</a></li>
 	                       <li><a href="subTopList?sub=${'4'}" class="sub_font">반팔티</a></li>
 	                       <li><a href="subTopList?sub=${'5'}" class="sub_font">나시</a></li>
-	                       <li><a href="subTopList?sub=${'6'}" class="sub_font">프린팅티</a></li>
 
 						</ul>
 					</li>
@@ -214,7 +213,6 @@ text-decoration:none;
 						<a href="bottomList" style="color:black; letter-spacing: 3px"><h6>BOTTOM</h6></a>
 						 <ul>
 					 		<li><a href="subBottomList?sub=${'1'}" class="sub_font">슬랙스</a></li>
-		                    <li><a href="subBottomList?sub=${'2'}" class="sub_font">면바지</a></li>
 		                    <li><a href="subBottomList?sub=${'3'}" class="sub_font">청바지</a></li>
 		                    <li><a href="subBottomList?sub=${'4'}" class="sub_font">밴딩팬츠</a></li>
 		                    <li><a href="subBottomList?sub=${'5'}" class="sub_font">반바지</a></li>
@@ -281,7 +279,7 @@ text-decoration:none;
 					<li><a href="shoppingCart"  style="color:black; letter-spacing: 3px"><h6>Cart</h6></a></li>
 					<li><a href="myPage"  style="color:black; letter-spacing: 3px"><h6>MyPage</h6></a></li>
 					<c:if test="${id eq 'root'}">
-						<li><a href="administrator"  style="color:black; letter-spacing: 3px"><h6>administrator</h6></a></li>
+						<li><a href="administrator" style="color:black; letter-spacing: 3px"><h6>administrator</h6></a></li>
 					</c:if>
 				</ul>
 			</div>
