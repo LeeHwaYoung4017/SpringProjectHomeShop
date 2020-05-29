@@ -103,7 +103,7 @@ public class UB_HomeController {
 	       
 	       StatusVO statusVO =new StatusVO(); 
 	       statusVO.setCategory(request.getParameter("category"));
-	       statusVO.setColor(request.getParameter("color"));
+	       statusVO.setColor(request.getParameter("color").toLowerCase());
 	       statusVO.setItem_name(request.getParameter("item_name"));
 	       statusVO.setId_number(request.getParameter("id_number"));
 	       statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
@@ -185,7 +185,9 @@ public class UB_HomeController {
 			  vo.setUser_id(loginVO.getId());
 			  vo.setStatus(1);
 			  mapper.insertStatus(vo);
-			  
+			  //주문한 상품의 재고 계산하기
+			  mapper.updateEa(vo);
+			  //ea가 0일때 처리하기@@!!!!
 			  if(category.equals("top")) {
 				  mapper.VolumeTop(vo);
 			  }else if (category.equals("acc")) {

@@ -111,6 +111,8 @@ public interface MybatisDAO {
 	void VolumeTop(StatusVO vo);
 	void VolumeAcc(StatusVO vo);
 	void VolumeBottom(StatusVO vo);
+//  주문된 상품 재고수량 처리
+	void updateEa(StatusVO vo);
 	
 	//서브 카테고리
 	int subTopCount(int sub);
@@ -128,7 +130,6 @@ public interface MybatisDAO {
 	String selectID(HashMap<String, String> hmap);
 //	품절 처리를 위한 수량 검색	
 	int getEA(Resize re);
-	
 //	관리자페이지
 	ArrayList<LoginVO> search(String name);
 	void changePassword(HashMap<String, String> hmap);
