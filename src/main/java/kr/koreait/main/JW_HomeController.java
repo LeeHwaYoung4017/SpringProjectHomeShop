@@ -39,7 +39,7 @@ public class JW_HomeController {
 	@Autowired
 	public SqlSession sqlSession, sqlSession1, sqlSession2, sqlSession3;
 	
-	@Autowired
+	 @Autowired
 	HttpSession session;
 	
 	@Resource(name= "uploadPath1")
