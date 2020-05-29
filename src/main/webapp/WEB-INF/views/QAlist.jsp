@@ -105,9 +105,16 @@ table.type09 td {
                
                <c:forEach var="vo" items="${list}">
                <tr>
-                    <td align="center"><img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/QAimage/${vo.attached}"/></td>
-                  <td align="center">${vo.idx}</td>
-                  <td>
+               		<td align="center">
+               			<c:if test="${vo.attached != noimage.jpg}">
+	                    	<img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/QAimage/${vo.attached}"/>
+               			</c:if>
+               			<c:if test="${vo.attached == noimage.jpg}">
+	                    	<img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/images/noimage.jpg"/>
+               			</c:if>
+                    </td>
+                    <td align="center">${vo.idx}</td>
+                    <td>
                      
                      <!-- 오늘 입력된 글은 new를 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
