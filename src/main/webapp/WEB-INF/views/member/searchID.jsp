@@ -44,7 +44,16 @@ function selectResponse(){
 		var result = object.result;
 		var id = result[0][0].value;
 		var resultID = document.getElementById("resultID");
-		resultID.innerHTML = "<p id='myp'>고객님의 아이디는 <strong>"+id+"</strong> 입니다. </p><br>";
+		var name = document.getElementById("name");
+		var email = document.getElementById("email")
+		if(id == "null"){
+			alert("입력하신 정보가 올바르지 않습니다.");
+			name.value = "";
+			email.value = "";
+			name.focus();
+		}else{
+			resultID.innerHTML = "<p id='myp'>고객님의 아이디는 <strong>"+id+"</strong> 입니다. </p><br>";
+		}
 	}
 }
 </script>
