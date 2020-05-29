@@ -251,7 +251,7 @@ a{text-decoration: none}
 				</c:if>
 				
 				<c:if test="${i != goodsList.currentPage}">
-					<input class="button btn"  type="button" value="${i}" onclick="location.href='?currentPage=${i}'" 
+					<input class="button btn"  type="button" value="${i}" onclick="location.href='?sub=${i}&currentPage=${i}'" 
 						title="${i}페이지로 이동합니다."/>
 				</c:if>
 			</c:forEach>

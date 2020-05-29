@@ -213,7 +213,7 @@ public class HY_HomeController {
      
      // 사진없이 글만 적을 경우.
      if(file.getOriginalFilename().equals("")) {
-        savedFileName = " ";
+        savedFileName = "noimage.jpg";
      } else {
         savedFileName = FileUtills.uploadFile(file,uploadPath2, QAIdx, date);
      }
@@ -402,10 +402,10 @@ public class HY_HomeController {
        * @param model
        * @return 상의 카테고리에서 세부적인 카테고리를 보여준다.
        */
+      static String sub_TopCategory = "";
       @RequestMapping("/subTopList")
       public String subTopList(HttpServletRequest request, Model model) {
-         
-        String sub_TopCategory = request.getParameter("sub");
+        sub_TopCategory = request.getParameter("sub");
         System.out.println(sub_TopCategory);
          
         MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
@@ -414,9 +414,11 @@ public class HY_HomeController {
  		int currentPage = 1;
  		try {
  			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+ 			System.out.println(currentPage);
  		} catch(NumberFormatException e) { }
  		System.out.println("맨투맨/후드=1 / 니트=2 / 긴팔티=3 / 반팔=4 / 나시=5 / 프린팅티=6 ");
  		if(sub_TopCategory.equals("1")) {
+ 			System.out.println("아우터 서브카테고리 실행");
  			int sub = 1;
 	 		int totalCount = mapper.subTopCount(sub);
 	 		System.out.println(totalCount);
