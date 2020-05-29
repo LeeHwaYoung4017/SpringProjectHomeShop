@@ -31,6 +31,7 @@ import kr.koreait.vo.GoodsVO;
 import kr.koreait.vo.LoginVO;
 import kr.koreait.vo.NoticeList;
 import kr.koreait.vo.NoticeVO;
+import kr.koreait.vo.Resize;
 import kr.koreait.vo.ReviewList;
 import kr.koreait.vo.ReviewVO;
 import kr.koreait.vo.StatusVO;
@@ -520,9 +521,37 @@ public class DK_HomeController {
 //	  		StringBuffer 타입의 객체를 String 타입으로 리턴시키기 위해 toString() 메소드를 실행해서 리턴시킨다.
 	  		return result.toString();
 		}
+	      
+	      @RequestMapping("/updateStock")
+		     public void revenue(HttpServletRequest request, Model model, HttpServletResponse response, StokeVO vo) throws IOException {
+		    	 System.out.println("수량 수정");
+		    	 int ea = Integer.parseInt(request.getParameter("volume"));
+		    	 String color = request.getParameter("color");
+		    	 int idx = Integer.parseInt(request.getParameter("idx"));
+		    	 String size = request.getParameter("size");
+					response.getWriter().write(getJSON3(ea, color, idx, size));
+		    	 
+		     }
 	     
 	     
-	     @RequestMapping("/financial")
+	     private int getJSON3(int ea, String color, int idx, String size) {
+	    	 System.out.println("수량수정");
+	    	 Resize resize = new Resize();
+	    	 try {
+	    	 resize.setEa(ea);
+	    	 resize.setColor(color);
+	    	 resize.setIdx(idx);
+	    	 resize.setSize(size);
+	    	 }catch (Exception e){
+	    		 return 0;
+	    	 }
+	  		System.out.println("수량수정:"+ resize);
+//	  		StringBuffer 타입의 객체를 String 타입으로 리턴시키기 위해 toString() 메소드를 실행해서 리턴시킨다.
+	  		
+		return sqlSession4.getMapper(MybatisDAO.class).updateStock(resize);
+		}
+
+		@RequestMapping("/financial")
 	     public String financial(HttpServletRequest request, Model model) {
 	    	 System.out.println("매출페이지!!");
 	    	 
@@ -567,4 +596,6 @@ public class DK_HomeController {
 	  		return result.toString();
 		}
 
+	      
+	      
 }

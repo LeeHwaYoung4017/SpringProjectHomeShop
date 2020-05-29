@@ -12,7 +12,7 @@
 
 /* 왼쪽 상단 부분 */
 .left-side {
-width:500px;
+width:40%;
 height:650px;
 float:left;
 margin:20px;
@@ -22,7 +22,7 @@ margin-left: 100px;
 
 /* 오른쪽 상단 부분 */
 .right_side {
-width:500px;
+width:40%;
 height:650px;
 float:left;
 margin:20px;

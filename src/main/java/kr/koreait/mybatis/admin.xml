@@ -17,6 +17,10 @@
   		select * from spring_stoke where category = #{category} order by idx desc
    </select>
    
+   <!-- 수량 update -->
+   <update id="updateStock" parameterType="kr.koreait.vo.Resize">
+		update spring_stoke set ea = #{ea} where idx=#{idx} and color=#{color} and size1=#{size}   
+   </update>
 </mapper>
 
 

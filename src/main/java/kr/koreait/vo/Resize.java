@@ -4,8 +4,16 @@ public class Resize {
 	String color;
 	int idx;
 	String size;
+	int ea;
 	
 	
+	
+	public int getEa() {
+		return ea;
+	}
+	public void setEa(int ea) {
+		this.ea = ea;
+	}
 	public String getSize() {
 		return size;
 	}
@@ -35,8 +43,10 @@ public class Resize {
 	}
 	@Override
 	public String toString() {
-		return "Resize [color=" + color + ", idx=" + idx + ", size=" + size + "]";
+		return "Resize [color=" + color + ", idx=" + idx + ", size=" + size + ", ea=" + ea + "]";
 	}
+	
+	
 	
 	
 }

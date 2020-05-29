@@ -132,10 +132,9 @@ public interface MybatisDAO {
 //	관리자페이지
 	ArrayList<LoginVO> search(String name);
 	void changePassword(HashMap<String, String> hmap);
-	
-	
 	ArrayList<StatusVO> datesearch(HashMap<String, String> hmap);
 	ArrayList<StokeVO> searchStock(String category);
+	int updateStock(Resize resize);
 	
 	
 	

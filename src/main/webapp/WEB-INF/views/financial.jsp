@@ -5,16 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>administrator</title>
-<<<<<<< HEAD
-</head>
-<body>
-<jsp:include page="item3.jsp"/>
+<style type="text/css">
+th, td {
+    border: 1px solid #cababa;
+  }
+  
+ th{
+ background-color: #d8d8d8;
+ text-align: center;
+  width: 100px;
+ }  
+</style>
 
-<div id="contents">
-         <div class="sub_contents_inner">
-            <div class="contents_inner" align="center">
-            	원하는걸 눌ㄹ러러럴러러럴!! 뾰로롱!!
-=======
 <script type="text/javascript">
 
 
@@ -66,20 +68,20 @@ function searchProcess() {
             	시작 날짜 <input type="date" id="dates" ><br/>
 				마지막 날짜 <input type="date" id="inputDate"/><br/>
             		<input type="button" value="확인" onclick="searchFunction()"/>
-            	
             	</div>
-            	
+            	<br/>
+            	<br/>
             	
             	<table class="table" align="center" style="text-align : center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #fafafa; text-align: center;">상품명</th>
-						<th style="background-color: #fafafa; text-align: center;">ID</th>
-						<th style="background-color: #fafafa; text-align: center;">수량</th>
-						<th style="background-color: #fafafa; text-align: center;">사이즈</th>
-						<th style="background-color: #fafafa; text-align: center;">색상</th>
-						<th style="background-color: #fafafa; text-align: center;">날짜</th>
-						<th style="background-color: #fafafa; text-align: center;">카테고리</th>
+						<th>상품명</th>
+						<th>ID</th>
+						<th>수량</th>
+						<th>사이즈</th>
+						<th>색상</th>
+						<th>날짜</th>
+						<th>카테고리</th>
 					</tr>
 				</thead>
 				<tbody id="ajaxTable">
@@ -91,7 +93,6 @@ function searchProcess() {
 				</table>
 			            	
             	
->>>>>>> branch 'master' of https://github.com/LeeHwaYoung4017/SpringProjectHomeShop.git
             </div>
          </div>
 </div>   
