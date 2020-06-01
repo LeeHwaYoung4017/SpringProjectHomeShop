@@ -78,13 +78,13 @@ function resize(img){
 .hotItemUL{}
 .hotItemUL li{
    float: left;
-   margin-right: 2%;
-   width: 32%;
+   margin-right: 1%;
+   width: 30%;
    padding: 5px;
    box-sizing: border-box;
 }
 .hotItemUL li:nth-child(3n){
-   margin-right: 0;
+   margin-right: 1;
 }
 .hotItemUL a{
    width: 80%;
@@ -251,7 +251,7 @@ a{text-decoration: none}
 				</c:if>
 				
 				<c:if test="${i != goodsList.currentPage}">
-					<input class="button btn"  type="button" value="${i}" onclick="location.href='?sub=${i}&currentPage=${i}'" 
+					<input class="button btn"  type="button" value="${i}" onclick="location.href='?currentPage=${i}'" 
 						title="${i}페이지로 이동합니다."/>
 				</c:if>
 			</c:forEach>
