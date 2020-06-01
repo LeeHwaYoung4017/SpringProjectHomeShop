@@ -163,7 +163,7 @@ public class UB_HomeController {
 	@RequestMapping(value = "/orderOK")
 	public String orderOK(HttpServletRequest request, Model model) {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-		System.out.println("orderOK 들어옴");
+		System.out.println("orderOK 들어옴1");
 		/* statusVO.setStatus(1); */
 		
 		
@@ -251,8 +251,9 @@ public class UB_HomeController {
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.POST)
 	public void uploadFormPOST(MultipartFile file, Model model, HttpServletRequest request ,GoodsVO goodsVO, StokeVO vo) throws Exception {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+		//상품 idx를 가져온다
 		int goodIdx = mapper.selectGoodsIdx();
-		
+		//메인 상품이름, 서브상품이름 선언
 		String savedFileName ="";
 		ArrayList<String> savedFileName_sub;
 		goodsVO.setGoodsidx(goodIdx);
