@@ -81,6 +81,7 @@ function resize(img){
    float: left;
    margin-right: 2%;
    width: 32%;
+   height: 500px;
    padding: 5px;
    box-sizing: border-box;
 }

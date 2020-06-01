@@ -80,6 +80,7 @@ function resize(img){
    float: left;
    margin-right: 2%;
    width: 32%;
+   height: 470px;
    padding: 5px;
    box-sizing: border-box;
 }
@@ -251,7 +252,7 @@ a{text-decoration: none}
 				</c:if>
 				
 				<c:if test="${i != goodsList.currentPage}">
-					<input class="button btn"  type="button" value="${i}" onclick="location.href='?sub=${i}&currentPage=${i}'" 
+					<input class="button btn"  type="button" value="${i}" onclick="location.href='?sub=${sub}&currentPage=${i}'" 
 						title="${i}페이지로 이동합니다."/>
 				</c:if>
 			</c:forEach>
