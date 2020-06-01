@@ -133,6 +133,7 @@ height: 35px;
     appearance: none;
 }
 #totalF{font-size: 20px;}
+a{text-decoration: none;}
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -346,7 +347,12 @@ function buyNow(){
 function buyresponse(){
    if(orderRequest.readyState == 4 && orderRequest.status == 200) {
       location.href="orderBuy";
+   }else{
+		   response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		   response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		   response.setHeader("Expires", "0"); // Proxies. 
    }
+	   
 }
 
 var searchRequest = new XMLHttpRequest();

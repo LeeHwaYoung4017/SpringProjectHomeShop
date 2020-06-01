@@ -101,6 +101,7 @@ public class UB_HomeController {
 	      System.out.println(cartVO);
 	      orderList.add(cartVO);
 	       
+	      statusList = new ArrayList<StatusVO>();
 	       StatusVO statusVO =new StatusVO(); 
 	       statusVO.setCategory(request.getParameter("category"));
 	       statusVO.setColor(request.getParameter("color").toLowerCase());
