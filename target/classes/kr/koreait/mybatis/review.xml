@@ -38,7 +38,9 @@
    </select>
    
    <select id="selectReviewIdx" resultType="int">
-	   select last_number from USER_SEQUENCES where SEQUENCE_NAME = 'SPRING_REVIEW_IDX_SEQ'
+	    SELECT MAX(idx) FROM(
+	      SELECT IDX FROM SPRING_review
+	   )
    </select>
   
    

@@ -425,12 +425,12 @@ function addCartSession(){
    }
 }
 
-//아작스가 필요없어...ㅜㅜㅜㅜ
+//리뷰 작성
 var reviewInsertRequest = new XMLHttpRequest();
 function insertReview(frm){
    frm.submit();
    var star = document.getElementsByClassName("starR on");
-   
+   alert("리뷰를 저장합니다.");
 
    var url = "./insertReview?idx=" + encodeURIComponent(document.getElementById("hidIdx").value)
                      + "&content=" + encodeURIComponent(document.getElementById("review_message").value)

@@ -385,7 +385,7 @@ public class DK_HomeController {
 		      String date = sdf.format(new Date());
 //		      redirect를 위해 idx를 받아주고 설정해줌.
 		      int idx = Integer.parseInt(request.getParameter("idx"));
-		      System.out.println("idx: " + idx);
+		      System.out.println("reviewIdx: " + reviewIdx);
 		      model.addAttribute("idx", idx);
 		       savedFileName = " ";
 		      // 사진없이 글만 적을 경우.
