@@ -426,39 +426,11 @@ function addCartSession(){
 }
 
 //리뷰 작성
-var reviewInsertRequest = new XMLHttpRequest();
 function insertReview(frm){
+   var star = document.getElementsByClassName("starR on").length;
+   var content = document.getElementById("review_message").value;
+   frm.action="uploadReview?idx=${vo.idx}&star="+star+"&content="+content+"&name=${name}";
    frm.submit();
-   var star = document.getElementsByClassName("starR on");
-   alert("리뷰를 저장합니다.");
-
-   var url = "./insertReview?idx=" + encodeURIComponent(document.getElementById("hidIdx").value)
-                     + "&content=" + encodeURIComponent(document.getElementById("review_message").value)
-                     + "&name=" + encodeURIComponent('${name}')
-                     + "&star=" + encodeURIComponent(star.length);//여기에 div의 값을 가져오게함.
-   reviewInsertRequest.open("POST", url, true);
-   reviewInsertRequest.onreadystatechange = insertProcess;
-   reviewInsertRequest.send(null);
-   
-}
-
-function insertProcess(){
-   if(reviewInsertRequest.readyState == 4 && reviewInsertRequest.status == 200) {
-            
-      var result = reviewInsertRequest.responseText;
-      if(result != 1) {
-         alert("저장실패!!!");
-      } else {
-//         정상적으로 데이터가 테이블에 저장되면 다음 데이터 입력을 위해서 입력 상자에 입력한 내용을 지워준다.
-         var content = document.getElementById("review_message");
-         var attached = document.getElementById("reviewFile");
-         content.value = "";
-         attached.value = "";
-   
-//         입력된 데이터가 화면에 표시되야 하므로 데이터를 얻어오는 함수를 실행한다.
-         //searchFunction();
-      }
-   }
 }
 
 var showRequest = new XMLHttpRequest();
@@ -637,7 +609,7 @@ function popup(filepath) {
       
        <!-- 리뷰! --> 
      <h2>REVIEW</h2>
-     <form id="uploadphoto" action="uploadReview?idx=${vo.idx}" method="post" enctype="multipart/form-data" >
+     <form id="uploadphoto"  method="post" enctype="multipart/form-data" >
 
      <div class ="reviewBox">
    <div class="review_textfieldBox">
@@ -650,13 +622,12 @@ function popup(filepath) {
         <div class=filebox>
            <label for="reviewFile"><img src='${pageContext.request.contextPath}/resources/images/camera.png' style='width: 30px;'> +사진추가</label>
            <input type="file" name="file" id="reviewFile"/>
-     
-        <span class="starR on">별1</span>
+           
+        <span class="starR on" >별1</span>
         <span class="starR">별2</span>
         <span class="starR">별3</span>
         <span class="starR">별4</span>
         <span class="starR">별5</span>
-       
    
          <input class="saveReview" style="float: right;"type="button" value="리뷰 등록하기"  onclick="insertReview(this.form)"/>
      </div>
