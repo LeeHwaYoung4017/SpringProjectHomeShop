@@ -190,7 +190,7 @@
 				select * from spring_acc where volume >=10
 			) where rownum <= #{bestListSize} 
 		]]>	
-	</select>
+		</select>
 	
 	<select id="bestSlide" resultType="kr.koreait.vo.GoodsVO">
 		<![CDATA[

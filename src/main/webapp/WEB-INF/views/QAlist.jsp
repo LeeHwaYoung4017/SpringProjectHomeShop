@@ -106,12 +106,7 @@ table.type09 td {
                <c:forEach var="vo" items="${list}">
                <tr>
                		<td align="center">
-               			<c:if test="${vo.attached != noimage.jpg}">
-	                    	<img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/QAimage/${vo.attached}"/>
-               			</c:if>
-               			<c:if test="${vo.attached == noimage.jpg}">
-	                    	<img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/images/noimage.jpg"/>
-               			</c:if>
+	                    <img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/QAimage/${vo.attached}" onerror="this.style.display='none'"/>
                     </td>
                     <td align="center">${vo.idx}</td>
                     <td>

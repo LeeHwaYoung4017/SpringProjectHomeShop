@@ -332,7 +332,7 @@ public class HY_HomeController {
       @RequestMapping("/newList")
       public String newList(HttpServletRequest request, Model model) {
     	MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-    	int newListSize = 24;
+    	int newListSize = 12;
   		int pageSize = 12;
   		int currentPage = 1;
   		try {
@@ -402,12 +402,11 @@ public class HY_HomeController {
        * @param model
        * @return 상의 카테고리에서 세부적인 카테고리를 보여준다.
        */
-      static String sub_TopCategory = "";
       @RequestMapping("/subTopList")
       public String subTopList(HttpServletRequest request, Model model) {
-        sub_TopCategory = request.getParameter("sub");
+    	String sub_TopCategory = request.getParameter("sub");
         System.out.println(sub_TopCategory);
-         
+        
         MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
  		
  		int pageSize = 12;
@@ -434,6 +433,7 @@ public class HY_HomeController {
 	 		goodsList.setGoodList(mapper.subTopList(hmap));
 	 		
 	 		model.addAttribute("goodsList", goodsList);
+	 		model.addAttribute("sub", sub_TopCategory);
 	 		return "subTopList";
  		}
  		else if(sub_TopCategory.equals("2")) {
@@ -452,6 +452,7 @@ public class HY_HomeController {
  			goodsList.setGoodList(mapper.subTopList(hmap));
  			
  			model.addAttribute("goodsList", goodsList);
+ 			model.addAttribute("sub", sub_TopCategory);
  			return "subTopList";
  		}
  		else if(sub_TopCategory.equals("3")) {
@@ -470,6 +471,7 @@ public class HY_HomeController {
  			goodsList.setGoodList(mapper.subTopList(hmap));
  			
  			model.addAttribute("goodsList", goodsList);
+ 			model.addAttribute("sub", sub_TopCategory);
  			return "subTopList";
  		}
  		else if(sub_TopCategory.equals("4")) {
@@ -488,6 +490,7 @@ public class HY_HomeController {
  			goodsList.setGoodList(mapper.subTopList(hmap));
  			
  			model.addAttribute("goodsList", goodsList);
+ 			model.addAttribute("sub", sub_TopCategory);
  			return "subTopList";
  		}
  		else if(sub_TopCategory.equals("5")) {
@@ -506,6 +509,7 @@ public class HY_HomeController {
  			goodsList.setGoodList(mapper.subTopList(hmap));
  			
  			model.addAttribute("goodsList", goodsList);
+ 			model.addAttribute("sub", sub_TopCategory);
  			return "subTopList";
  		}
  		else {
@@ -524,6 +528,7 @@ public class HY_HomeController {
  			goodsList.setGoodList(mapper.subTopList(hmap));
  			
  			model.addAttribute("goodsList", goodsList);
+ 			model.addAttribute("sub", sub_TopCategory);
  			return "subTopList";
  		}
       }
@@ -582,6 +587,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subBottomList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_BottomCategory);
     		  return "subBottomList";
     	  }
     	  else if(sub_BottomCategory.equals("3")) {
@@ -600,6 +606,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subBottomList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_BottomCategory);
     		  return "subBottomList";
     	  }
     	  else if(sub_BottomCategory.equals("4")) {
@@ -618,6 +625,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subBottomList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_BottomCategory);
     		  return "subBottomList";
     	  }
     	  else {
@@ -636,6 +644,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subBottomList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_BottomCategory);
     		  return "subBottomList";
     	  }
       }
@@ -676,6 +685,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subAccList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_AccCategory);
     		  return "subAccList";
     	  }
     	  else if(sub_AccCategory.equals("2")) {
@@ -694,6 +704,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subAccList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_AccCategory);
     		  return "subAccList";
     	  }
     	  else if(sub_AccCategory.equals("3")) {
@@ -712,6 +723,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subAccList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_AccCategory);
     		  return "subAccList";
     	  }
     	  else if(sub_AccCategory.equals("4")) {
@@ -730,6 +742,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subAccList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_AccCategory);
     		  return "subAccList";
     	  }
     	  else {
@@ -748,6 +761,7 @@ public class HY_HomeController {
     		  goodsList.setGoodList(mapper.subAccList(hmap));
     		  
     		  model.addAttribute("goodsList", goodsList);
+    		  model.addAttribute("sub", sub_AccCategory);
     		  return "subAccList";
     	  }
       }
