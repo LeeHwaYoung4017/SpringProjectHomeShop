@@ -126,7 +126,6 @@ table.type09 td {
                      
                   </td>
                   <td align="center">
-                     <c:set var="name" value="관리자"/>
                      ${name}
                   </td>
                   <td align="center">

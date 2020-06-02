@@ -77,7 +77,7 @@ function goWrite(frm) {
                             <span style="border: 1px solid gray;">
                               <span style="margin: 40px 37px 40px; letter-spacing: 6px">name</span>
                             </span>
-	                        <span><input type="text" name="name" style="width: 40%;" placeholder="이름"/></span>
+	                        <span><input type="text" name="name" style="width: 40%;" placeholder="이름" value="${name}" readonly="readonly"/></span>
                          </div>
                            <br>
                            <textarea name="content" id="editor"></textarea>
