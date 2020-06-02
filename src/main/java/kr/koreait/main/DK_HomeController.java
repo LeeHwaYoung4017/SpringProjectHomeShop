@@ -368,7 +368,6 @@ public class DK_HomeController {
 
 
 
-		String savedFileName= "";
 //	    리뷰 작성하기
 	      /**
 	       * 리뷰 업로드
@@ -396,7 +395,7 @@ public class DK_HomeController {
 		      int idx = Integer.parseInt(request.getParameter("idx"));
 		      System.out.println("reviewIdx: " + reviewIdx);
 		      model.addAttribute("idx", idx);
-		       savedFileName = " ";
+		      String savedFileName = " ";
 		      // 사진없이 글만 적을 경우.
 		      if(file.getOriginalFilename().equals("")) {
 		         savedFileName = " ";
