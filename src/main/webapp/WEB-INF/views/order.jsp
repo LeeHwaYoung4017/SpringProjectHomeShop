@@ -165,7 +165,9 @@ window.onload = function () {
 	totalPay-=2500;
 	addComma1(totalPay);
 }
-	
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0"); // Proxies.
 </script>
 <style type="text/css">
 table {
@@ -294,7 +296,10 @@ strong {
                                           <label for="phonePay">핸드폰 결제</label> 
                                        <input type="radio" id="directPay" name="pay" value="directPay">
                                           <label for="directPay">무통장 입금 </label>
-                                          <c:out value="${totalPay}"/>
+<<<<<<< HEAD
+=======
+                                         
+>>>>>>> branch 'master' of https://github.com/LeeHwaYoung4017/SpringProjectHomeShop.git
                                     </div> 
                                  </td> 
                               </tr>

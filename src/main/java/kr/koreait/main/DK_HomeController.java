@@ -368,7 +368,6 @@ public class DK_HomeController {
 
 
 
-		String savedFileName= "";
 //	    리뷰 작성하기
 	      /**
 	       * 리뷰 업로드
@@ -377,58 +376,38 @@ public class DK_HomeController {
 	       * @throws Exception
 	       */
 	     @RequestMapping("/uploadReview")
-		public String uploadReview(MultipartFile file, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		public String uploadReview(MultipartFile file, Model model, HttpServletRequest request, HttpServletResponse response, ReviewVO vo) throws Exception {
 	   	  System.out.println("파일 업로드 부터 했음 좋겠다~~");
 		      MybatisDAO mapper = sqlSession3.getMapper(MybatisDAO.class);
+		      int star = Integer.parseInt(request.getParameter("star"));
+		      int goodsidx = Integer.parseInt(request.getParameter("idx"));
+		      String name = request.getParameter("name");
+		  	  String content = request.getParameter("content");
+		      vo.setStar(star);
+		      vo.setGoodsidx(goodsidx);
+		      vo.setName(name);
+		      vo.setContent(content);
+		      System.out.println("Star: " + star + ", goodsidx:" + goodsidx);
 		      int reviewIdx = mapper.selectReviewIdx();
 		      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		      String date = sdf.format(new Date());
 //		      redirect를 위해 idx를 받아주고 설정해줌.
 		      int idx = Integer.parseInt(request.getParameter("idx"));
-		      System.out.println("idx: " + idx);
+		      System.out.println("reviewIdx: " + reviewIdx);
 		      model.addAttribute("idx", idx);
-		       savedFileName = " ";
+		      String savedFileName = " ";
 		      // 사진없이 글만 적을 경우.
 		      if(file.getOriginalFilename().equals("")) {
 		         savedFileName = " ";
 		      } else {
 		         savedFileName = FileUtills.uploadFile(file,uploadPath3, reviewIdx, date);
 		      }
+		      vo.setAttached(savedFileName);
+		      mapper.insertReview(vo);
 		      return "redirect: contentView_goods";
 		   }
 	     
-	     /**
-	      * AJAX를 사용해 리뷰 글 작성
-	      * @throws IOException
-	      */
-	     @RequestMapping("/insertReview")
-	     public void insertReview(HttpServletRequest request, Model model, HttpServletResponse response, ReviewVO vo) throws IOException {
-	   	  System.out.println("insertReview() 메소드");
-	   	 
-	   	  String name = request.getParameter("name");
-		  		String content = request.getParameter("content");
-		  		int star = Integer.parseInt(request.getParameter("star"));
-		  		String attached = savedFileName;
-		  		System.out.println(attached);
-		  		int goodsidx = Integer.parseInt(request.getParameter("idx"));
-		  		response.getWriter().write(insert1(name, content, star, attached, goodsidx) + ""); 
-	     }
-	     
-	     private int insert1(String name, String content, int star, String attached, int goodsidx) {
-	   	  System.out.println("리뷰 insert작동??");
-	   	  ReviewVO vo = new ReviewVO();
-	   	  try {
-	   		  vo.setName(name);
-	   		  vo.setContent(content);
-	   		  vo.setGoodsidx(goodsidx);
-	   		  vo.setStar(star);
-	   		  vo.setAttached(attached);
-	   	  }catch (Exception e) {
-	   		  return 0;
-	   	  }
-	   	  	return sqlSession3.getMapper(MybatisDAO.class).insertReview(vo); 
-				
-	     }
+	    
 	     
 	     @RequestMapping("/imagePopup")
 	     public String imagePopup(HttpServletRequest request, Model model, HttpServletResponse response) {

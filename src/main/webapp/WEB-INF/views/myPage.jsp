@@ -109,7 +109,7 @@ th {
 					
 		<table class="order">
 			<tr align="left">
-				<td colspan="6"><hr><br><br><br><br>
+				<td colspan="5"><hr><br><br><br><br>
 						<b id="font1">ORDER STATUS</b>&nbsp;&nbsp;최근 3개월<br><br><br>
 													
 						<span class="font2">입금 전 &nbsp;&nbsp;<a href="javascript:click_number(0)">${countVO.ndeposit}</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -124,7 +124,6 @@ th {
 						<td width="400">상품</td>
 						<td width="100">가격</td>
 						<td width="50">수량</td>
-						<td width="100">배송비</td>
 						<td width="150">TOTAL</td>
 						<td width="100">NOW</td>
 			</tr>
@@ -135,7 +134,6 @@ th {
 							${vo.item_name}(${vo.color})</td>
 						<td>${vo.price}</td>
 						<td>${vo.ea}</td>
-						<td>2500</td>
 						<td><c:set var="total" value="${(vo.price*vo.ea)+2500}"/>${total}</td>
 						<td><c:if test="${vo.status==0}">입금전</c:if><c:if test="${vo.status==1}">배송준비중</c:if><c:if test="${vo.status==2}">배송중</c:if>
 						<c:if test="${vo.status==3}">배송중</c:if><c:if test="${vo.status==4}">취소/반품</c:if></td>

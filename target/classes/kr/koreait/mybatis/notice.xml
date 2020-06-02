@@ -77,7 +77,10 @@
 	<update id="VolumeBottom" parameterType="kr.koreait.vo.StatusVO">
 		update spring_bottom set volume = volume+#{ea} where idx = #{idx}
 	</update>
-	
+	<!-- 주문된 상품에 재고를 계산한다. -->
+	<update id="updateEa" parameterType="kr.koreait.vo.StatusVO">
+		update spring_stoke set ea = ea-#{ea} where idx = #{idx}  and color=#{color} and size1=#{item_size} 
+	</update>
 	<insert id="insertStoke" parameterType="kr.koreait.vo.StokeVO">
 		insert into SPRING_STOKE(idx, color, ea, size1, category, item_name) values(#{idx}, #{color}, #{ea}, #{size1}, #{category}, #{item_name})
 	</insert>
@@ -190,7 +193,7 @@
 				select * from spring_acc where volume >=10
 			) where rownum <= #{bestListSize} 
 		]]>	
-	</select>
+		</select>
 	
 	<select id="bestSlide" resultType="kr.koreait.vo.GoodsVO">
 		<![CDATA[

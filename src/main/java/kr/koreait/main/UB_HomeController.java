@@ -101,9 +101,10 @@ public class UB_HomeController {
 	      System.out.println(cartVO);
 	      orderList.add(cartVO);
 	       
+	      statusList = new ArrayList<StatusVO>();
 	       StatusVO statusVO =new StatusVO(); 
 	       statusVO.setCategory(request.getParameter("category"));
-	       statusVO.setColor(request.getParameter("color"));
+	       statusVO.setColor(request.getParameter("color").toLowerCase());
 	       statusVO.setItem_name(request.getParameter("item_name"));
 	       statusVO.setId_number(request.getParameter("id_number"));
 	       statusVO.setPrice(Integer.parseInt(request.getParameter("price")));
@@ -125,13 +126,12 @@ public class UB_HomeController {
 	 */
 	@RequestMapping(value = "/orderBuy")
 	public String orderBuy(HttpServletRequest request, Model model) {
-		System.out.println("orderBuy 들어옴");
+		System.out.println("orderBuy 들어옴  ");
 		if(session.getAttribute("name")==null) {
 			orderList=new ArrayList<CartVO>();
 			statusList=new ArrayList<StatusVO>();
-			return "login";
+			return "/member/login";
 		}
-			
 			
 		   LoginVO loginVO= (LoginVO) session.getAttribute("vo");
 		    String id = loginVO.getId();
@@ -139,18 +139,13 @@ public class UB_HomeController {
 		    String email = loginVO.getEmail();
 		    String phone = loginVO.getPhone();
 		    
-		      model.addAttribute("id", id);
-		      model.addAttribute("addr", addr);
-		      model.addAttribute("email", email);
-		      model.addAttribute("phone", phone);
-		      model.addAttribute("orderList", orderList);
-		      System.out.println(orderList);
-		      orderList=new ArrayList<CartVO>();
-		     
-		/*
-		 * statusVO.setAddr(addr); statusVO.setUser_id(id);
-		 */
-		      
+	       model.addAttribute("id", id);
+	       model.addAttribute("addr", addr);
+	       model.addAttribute("email", email);
+	       model.addAttribute("phone", phone);
+	       model.addAttribute("orderList", orderList);
+	       System.out.println(orderList);
+	       orderList=new ArrayList<CartVO>();
 		return "order";
 	}
 	/**
@@ -162,18 +157,9 @@ public class UB_HomeController {
 	@RequestMapping(value = "/orderOK")
 	public String orderOK(HttpServletRequest request, Model model) {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-		System.out.println("orderOK 들어옴");
-		/* statusVO.setStatus(1); */
-		
-		
 		System.out.println(request. getParameter("name"));
 		
 		LoginVO loginVO= (LoginVO) session.getAttribute("vo");
-		/*
-		 * for(int i=0; i<statusList.size(); i++) { StatusVO vo = statusList.get(i);
-		 * vo.getAddr(); }
-		 */
-		
 	      for(StatusVO vo : statusList) {
 	    	  int idx=vo.getIdx();
 	    	  String category = vo.getCategory();
@@ -185,14 +171,16 @@ public class UB_HomeController {
 			  vo.setUser_id(loginVO.getId());
 			  vo.setStatus(1);
 			  mapper.insertStatus(vo);
-			  
+			  //주문한 상품의 재고 계산하기
+			  mapper.updateEa(vo);
+			  //ea가 0일때 처리하기@@!!!!
 			  if(category.equals("top")) {
 				  mapper.VolumeTop(vo);
 			  }else if (category.equals("acc")) {
 				  mapper.VolumeAcc(vo);
-			}else if (category.equals("bottom")) {
+			  }else if (category.equals("bottom")) {
 				mapper.VolumeBottom(vo);
-			}
+			  }
 	      }
 	      
 	      model.addAttribute("statusList", statusList);
@@ -248,8 +236,9 @@ public class UB_HomeController {
 	@RequestMapping(value = "/uploadForm", method = RequestMethod.POST)
 	public void uploadFormPOST(MultipartFile file, Model model, HttpServletRequest request ,GoodsVO goodsVO, StokeVO vo) throws Exception {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
+		//상품 idx를 가져온다
 		int goodIdx = mapper.selectGoodsIdx();
-		
+		//메인 상품이름, 서브상품이름 선언
 		String savedFileName ="";
 		ArrayList<String> savedFileName_sub;
 		goodsVO.setGoodsidx(goodIdx);

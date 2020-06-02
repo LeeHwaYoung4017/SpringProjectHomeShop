@@ -133,6 +133,7 @@ height: 35px;
     appearance: none;
 }
 #totalF{font-size: 20px;}
+a{text-decoration: none;}
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -257,7 +258,7 @@ function minus(obj){
  var dd = document.getElementById("calc").innerHTML;
  var dd1 = document.getElementById("calc");
   dd *= 1; //숫자로 형변환
- 
+  var price = ${vo.price}
  var test = obj.nextSibling;
  var val = test.value
  if(val == "1"){
@@ -266,7 +267,7 @@ function minus(obj){
        var del = obj.parentNode.parentNode; //tr태크
        var table = del.parentNode
        table.removeChild(del)
-        var ss = dd - 10000;
+        var ss = dd - price;
         dd1.innerHTML = ss;
         var d2 = document.getElementById("calc").innerHTML;
         if(d2 == 0){
@@ -285,7 +286,7 @@ function minus(obj){
     td.innerHTML = newPri + "won"
     
     //total price
-     var ss = dd - 10000;
+     var ss = dd - price;
      dd1.innerHTML = ss;
   
  } 
@@ -294,7 +295,6 @@ function minus(obj){
 function plus(obj){
  var test = obj. previousSibling;
  var val = test.value //1
- 
   val *= 1    /* 숫자로 형변환 */
     var newval = val + 1;
     $(test).val(newval)
@@ -309,7 +309,7 @@ function plus(obj){
   var dd1 = document.getElementById("calc");
   dd *= 1; //숫자로 형변환
   
-  var ss = dd + 10000;
+  var ss = dd + price;
   dd1.innerHTML = ss;
   
   
@@ -346,7 +346,12 @@ function buyNow(){
 function buyresponse(){
    if(orderRequest.readyState == 4 && orderRequest.status == 200) {
       location.href="orderBuy";
+   }else{
+		   response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		   response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		   response.setHeader("Expires", "0"); // Proxies. 
    }
+	   
 }
 
 var searchRequest = new XMLHttpRequest();
@@ -419,40 +424,12 @@ function addCartSession(){
    }
 }
 
-//아작스가 필요없어...ㅜㅜㅜㅜ
-var reviewInsertRequest = new XMLHttpRequest();
+//리뷰 작성
 function insertReview(frm){
+   var star = document.getElementsByClassName("starR on").length;
+   var content = document.getElementById("review_message").value;
+   frm.action="uploadReview?idx=${vo.idx}&star="+star+"&content="+content+"&name=${name}";
    frm.submit();
-   var star = document.getElementsByClassName("starR on");
-   
-
-   var url = "./insertReview?idx=" + encodeURIComponent(document.getElementById("hidIdx").value)
-                     + "&content=" + encodeURIComponent(document.getElementById("review_message").value)
-                     + "&name=" + encodeURIComponent('${name}')
-                     + "&star=" + encodeURIComponent(star.length);//여기에 div의 값을 가져오게함.
-   reviewInsertRequest.open("POST", url, true);
-   reviewInsertRequest.onreadystatechange = insertProcess;
-   reviewInsertRequest.send(null);
-   
-}
-
-function insertProcess(){
-   if(reviewInsertRequest.readyState == 4 && reviewInsertRequest.status == 200) {
-            
-      var result = reviewInsertRequest.responseText;
-      if(result != 1) {
-         alert("저장실패!!!");
-      } else {
-//         정상적으로 데이터가 테이블에 저장되면 다음 데이터 입력을 위해서 입력 상자에 입력한 내용을 지워준다.
-         var content = document.getElementById("review_message");
-         var attached = document.getElementById("reviewFile");
-         content.value = "";
-         attached.value = "";
-   
-//         입력된 데이터가 화면에 표시되야 하므로 데이터를 얻어오는 함수를 실행한다.
-         //searchFunction();
-      }
-   }
 }
 
 var showRequest = new XMLHttpRequest();
@@ -631,7 +608,7 @@ function popup(filepath) {
       
        <!-- 리뷰! --> 
      <h2>REVIEW</h2>
-     <form id="uploadphoto" action="uploadReview?idx=${vo.idx}" method="post" enctype="multipart/form-data" >
+     <form id="uploadphoto"  method="post" enctype="multipart/form-data" >
 
      <div class ="reviewBox">
    <div class="review_textfieldBox">
@@ -644,13 +621,12 @@ function popup(filepath) {
         <div class=filebox>
            <label for="reviewFile"><img src='${pageContext.request.contextPath}/resources/images/camera.png' style='width: 30px;'> +사진추가</label>
            <input type="file" name="file" id="reviewFile"/>
-     
-        <span class="starR on">별1</span>
+           
+        <span class="starR on" >별1</span>
         <span class="starR">별2</span>
         <span class="starR">별3</span>
         <span class="starR">별4</span>
         <span class="starR">별5</span>
-       
    
          <input class="saveReview" style="float: right;"type="button" value="리뷰 등록하기"  onclick="insertReview(this.form)"/>
      </div>

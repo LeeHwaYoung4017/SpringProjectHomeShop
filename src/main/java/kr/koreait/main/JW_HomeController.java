@@ -66,7 +66,6 @@ public class JW_HomeController {
 	 */	
 	@RequestMapping("/removeItem")
 	public String removeItem(HttpServletRequest request, Model model) {
-		System.out.println("진원 컨트롤러의 removeItem() 실행");
 		int idx = Integer.parseInt(request.getParameter("idx"))-1;
 		ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
 		cartList.remove(idx);
@@ -156,7 +155,6 @@ public class JW_HomeController {
 	 */
 	@RequestMapping(value="/loginOK")
 	public void loginOK(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("로그인 확인(loginOK)");
 		MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("id", request.getParameter("id"));
@@ -164,23 +162,16 @@ public class JW_HomeController {
 		vo = mapper.selectLogin(hmap);
 		String str;
 		try {
-			if(vo.getName()!=null) {
-				str = "success";
-			}else {
-				str = "fail";
-			}
-		}catch (NullPointerException e) {
-			str = "fail";
-		}
+			if(vo.getName()!=null) {str = "success";}
+			else {str = "fail";}
+		}catch (NullPointerException e) {str = "fail";}
 		StringBuffer result = new StringBuffer();
 		result.append("{\"result\":");
 		result.append("[{\"value\":\"" + str + "\"}],");
 		result.append("}");
 		try {
 			response.getWriter().write(result.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (IOException e) {e.printStackTrace();}
 	}
 	
 	/**
@@ -188,7 +179,7 @@ public class JW_HomeController {
 	 * @return 로그인 성공 시 메인을 호출한다.
 	 */
 	@RequestMapping(value="/x685x23")
-	public String x685x23(HttpServletRequest request, Model model, HttpServletResponse response){
+	public String x685x23(HttpServletResponse response){
 		if(vo!=null) {
 			session.setAttribute("name", vo.getName());
 			session.setAttribute("id", vo.getId());
@@ -204,14 +195,12 @@ public class JW_HomeController {
 	 */
 	@RequestMapping(value="/myPage")
 	public String myPage(HttpServletRequest request, Model model){
-		System.out.println("마이페이지(myPage)");
 		if(session.getAttribute("name")==null) {
 			   return "/member/login";
 		 }
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 	    String id = (String) session.getAttribute("id");
 	    ArrayList<StatusVO> list  = mapper.selectStatus(id);
-	    System.out.println(list);
 	    StatusCount countVO = new StatusCount();
 	    for(StatusVO vo : list) { 
 	    	switch (vo.getStatus()) {
@@ -255,9 +244,7 @@ public class JW_HomeController {
 		 */
 	   @RequestMapping("/logout")
 	   public String logout(HttpServletRequest request, Model model) {
-		   session.removeAttribute("name");
-		   session.removeAttribute("id");
-		   session.removeAttribute("vo");
+		   session.invalidate();
 		   return "redirect:mainHome";
 	   }
 	   
@@ -269,13 +256,11 @@ public class JW_HomeController {
 	   public void reSize(HttpServletRequest request, Model model, HttpServletResponse response) {
 		    System.out.println("reSize함수 실행");
 		    String color = request.getParameter("color");
-		    System.out.println(color);
 		    
 		    MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 		    int idx = Integer.parseInt(request.getParameter("idx"));
 		    Resize re = new Resize(color, idx);
 		    ArrayList<String> size_List = mapper.reSize(re);
-		    System.out.println(size_List);
 		    StringBuffer result = new StringBuffer();
 			result.append("{\"result\":[");
 			for (int i = 0; i < size_List.size(); i++) {
@@ -320,7 +305,6 @@ public class JW_HomeController {
 	    */
 	   @RequestMapping("/bestList")
 	   public String bestList(HttpServletRequest request, Model model,HttpServletResponse response) {
-		    System.out.println("진원 컨트롤러 - bestList");  
 		    MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
 	 	    int bestListSize = 12;
 			int pageSize = 12;
@@ -353,11 +337,6 @@ public class JW_HomeController {
 		   model.addAttribute("newMain", newMain);
 		   model.addAttribute("bestSlide", bestSlide);
 		   return "mainHome";
-		}
-	   
-	   @RequestMapping("/rootPage")
-		public String rootPage() {
-		   return "/root/rootPage";
 		}
 	   
 	   @RequestMapping("/searchPW")
@@ -404,7 +383,6 @@ public class JW_HomeController {
 					model.addAttribute("result","fail");
 				}//end catch
 		   }//end else
-		   
 		   return "/member/searchPassword";
 		}//END search_pw()
 	   
