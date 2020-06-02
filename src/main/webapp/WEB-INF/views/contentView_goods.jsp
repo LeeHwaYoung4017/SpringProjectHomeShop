@@ -258,7 +258,7 @@ function minus(obj){
  var dd = document.getElementById("calc").innerHTML;
  var dd1 = document.getElementById("calc");
   dd *= 1; //숫자로 형변환
- 
+  var price = ${vo.price}
  var test = obj.nextSibling;
  var val = test.value
  if(val == "1"){
@@ -267,7 +267,7 @@ function minus(obj){
        var del = obj.parentNode.parentNode; //tr태크
        var table = del.parentNode
        table.removeChild(del)
-        var ss = dd - 10000;
+        var ss = dd - price;
         dd1.innerHTML = ss;
         var d2 = document.getElementById("calc").innerHTML;
         if(d2 == 0){
@@ -286,7 +286,7 @@ function minus(obj){
     td.innerHTML = newPri + "won"
     
     //total price
-     var ss = dd - 10000;
+     var ss = dd - price;
      dd1.innerHTML = ss;
   
  } 
@@ -295,7 +295,6 @@ function minus(obj){
 function plus(obj){
  var test = obj. previousSibling;
  var val = test.value //1
- 
   val *= 1    /* 숫자로 형변환 */
     var newval = val + 1;
     $(test).val(newval)
@@ -310,7 +309,7 @@ function plus(obj){
   var dd1 = document.getElementById("calc");
   dd *= 1; //숫자로 형변환
   
-  var ss = dd + 10000;
+  var ss = dd + price;
   dd1.innerHTML = ss;
   
   
