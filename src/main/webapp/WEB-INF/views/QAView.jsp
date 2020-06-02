@@ -89,7 +89,7 @@ table.type09 td {
                      <td width="250" align="center" style="font-weight: bold; font-size: larger;">작성일</td>
                   </tr>
                   <tr>
-                           <td align="center" style="font-weight: bold; font-size: larger;">관리자</td>
+                           <td align="center" style="font-weight: bold; font-size: larger;">${vo.name }</td>
                            <td align="center" >
                               <fmt:formatDate value="${vo.writeDate}" pattern="yyyy/MM/dd(E) HH:mm"/>
                            </td>
