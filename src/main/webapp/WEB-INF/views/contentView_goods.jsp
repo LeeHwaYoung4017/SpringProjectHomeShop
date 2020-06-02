@@ -437,7 +437,6 @@ var pagen;
 function showReview(num) {
 	var url = "./showReview?page="+ encodeURIComponent(num)
 				+ "&idx=" + encodeURIComponent(document.getElementById("hidIdx").value);
-	alert(num);/* 2로 따로 집어넣을때는 작동, 근데 >>>등 10페이지 뛰기면?? */	
 	pagen = num;
 	searchRequest.open("post",url,true);
 	searchRequest.onreadystatechange = reviewProcess;
