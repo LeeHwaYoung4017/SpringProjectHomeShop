@@ -174,9 +174,12 @@ table.type09 td {
                   </c:if>            
                   </td>
                <!-- 글쓰기 페이지로 이동하는 버튼 -->
+               <c:if test="${vo.id=='root'}">
                   <td align="right" >
                      <input class="button btn1" type="button" value="글쓰기" onclick="location.href='insert'"/>
                   </td>
+               </c:if>
+               
                </tr>
             
             </table>

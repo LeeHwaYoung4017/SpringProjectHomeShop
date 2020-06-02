@@ -41,7 +41,6 @@
 	   select last_number from USER_SEQUENCES where SEQUENCE_NAME = 'SPRING_REVIEW_IDX_SEQ'
    </select>
   
-   
 </mapper>
 
 

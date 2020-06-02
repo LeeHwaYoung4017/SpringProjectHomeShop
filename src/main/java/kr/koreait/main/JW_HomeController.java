@@ -244,9 +244,7 @@ public class JW_HomeController {
 		 */
 	   @RequestMapping("/logout")
 	   public String logout(HttpServletRequest request, Model model) {
-		   session.removeAttribute("name");
-		   session.removeAttribute("id");
-		   session.removeAttribute("vo");
+		   session.invalidate();
 		   return "redirect:mainHome";
 	   }
 	   
