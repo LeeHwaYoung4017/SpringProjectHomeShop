@@ -1,0 +1,9 @@
+프레임워크 : spring
+알집과 sql을 import 후 spring을 실행 후 src - main - webapp - WEB-INF - spring - appservlet - servlet-context.xml 에서 해당 컴퓨터 경로를
+ src - main - webapp - resources 안에 있는 이미지 경로로 지정 후 사용
+
+관리자 	아이디 :  root
+	비밀번호 : root
+
+일반	아이디 : odminid
+	비밀번호 : abcd1234!
