@@ -41,7 +41,6 @@ import kr.koreait.vo.ReviewVO;
 import kr.koreait.vo.StatusCount;
 import kr.koreait.vo.StatusVO;
 import kr.koreait.vo.StokeVO;
-
 /**
  * 
  * @author 심운보
@@ -185,10 +184,10 @@ public class UB_HomeController {
 			  vo.setAddr(request. getParameter("addr"));
 			  vo.setUser_id(loginVO.getId());
 			  vo.setStatus(1);
+			  //주문 정보 넣어주기
 			  mapper.insertStatus(vo);
 			  //주문한 상품의 재고 계산하기
 			  mapper.updateEa(vo);
-			  //ea가 0일때 처리하기@@!!!!
 			  if(category.equals("top")) {
 				  mapper.VolumeTop(vo);
 			  }else if (category.equals("acc")) {
