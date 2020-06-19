@@ -12,7 +12,7 @@
 <div id="contents">
          <div class="sub_contents_inner">
             <div class="contents_inner" align="center">
-            	원하는걸 눌ㄹ러러럴러러럴!! 뾰로롱!!
+            	<h1>관리자용 페이지 입니다.</h1>
             </div>
          </div>
 </div>   

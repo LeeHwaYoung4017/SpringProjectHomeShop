@@ -296,7 +296,10 @@ strong {
                                           <label for="phonePay">핸드폰 결제</label> 
                                        <input type="radio" id="directPay" name="pay" value="directPay">
                                           <label for="directPay">무통장 입금 </label>
+<<<<<<< HEAD
+=======
                                          
+>>>>>>> branch 'master' of https://github.com/LeeHwaYoung4017/SpringProjectHomeShop.git
                                     </div> 
                                  </td> 
                               </tr>

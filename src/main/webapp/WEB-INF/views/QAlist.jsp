@@ -105,11 +105,9 @@ table.type09 td {
                
                <c:forEach var="vo" items="${list}">
                <tr>
-               		<td align="center">
-	                    <img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/QAimage/${vo.attached}" onerror="this.style.display='none'"/>
-                    </td>
-                    <td align="center">${vo.idx}</td>
-                    <td>
+                    <td align="center"><img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath }/resources/QAimage/${vo.attached}" onerror="this.style.display='none'"/></td>
+                  <td align="center">${vo.idx}</td>
+                  <td>
                      
                      <!-- 오늘 입력된 글은 new를 표시한다. -->
                      <c:if test="${date.year == vo.writeDate.year && date.month == vo.writeDate.month && date.date == vo.writeDate.date}">
@@ -126,7 +124,6 @@ table.type09 td {
                      
                   </td>
                   <td align="center">
-                     <c:set var="name" value="관리자"/>
                      ${name}
                   </td>
                   <td align="center">
