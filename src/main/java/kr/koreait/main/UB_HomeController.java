@@ -132,25 +132,19 @@ public class UB_HomeController {
 			return "/member/login";
 		}
 			
-			
 		   LoginVO loginVO= (LoginVO) session.getAttribute("vo");
 		    String id = loginVO.getId();
 		    String addr = loginVO.getaddr();
 		    String email = loginVO.getEmail();
 		    String phone = loginVO.getPhone();
 		    
-		      model.addAttribute("id", id);
-		      model.addAttribute("addr", addr);
-		      model.addAttribute("email", email);
-		      model.addAttribute("phone", phone);
-		      model.addAttribute("orderList", orderList);
-		      System.out.println(orderList);
-		      orderList=new ArrayList<CartVO>();
-		     
-		/*
-		 * statusVO.setAddr(addr); statusVO.setUser_id(id);
-		 */
-		      
+	       model.addAttribute("id", id);
+	       model.addAttribute("addr", addr);
+	       model.addAttribute("email", email);
+	       model.addAttribute("phone", phone);
+	       model.addAttribute("orderList", orderList);
+	       System.out.println(orderList);
+	       orderList=new ArrayList<CartVO>();
 		return "order";
 	}
 	/**
@@ -162,18 +156,9 @@ public class UB_HomeController {
 	@RequestMapping(value = "/orderOK")
 	public String orderOK(HttpServletRequest request, Model model) {
 		MybatisDAO mapper = sqlSession1.getMapper(MybatisDAO.class);
-		System.out.println("orderOK 들어옴1");
-		/* statusVO.setStatus(1); */
-		
-		
 		System.out.println(request. getParameter("name"));
 		
 		LoginVO loginVO= (LoginVO) session.getAttribute("vo");
-		/*
-		 * for(int i=0; i<statusList.size(); i++) { StatusVO vo = statusList.get(i);
-		 * vo.getAddr(); }
-		 */
-		
 	      for(StatusVO vo : statusList) {
 	    	  int idx=vo.getIdx();
 	    	  String category = vo.getCategory();
@@ -192,9 +177,9 @@ public class UB_HomeController {
 				  mapper.VolumeTop(vo);
 			  }else if (category.equals("acc")) {
 				  mapper.VolumeAcc(vo);
-			}else if (category.equals("bottom")) {
+			  }else if (category.equals("bottom")) {
 				mapper.VolumeBottom(vo);
-			}
+			  }
 	      }
 	      
 	      model.addAttribute("statusList", statusList);

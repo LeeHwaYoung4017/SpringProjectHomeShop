@@ -211,12 +211,7 @@ public class HY_HomeController {
      
      String savedFileName = " ";
      
-     // 사진없이 글만 적을 경우.
-     if(file.getOriginalFilename().equals("")) {
-        savedFileName = "noimage.jpg";
-     } else {
-        savedFileName = FileUtills.uploadFile(file,uploadPath2, QAIdx, date);
-     }
+     savedFileName = FileUtills.uploadFile(file,uploadPath2, QAIdx, date);
      
      vo.setAttached(savedFileName);
      mapper.QAinsert(vo);
