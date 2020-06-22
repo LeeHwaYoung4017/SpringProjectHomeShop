@@ -183,7 +183,7 @@ function resize(img){
                <c:forEach var="vo" items="${list}">
                <tr class="line"><!-- 사진 -->
                   <td align="center" >
-               <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)'>
+               <img src="${pageContext.request.contextPath }/resources/goodsupload/goodsupload_${goodslist[i].category}/${goodslist[i].id_Number}" onload='resize(this)' onerror="this.style.display='none'">
               
                   </td>
                     <td > ${goodslist[i].name}

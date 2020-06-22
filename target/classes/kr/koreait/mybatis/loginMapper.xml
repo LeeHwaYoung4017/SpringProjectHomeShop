@@ -50,8 +50,9 @@
 	<select id="selectID" parameterType="java.util.HashMap" resultType="String">
 		select id from spring_member where name=#{name} AND email=#{email}
 	</select>
+	
 	<update id="changePassword" parameterType="java.util.HashMap" >
-		update spring_member set pw=#{pw} where id=#{id}
+		update spring_member set PW=#{pw} where ID=#{id}
 	</update>
 </mapper>
 

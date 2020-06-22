@@ -763,14 +763,16 @@ public class HY_HomeController {
       
       @RequestMapping("/changePass")
       public String changePass(HttpServletRequest request, Model model) {
-    	  
+    	  System.out.println("changePass 실행");
     	  return "changePass";
       }
       
       @RequestMapping("/changePassOK")
       public String changePassOK(HttpServletRequest request, Model model) {
+    	  System.out.println("changePassOK 실행");
     	  String id = request.getParameter("ids");
     	  String pw = request.getParameter("pw");
+    	  
     	  System.out.println("id = "+id + "pw = " + pw);
     	  MybatisDAO mapper = sqlSession.getMapper(MybatisDAO.class);
     	  HashMap<String, String> hmap = new HashMap<String, String>();

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GoodsList {
 	private ArrayList<GoodsVO> goodList = new ArrayList<GoodsVO>();
-	private int pageSize = 0;
+	private int pageSize = 8;
 	private int totalCount = 0;
 	private int totalPage = 0;
 	private int currentPage = 1;

@@ -43,7 +43,7 @@
     width: 13.2%;
     left: 50px;
     top: 0px;
-    height: 100%;
+    height: 70%;
     z-index: 999;
     background: none;
 }

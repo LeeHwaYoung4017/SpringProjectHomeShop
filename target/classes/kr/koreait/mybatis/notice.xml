@@ -150,11 +150,11 @@
    <select id="newCount" parameterType="int" resultType="int">
    <![CDATA[
 	   select count(*) from(
-	      select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+	      select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 				union
-		  select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+		  select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 				union
-		  select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+		  select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 	   ) where rownum <= #{newListSize}
 	]]>		   
 	</select>
@@ -162,11 +162,11 @@
    <select id="newList"  parameterType="int" resultType="kr.koreait.vo.GoodsVO">
 		<![CDATA[
 			select * from (	
-				select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+				select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 				union
-				select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+				select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 				union
-				select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+				select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 			) where rownum <= #{newListSize} 
 		]]>	
 	</select>
@@ -210,11 +210,11 @@
 	<select id="newMain" resultType="kr.koreait.vo.GoodsVO">
 	   <![CDATA[
 		   select * from(
-		     select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+		     select * from spring_top where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 				union
-			 select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+			 select * from spring_bottom where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 				union
-			 select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+8)
+			 select * from spring_acc where (SELECT SYSDATE FROM DUAL)<=(WRITEDATE+60)
 		   ) where rownum <= 6
 		]]>		   
 	</select>

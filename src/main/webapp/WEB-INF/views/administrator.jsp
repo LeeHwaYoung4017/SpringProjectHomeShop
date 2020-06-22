@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>administrator</title>
+<style type="text/css">
+*{
+	text-decoration: none;
+}
+</style>
 </head>
 <body>
 <jsp:include page="item3.jsp"/>

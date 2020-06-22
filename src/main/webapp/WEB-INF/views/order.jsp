@@ -170,6 +170,10 @@ response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 response.setHeader("Expires", "0"); // Proxies.
 </script>
 <style type="text/css">
+*{
+	text-decoration: none;
+}
+
 table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -296,10 +300,6 @@ strong {
                                           <label for="phonePay">핸드폰 결제</label> 
                                        <input type="radio" id="directPay" name="pay" value="directPay">
                                           <label for="directPay">무통장 입금 </label>
-<<<<<<< HEAD
-=======
-                                         
->>>>>>> branch 'master' of https://github.com/LeeHwaYoung4017/SpringProjectHomeShop.git
                                     </div> 
                                  </td> 
                               </tr>

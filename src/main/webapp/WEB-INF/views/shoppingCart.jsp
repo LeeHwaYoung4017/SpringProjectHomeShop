@@ -152,6 +152,10 @@ function removeItem(num){
 }	
 </script>
 <style type="text/css">
+*{
+	text-decoration: none;
+}
+
 .button {
   background-color: black; /* Green */
   border: none;

@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>administrator</title>
 <style type="text/css">
+*{
+	text-decoration: none;
+}
 th, td {
     border: 1px solid #cababa;
   }

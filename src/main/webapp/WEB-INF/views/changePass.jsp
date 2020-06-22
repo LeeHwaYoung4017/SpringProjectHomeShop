@@ -43,8 +43,8 @@
 			return false;
 		}
 		alert("비밀번호가 변경되었습니다.");
-		self.close();
 		pwForm.submit();
+		self.close();
 	}
 	
 	// 기존 비밀번호가 일치하는지 확인
